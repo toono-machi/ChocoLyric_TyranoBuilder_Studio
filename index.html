@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f0df">
+<title>ChocoLyric Studio | 歌詞・エンドロール・映像演出スタジオ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-mode="lyrics">
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand"><div class="brand-icon" aria-hidden="true"><span>♪</span></div><div><div class="brand-name">Choco<span>Lyric</span><i>studio</i></div><div class="brand-sub">TYRANOBUILDER × LYRICS & END CREDITS</div></div></div>
+    <div class="top-actions"><span class="top-version">BROWSER STUDIO / v2.9</span><button class="btn ghost" id="helpBtn">? <span>使い方</span></button><button class="btn ghost" id="loadProjectBtn">↥ <span>プロジェクトを開く</span></button><button class="btn light" id="saveProjectBtn">✧ <span>素材込みJSON保存</span></button><button class="btn primary" id="exportBtn">⇩ <span>ティラノ用に書き出す</span></button></div>
+  </header>
+  <nav class="workspace-switch" aria-label="制作モード">
+    <button type="button" id="modeLyrics" class="workspace-tab active">♫　歌詞・SRT演出</button>
+    <button type="button" id="modeEndroll" class="workspace-tab">☰　エンドロール</button>
+    <button type="button" id="modeCredits" class="workspace-tab">▣　エンドロール映像</button>
+    <span class="workspace-caption">同じ音声タイムラインで歌詞・クレジット・映像を同期</span>
+  </nav>
+  <div class="workbench">
+    <aside class="sidebar left-sidebar">
+      <section class="panel upload-panel">
+        <div class="section-heading"><div><span class="eyebrow">01 / IMPORT</span><h2>素材を読み込む</h2></div><span class="mini-mark">♫</span></div>
+        <label class="dropzone" id="audioDrop" for="audioInput"><span class="upload-icon">♫</span><span class="drop-title" id="audioTitle">音声ファイルを選ぶ</span><span class="drop-detail">MP3 / OGG / M4A / WAV</span><span class="upload-link">ファイルを選択　↗</span></label>
+        <input type="file" id="audioInput" accept="audio/*,.mp3,.ogg,.m4a,.wav,.aac,.webm" hidden>
+        <div class="inline-imports"><label class="btn import-btn" for="srtInput">▤　SRTを読み込む</label><label class="btn import-btn" for="txtInput">≡　歌詞TXTを読み込む</label></div>
+        <input type="file" id="srtInput" accept=".srt,text/plain" hidden><input type="file" id="txtInput" accept=".txt,text/plain" hidden>
+        <p class="microcopy">SRTは開始・終了時刻を自動反映。TXTは再生中に歌詞ボタンを押してタイミング入力できます。</p>
+        <div class="file-status"><span class="status-dot"></span><span id="importStatus">まだ素材を読み込んでいません</span></div>
+      </section>
+      <section class="panel phrases-panel lyrics-only">
+        <div class="section-heading list-heading"><div><span class="eyebrow">02 / LYRIC CUES</span><h2>歌詞タイムライン <span class="count-pill" id="cueCount">0</span></h2></div><button class="icon-btn" id="addCueBtn" title="現在の再生位置に歌詞を追加">＋</button></div>
+        <div class="list-switch"><button class="switch-tab active" data-tab="cues">配置済みの歌詞</button><button class="switch-tab" data-tab="tap">タイミング入力 <span id="unplacedCount"></span></button></div>
+        <div class="list-body" id="cueList"></div><div class="list-body hidden" id="tapList"></div>
+        <div class="list-footer"><button class="text-btn" id="clearCuesBtn">⌫　歌詞をすべて消去</button><button class="text-btn" id="exportSrtBtn">SRT保存 ⇩</button></div>
+      </section>
+      
+      <section class="panel endroll-only endroll-list-panel">
+        <div class="section-heading list-heading"><div><span class="eyebrow">02 / ENDROLL CARDS</span><h2>エンドロールカード <span class="count-pill" id="endrollCount">0</span></h2></div><button class="icon-btn" id="addEndrollCardBtn" title="カードを追加">＋</button></div>
+        <div class="field-row" style="margin-bottom:10px;align-items:end"><label class="form-field grow">追加する項目<select id="endrollTemplate"><option value="custom">任意（入力して決める）</option><option value="idea">原案</option><option value="scenario">シナリオ</option><option value="bg">イラスト/背景</option><option value="standing">イラスト/立ち絵</option><option value="otherart">イラスト/他素材</option><option value="cast">声優</option><option value="bgm">BGM</option><option value="song">主題歌</option><option value="se">効果音</option><option value="script">スクリプト</option><option value="modeling">２Dモデリング</option><option value="supporter">サポーター</option><option value="testplay">テストプレイ</option></select></label></div>
+        <div class="list-body" id="endrollCardList"></div>
+        <div class="list-footer"><button class="text-btn" id="clearEndrollCardsBtn">⌫　カードをすべて消去</button></div>
+      </section>
+      <section class="panel credits-only credits-library">
+        <div class="section-heading"><div><span class="eyebrow">02 / END CREDITS MEDIA</span><h2>映像素材</h2></div><span class="mini-mark">▣</span></div>
+        <label class="dropzone credits-drop" id="mediaDrop" for="mediaInput"><span class="upload-icon">▧</span><span class="drop-title">画像・動画を読み込む</span><span class="drop-detail">PNG / JPG / WEBP / GIF / MP4 / WEBM</span><span class="upload-link">複数選択して追加　↗</span></label>
+        <input type="file" id="mediaInput" accept="image/*,video/mp4,video/webm,video/ogg,.mp4,.webm,.ogv" multiple hidden>
+        <p class="microcopy">素材を選んで「現在位置に挿入」。読み込んだ元ファイルをそのままZIPに保存します。</p>
+        <div id="mediaLibrary" class="media-library-list"></div>
+      </section>
+      <section class="panel credits-only credits-clips">
+        <div class="section-heading"><div><span class="eyebrow">03 / TIMING</span><h2>映像タイムライン <span class="count-pill" id="clipCount">0</span></h2></div><button class="icon-btn" id="addClipBtn" title="選択中の素材を現在位置に追加">＋</button></div>
+        <div class="list-body" id="clipList"></div>
+        <div class="list-footer"><button class="text-btn" id="clearClipsBtn">⌫　映像をすべて消去</button></div>
+      </section>
+    </aside>
+    <main class="center-stage">
+      <section class="panel preview-panel">
+        <div class="preview-head"><div><span class="eyebrow">LIVE CANVAS</span><h2>プレビュー <small>実際のゲーム画面に合わせて確認</small></h2></div><div class="preview-options"><label class="small-toggle lyrics-only"><input id="forceSelected" type="checkbox"><span>選択中を常時表示</span></label><label class="small-toggle nonlyrics-only"><input id="previewLyricsWithCredits" type="checkbox" checked><span>歌詞も重ねる</span></label><button class="preview-action" id="fitBtn" title="プレビューにフィット">⛶</button></div></div>
+        <div class="screen-toolbar"><label class="toolbar-label">ゲーム画面</label><select id="screenSize"><option value="1920x1080">1920 × 1080　/ FHD</option><option value="1280x720">1280 × 720　/ HD</option><option value="1600x900">1600 × 900</option><option value="1366x768">1366 × 768</option><option value="960x540">960 × 540</option><option value="1024x768">1024 × 768　/ 4:3</option><option value="800x600">800 × 600　/ 4:3</option><option value="640x480">640 × 480　/ 4:3</option><option value="custom">カスタムサイズ</option></select><div id="customSize" class="custom-size hidden"><input id="customWidth" type="number" min="320" max="3840" value="1920" aria-label="横幅"><span>×</span><input id="customHeight" type="number" min="240" max="2160" value="1080" aria-label="高さ"></div><span class="stage-hint">プレビュー上をクリック・ドラッグして位置を変更できます</span></div>
+        <div class="preview-area" id="previewArea"><div class="stage-mat"><div class="stage-ruler top-ruler"><span>0</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div><div class="canvas-wrap" id="canvasWrap"><canvas id="previewCanvas" width="1920" height="1080"></canvas><div class="canvas-grain"></div></div><div class="stage-ruler bottom-ruler"><span>0</span><span id="screenInfo">1920 × 1080 px</span><span>100%</span></div></div></div>
+        <div class="preview-foot"><span class="preview-badge"><span class="live-dot"></span> LIVE PREVIEW</span><span id="previewCueInfo">歌詞を選択して位置・色・演出を調整</span><span class="pill-muted">60 FPS</span></div>
+      </section>
+      <section class="panel transport-panel">
+        <div class="transport-header"><div class="time-group"><span class="time-now" id="currentTime">00:00.00</span><span class="time-separator">/</span><span class="time-total" id="totalTime">00:00.00</span></div><div class="transport-buttons"><button class="tiny-btn" id="back1Btn" title="1秒戻る">−1s</button><button class="tiny-btn" id="backFrameBtn" title="0.1秒戻る">‹</button><button class="play-btn" id="playBtn" title="再生 / 一時停止（Space）">▶</button><button class="tiny-btn" id="forwardFrameBtn" title="0.1秒進む">›</button><button class="tiny-btn" id="forward1Btn" title="1秒進む">+1s</button></div><div class="transport-right"><label class="small-toggle"><input type="checkbox" id="loopPreview"><span>ループ</span></label><button class="text-btn" id="setStartBtn">IN を現在位置に</button><button class="text-btn" id="setEndBtn">OUT を現在位置に</button></div></div>
+        <div class="timeline-label"><span>TIME LINE</span><span id="timelineRange">00:00 — 00:00</span></div>
+        <div class="timeline" id="timeline" tabindex="0" aria-label="再生位置タイムライン"><div class="timeline-grid" id="timelineGrid"></div><div class="timeline-cues lyrics-only" id="timelineCues"></div><div class="timeline-cues endroll-only" id="timelineEndroll"></div><div class="timeline-cues credits-only" id="timelineCredits"></div><div class="playhead" id="playhead"><span></span></div></div>
+        <div class="transport-footer"><span class="lyrics-only"><i class="legend-cream"></i>歌詞の表示区間</span><span class="lyrics-only"><i class="legend-brown"></i>選択中の歌詞</span><span class="endroll-only"><i class="legend-cream"></i>エンドロールの流れる区間</span><span class="endroll-only"><i class="legend-brown"></i>選択中のカード</span><span class="credits-only"><i class="legend-cream"></i>素材の表示区間</span><span class="credits-only"><i class="legend-brown"></i>選択中の素材</span><span class="keyboard-hint lyrics-only">SPACE：再生 / ← →：0.1秒 / ENTER：次の歌詞を配置</span><span class="keyboard-hint endroll-only">SPACE：再生 / ← →：0.1秒 / 左の＋：カード追加</span><span class="keyboard-hint credits-only">SPACE：再生 / ← →：0.1秒 / 左の＋：現在位置に挿入</span></div>
+      </section>
+      <section class="panel support-panel"><div class="support-ornament">✦</div><div><strong>ちょこっとヒント</strong><p>SRTを使えば歌詞の表示タイミングを一括設定。再生を聴きながら細かい秒数を調整して、ティラノビルダーでそのまま使える演出ファイルを出力できます。</p></div></section>
+    </main>
+    <aside class="sidebar right-sidebar">
+      
+      <section class="panel endroll-only endroll-editor">
+        <div class="section-heading"><div><span class="eyebrow">04 / ENDROLL</span><h2>流れるクレジット</h2></div><span class="mini-mark">☰</span></div>
+        <div class="setting-group"><div class="group-title"><span>◷</span><strong>再生区間</strong></div>
+          <div class="two-fields"><label class="form-field">開始（秒）<input type="number" step="0.01" min="0" id="endrollStart"></label><label class="form-field">終了（秒）<input type="number" step="0.01" min="0" id="endrollEnd"></label></div>
+          <div class="small-row"><button class="mini-button" id="endrollNowStart">現在位置を開始に設定</button><button class="mini-button" id="endrollNowEnd">現在位置を終了に設定</button></div>
+          <label class="form-field">流れる方向<select id="endrollDirection"><option value="bottomToTop">下から上へ</option><option value="topToBottom">上から下へ</option></select></label>
+        </div>
+        <div class="setting-group endroll-position-group">
+          <div class="group-title"><span>↔</span><strong>横位置・文字揃え</strong></div>
+          <div class="range-field endroll-horizontal-range">
+            <div><label for="endrollPositionX">エンドロールの横位置</label><output id="endrollPositionXOutput">50%（中央）</output></div>
+            <input type="range" id="endrollPositionX" min="0" max="100" step="1" value="50" aria-label="エンドロールの横位置 左0% 中央50% 右100%">
+            <div class="endroll-range-labels"><span>左端 0%</span><span>中央 50%</span><span>右端 100%</span></div>
+          </div>
+          <label class="form-field">文字の揃え方
+            <select id="endrollTextAlign"><option value="left">左揃え</option><option value="center">中央揃え</option><option value="right">右揃え</option></select>
+          </label>
+          <div class="small-row endroll-position-presets">
+            <button type="button" class="mini-button" data-endroll-preset="left">左寄せ</button>
+            <button type="button" class="mini-button" data-endroll-preset="center">中央</button>
+            <button type="button" class="mini-button" data-endroll-preset="right">右寄せ</button>
+          </div>
+          <p class="microcopy">クレジット全体の位置と文字揃えを指定できます。見出しと本文をまとめて移動します。</p>
+          <div class="endroll-body-position">
+            <div class="endroll-body-position-head">
+              <label for="endrollBodyOffsetX">本文だけの横位置</label>
+              <output id="endrollBodyOffsetXOutput">0%（調整なし）</output>
+            </div>
+            <input type="range" id="endrollBodyOffsetX" min="-40" max="40" step="1" value="0" aria-label="本文だけの横位置。マイナスで左、プラスで右へ移動">
+            <div class="endroll-range-labels"><span>← 左へ -40%</span><span>0%</span><span>右へ +40% →</span></div>
+            <button type="button" class="mini-button endroll-offset-reset" id="endrollBodyOffsetReset">本文位置をリセット</button>
+            <p class="microcopy">【 】の見出しは動かさず、本文・クレジット名のみを左右にずらします。左寄せ・右寄せでも調整できます。数値は画面幅に対する割合です。</p>
+          </div>
+        </div>
+        <div class="setting-group">
+          <div class="group-title"><span>▣</span><strong>選択中のカード</strong></div>
+          <div id="endrollSelectedTitle" class="clip-selected-name">カードを選択してください</div>
+          <div id="endrollCardEditor" class="endroll-card-editor microcopy">左の一覧からカードを選択すると、ここで内容を編集できます。</div>
+        </div>
+        <div class="setting-group endroll-style-group">
+          <div class="group-title"><span>◉</span><strong>エンドロールの文字設定</strong></div>
+          <label class="check-setting endroll-sync-toggle"><input id="endrollSameStyle" type="checkbox"><span class="custom-check"></span><span>見出しと本文の設定を一括調整</span></label>
+          <p class="microcopy">ONの場合、見出しの設定を変更すると本文にも反映します。</p>
+          <label class="background-upload" for="endrollFontInput">＋ フォントファイルを追加（TTF / OTF / WOFF / WOFF2）</label>
+          <input type="file" id="endrollFontInput" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2" multiple hidden>
+          <p class="microcopy">追加すると、見出し・本文のフォント一覧から選択できます。書き出しZIPにも同梱されます。</p>
+          <div class="endroll-style-card" id="endrollTitleSettings">
+            <div class="endroll-style-heading">【 】 項目名・見出し</div>
+            <label class="form-field">フォント<select id="endrollTitleFont" class="endroll-font-select"></select></label>
+            <label class="form-field">文字サイズ <output id="endrollTitleSizeOutput">42 px</output><input id="endrollTitleSize" type="range" min="12" max="200" step="1"></label>
+            <div class="color-line"><span>文字色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollTitleColor" title="見出し文字色"></button><input class="color-hex" data-hex="endrollTitleColor" aria-label="見出し文字色HEX" maxlength="7"></div></div>
+            <label class="form-field">縁取りの太さ（0でOFF）<output id="endrollTitleStrokeWidthOutput">6 px</output><input id="endrollTitleStrokeWidth" type="range" min="0" max="24" step="1"></label>
+            <div class="color-line"><span>縁取り色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollTitleStrokeColor" title="見出し縁取り色"></button><input class="color-hex" data-hex="endrollTitleStrokeColor" aria-label="見出し縁取り色HEX" maxlength="7"></div></div>
+          </div>
+          <div class="endroll-style-card" id="endrollBodySettings">
+            <div class="endroll-style-heading">本文・クレジット名</div>
+            <label class="form-field">フォント<select id="endrollBodyFont" class="endroll-font-select"></select></label>
+            <label class="form-field">文字サイズ <output id="endrollBodySizeOutput">30 px</output><input id="endrollBodySize" type="range" min="12" max="200" step="1"></label>
+            <div class="color-line"><span>文字色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollBodyColor" title="本文文字色"></button><input class="color-hex" data-hex="endrollBodyColor" aria-label="本文文字色HEX" maxlength="7"></div></div>
+            <label class="form-field">縁取りの太さ（0でOFF）<output id="endrollBodyStrokeWidthOutput">5 px</output><input id="endrollBodyStrokeWidth" type="range" min="0" max="24" step="1"></label>
+            <div class="color-line"><span>縁取り色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollBodyStrokeColor" title="本文縁取り色"></button><input class="color-hex" data-hex="endrollBodyStrokeColor" aria-label="本文縁取り色HEX" maxlength="7"></div></div>
+          </div>
+          <div class="endroll-style-card endroll-background-card">
+            <div class="endroll-style-heading">クレジットの背景</div>
+            <label class="check-setting"><input id="endrollBgEnabled" type="checkbox"><span class="custom-check"></span><span>角丸の背景パネルを表示する</span></label>
+            <div id="endrollBgOptions">
+              <div class="color-line"><span>パネルの色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollBgColor" title="背景パネルの色"></button><input class="color-hex" data-hex="endrollBgColor" aria-label="背景パネル色HEX" maxlength="7"></div></div>
+              <label class="form-field">背景の不透明度 <output id="endrollBgOpacityOutput">56 %</output><input id="endrollBgOpacity" type="range" min="0" max="100" step="1"></label>
+            </div>
+          </div>
+        </div>
+        <div class="setting-group">
+          <div class="group-title"><span>✦</span><strong>表示ルール</strong></div>
+          <p class="microcopy">描画優先順は「歌詞（最前面） → エンドロール → 映像」です。クレジット全体が指定区間の中で一定速度で流れます。</p>
+        </div>
+      </section>
+      <section class="panel credits-only credits-editor">
+        <div class="section-heading"><div><span class="eyebrow">04 / VISUAL STYLING</span><h2>映像の表示・切り替え</h2></div><span class="mini-mark">✦</span></div>
+        <div class="edit-current"><span class="eyebrow">SELECTED VISUAL</span><div id="clipSelectedName" class="clip-selected-name">素材を選択してください</div><div id="clipSelectedInfo" class="microcopy">音声に合わせてプレビューできます</div></div>
+        <div class="setting-group"><div class="group-title"><span>◷</span><strong>タイミング</strong></div>
+          <div class="two-fields"><label class="form-field">表示開始（秒）<input type="number" step="0.01" min="0" id="clipStart"></label><label class="form-field">表示終了（秒）<input type="number" step="0.01" min="0" id="clipEnd"></label></div>
+          <label class="check-setting"><input type="checkbox" id="clipAutoEnd"><span class="custom-check"></span><span>次の素材への切り替えまで表示</span></label>
+          <div class="small-row"><button class="mini-button" id="clipNowStart">現在位置を開始に設定</button><button class="mini-button" id="clipNowEnd">現在位置を終了に設定</button></div>
+        </div>
+        <div class="setting-group"><div class="group-title"><span>◌</span><strong>画像の切り替え</strong></div>
+          <label class="check-setting"><input type="checkbox" id="clipCrossfade" checked><span class="custom-check"></span><span>クロスフェードで切り替える</span></label>
+          <div class="range-field"><div><label for="clipFade">切り替え時間</label><output id="clipFadeOutput">1.00 秒</output></div><input type="range" id="clipFade" min="0.1" max="5" step="0.1" value="1"></div>
+          <label class="form-field">画面への配置<select id="clipFit"><option value="cover">画面を埋める（中央トリミング）</option><option value="contain">画像全体を表示（余白あり）</option></select></label>
+          <div id="clipVideoLoopGroup" class="video-loop-group hidden">
+            <label class="check-setting"><input type="checkbox" id="clipVideoLoop"><span class="custom-check"></span><span>動画をループ再生する</span></label>
+            <p class="microcopy">ON：この素材の表示区間中、終わるたびに先頭から再生します。OFF：動画終了後は最後のフレームを表示します。映像内の音声は常にミュートです。</p>
+          </div>
+        </div>
+        <div class="setting-group"><div class="group-title"><span>▷</span><strong>プレビューと書き出し</strong></div>
+          <p class="microcopy">動画の音声はミュートされ、選択した楽曲が共通の再生時計です。歌詞の前面表示を保持しながら、映像のみ切り替えます。</p>
+          <div class="credits-export-hint"><strong>書き出しには画像・動画を同梱</strong><span>生成する <code>credits_show.ks</code> は歌詞用 <code>lyrics_show.ks</code> と並行動作できます。</span></div>
+        </div>
+      </section>
+      <section class="panel settings-panel lyrics-only"><div class="section-heading"><div><span class="eyebrow">03 / STYLING</span><h2>歌詞の演出を調整</h2></div><span class="mini-mark">✦</span></div>
+        <div class="edit-current"><span class="eyebrow">SELECTED PHRASE</span><div id="selectedNumber">— / 0</div><textarea id="cueText" rows="2" placeholder="ここに歌詞を入力"></textarea><p id="cueSelectedHint">左の歌詞一覧で編集する行を選択</p><button class="apply-all-btn" id="applyAllStyleBtn">✦　この見た目・位置をすべての歌詞に適用</button></div>
+        <div class="setting-group"><div class="group-title"><span>◷</span><strong>表示タイミング</strong></div><div class="two-fields"><label class="form-field">開始（秒）<input id="cueStart" type="number" min="0" step="0.01"></label><label class="form-field">終了（秒）<input id="cueEnd" type="number" min="0" step="0.01"></label></div><div class="small-row"><button class="mini-button" id="copyStartBtn">◂ 現在位置 → 開始</button><button class="mini-button" id="copyEndBtn">◂ 現在位置 → 終了</button></div></div>
+        <div class="setting-group"><div class="group-title"><span>⌖</span><strong>位置と文字</strong></div><div class="range-field"><div><label for="posX">横位置 X</label><output id="posXOutput">960 px</output></div><input id="posX" type="range" min="0" max="1920" step="1"></div><div class="range-field"><div><label for="posY">縦位置 Y</label><output id="posYOutput">845 px</output></div><input id="posY" type="range" min="0" max="1080" step="1"></div><div class="field-row"><label class="form-field grow">フォント<select id="fontFamily"><option value='"Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif'>游ゴシック / 日本語</option><option value='"Hiragino Mincho ProN", "Yu Mincho", serif'>明朝体 / 日本語</option><option value='Meiryo, sans-serif'>メイリオ</option><option value='"Noto Sans JP", "Yu Gothic", sans-serif'>Noto Sans JP</option><option value='"Noto Serif JP", "Yu Mincho", serif'>Noto Serif JP</option><option value='Arial, sans-serif'>Arial</option><option value='Georgia, serif'>Georgia</option><option value='"Times New Roman", serif'>Times New Roman</option></select></label><label class="form-field short">太さ<select id="fontWeight"><option value="400">標準</option><option value="700">太字</option><option value="900">極太</option></select></label></div><div class="custom-font-box"><label class="background-upload font-upload" for="fontInput">＋ フォントファイルを追加（TTF / OTF / WOFF / WOFF2）</label><input type="file" id="fontInput" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2" multiple hidden><div id="fontList" class="font-list"></div><button type="button" class="mini-button font-only-button" id="downloadFontsOnlyBtn">↓ フォントのみZIPで保存（予備）</button><p class="font-hint">読み込んだフォントはプレビューで使用でき、ゲーム用ZIPの <code>data/others/font/</code> に自動同梱されます。</p></div><div class="range-field"><div><label for="fontSize">フォントサイズ</label><output id="fontSizeOutput">66 px</output></div><input id="fontSize" type="range" min="14" max="200" step="1"></div><div class="field-row"><label class="form-field grow">文字揃え<select id="align"><option value="left">左揃え</option><option value="center">中央揃え</option><option value="right">右揃え</option></select></label><label class="form-field short">字間（px）<input id="letterSpacing" type="number" min="-10" max="50" step="1"></label></div><div class="color-line"><span>文字色</span><div class="color-control"><button class="color-swatch" data-color="color" aria-label="文字色を色相リングで変更"></button><input class="color-hex" data-hex="color" aria-label="文字色HEX" maxlength="7"></div></div></div>
+        <div class="setting-group"><div class="group-title"><span>◉</span><strong>縁取り・影</strong></div><label class="check-setting"><input type="checkbox" id="stroke"><span class="custom-check"></span><span>文字に縁取りを付ける</span></label><div class="color-line dependent" data-dependent="stroke"><span>縁取りの色</span><div class="color-control"><button class="color-swatch" data-color="strokeColor" aria-label="縁取り色を色相リングで変更"></button><input class="color-hex" data-hex="strokeColor" aria-label="縁取りHEX" maxlength="7"></div></div><div class="range-field dependent" data-dependent="stroke"><div><label for="strokeWidth">縁取りの太さ</label><output id="strokeWidthOutput">5 px</output></div><input id="strokeWidth" type="range" min="0" max="18" step="1"></div><label class="check-setting"><input type="checkbox" id="shadow"><span class="custom-check"></span><span>やわらかいドロップシャドウ</span></label><div class="color-line dependent" data-dependent="shadow"><span>影の色</span><div class="color-control"><button class="color-swatch" data-color="shadowColor" aria-label="影色を色相リングで変更"></button><input class="color-hex" data-hex="shadowColor" aria-label="影のHEX" maxlength="7"></div></div></div>
+        <div class="setting-group"><div class="group-title"><span>✧</span><strong>アニメーション</strong></div><label class="form-field">動きの種類<select id="animation"><option value="none">通常表示（静止）</option><option value="typewriter">タイプライター</option><option value="jumpTypewriter">ジャンプ・タイプライター</option><option value="scaleReveal">文字ごとに拡大して登場</option><option value="wave">ゆらゆらウェーブ</option><option value="jump">ジャンプを繰り返す</option><option value="jumpInOut">登場・退場時にジャンプ</option><option value="float">ふわっと浮かび上がる</option><option value="slide">横からスライドイン</option><option value="zoom">拡大しながら登場</option></select></label><div class="range-field"><div><label for="animSpeed">アニメーション速度</label><output id="animSpeedOutput">16</output></div><input id="animSpeed" type="range" min="1" max="60" step="1"></div><div class="range-field"><div><label for="animIntensity">動きの大きさ</label><output id="animIntensityOutput">28 px</output></div><input id="animIntensity" type="range" min="0" max="100" step="1"></div></div>
+        <div class="setting-group"><div class="group-title"><span>◌</span><strong>表示・消去エフェクト</strong></div><label class="check-setting"><input id="fadeIn" type="checkbox"><span class="custom-check"></span><span>フェードイン</span><output id="fadeInDurationOutput">0.34s</output></label><input class="fade-range" id="fadeInDuration" type="range" min="0.05" max="2" step="0.05"><label class="check-setting"><input id="fadeOut" type="checkbox"><span class="custom-check"></span><span>フェードアウト</span><output id="fadeOutDurationOutput">0.34s</output></label><input class="fade-range" id="fadeOutDuration" type="range" min="0.05" max="2" step="0.05"></div>
+        <div class="setting-group global-settings"><div class="group-title"><span>▣</span><strong>プレビュー背景</strong><small>ゲームには出力されません</small></div><div class="color-line"><span>背景色</span><div class="color-control"><button class="color-swatch" data-color="background" aria-label="背景色を色相リングで変更"></button><input class="color-hex" data-hex="background" aria-label="背景色HEX" maxlength="7"></div></div><label class="background-upload" for="bgImageInput">＋ プレビュー背景画像を追加</label><input type="file" id="bgImageInput" accept="image/*" hidden><button class="text-btn" id="removeBgBtn">背景画像を解除</button></div>
+      </section>
+    </aside>
+  </div>
+  <footer class="site-footer"><span>CHOCO LYRIC STUDIO</span><span>♡　あなたの物語に、歌詞の演出を。</span><span>OFFLINE READY ・ NO SERVER REQUIRED</span></footer>
+</div>
+<input type="file" id="projectInput" accept=".json,application/json" hidden>
+<div class="popover hidden" id="colorPopover"><div class="popover-head"><span>カラーサークル</span><button id="closeColor" aria-label="閉じる">×</button></div><canvas id="colorWheel" width="230" height="230"></canvas><div class="popover-bottom"><span id="colorPreviewDot"></span><code id="colorCurrent">#FFF8E9</code><input id="nativePicker" type="color" title="OS標準カラーピッカー"></div><p>外側：色相 / 中央：彩度・明るさ</p></div>
+<dialog id="exportDialog"><form method="dialog" class="modal-inner"><div class="modal-eyebrow">EXPORT / TYRANOBUILDER</div><h2>ゲーム用スクリプトを書き出す</h2><p>プレビューと同じ描画処理をKS内に組み込みます。独立したJSファイルの配置は不要です。</p><label class="form-field">ゲーム内の音声ファイル名（読み込み時の名前を保持）<input id="exportAudioName" type="text" placeholder="morning_song.mp3"></label><label class="check-setting export-check"><input type="checkbox" id="bundleAudio" checked><span class="custom-check"></span><span>読み込んだ音声もZIPに含める</span></label><p class="modal-note"><code>[call storage="choco_start.ks"]</code>で再生できます（歌詞のみ・映像のみでも使用可）。エンドロール・映像は歌詞の音声時計を参照するため二重再生しません。画像・動画素材、音声、追加フォントは読み込み時のファイル名のままZIPに同梱します。</p><div class="export-file-list"><span>data/scenario/choco_start.ks</span><span>data/scenario/choco_quick_test.ks</span><span>data/scenario/lyrics_show.ks</span><span>data/scenario/lyrics_stop.ks</span><span>data/scenario/endroll_show.ks</span><span>data/scenario/endroll_stop.ks</span><span id="exportAudioPreview">data/bgm/your_song.mp3</span><span id="exportMediaPreview" class="hidden"></span><span id="exportFontsPreview" class="hidden"></span><span>README_導入手順.txt</span></div><div class="modal-actions"><button type="button" class="btn ghost" id="closeExportBtn">キャンセル</button><button type="button" class="btn primary" id="confirmExportBtn">ZIPをダウンロード ⇩</button></div></form></dialog>
+<dialog id="helpDialog" aria-labelledby="helpTitle">
+  <div class="modal-inner help-inner">
+    <div class="modal-eyebrow">HOW TO USE / TYRANOBUILDER</div>
+    <h2 id="helpTitle">ChocoLyric の使い方</h2>
+    <ol>
+      <li><strong>音声を読み込む：</strong>MP3などを選択します。音声がなくてもSRTの歌詞を編集できます。</li>
+      <li><strong>歌詞のタイミング：</strong>SRTなら開始・終了時刻を自動で設定。TXTなら「タイミング入力」で再生しながら登録します。</li>
+      <li><strong>演出を調整：</strong>歌詞を選び、スライダー・カラーサークル・プレビューから位置や見た目を設定します。</li>
+      <li><strong>フォント：</strong>TTF / OTF / WOFF / WOFF2を読み込めます。ゲーム用ZIPには <code>data/others/font/</code> に同梱します。</li>
+      <li><strong>エンドロール：</strong>カードを追加して、原案・CAST・主題歌などのクレジットを流せます。方向は上向き・下向きから選択できます。</li>
+      <li><strong>エンドロール映像：</strong>画像・動画を追加し、再生時刻に合わせて配置。クロスフェードの有無、動画ごとのループ再生も指定できます。</li>
+      <li><strong>ゲーム用に出力：</strong>「ティラノ用に書き出す」でZIPを保存し、ZIPの <code>data</code> フォルダをゲームプロジェクトへ統合します。</li>
+    </ol>
+    <section class="help-recipe" aria-label="ティラノビルダーへの導入例">
+      <h3>ティラノビルダーでの呼び出し例</h3>
+      <p>ティラノスクリプトコンポーネント（KS）に、必要な場面ごとに以下を記述します。</p>
+      <p><strong>① ゲーム冒頭（任意・1回のみ）</strong></p>
+      <pre><code>[call storage="choco_setup.ks"]</code></pre>
+      <p><strong>② 音楽・歌詞・映像を開始したい場面</strong></p>
+      <pre><code>[call storage="choco_start.ks"]</code></pre>
+      <p><strong>③ 音楽を終了したい別の場面</strong></p>
+      <pre><code>[call storage="choco_stop.ks"]</code></pre>
+      <p><strong>※ ②と③を続けて書くと、即停止します。</strong> <code>[call]</code>は曲の再生終了を待ちません。</p>
+      <p><strong>動作確認には次の1行だけを使用してください。</strong> 初期化・開始・15秒待機・停止まで自動実行します。</p>
+      <pre><code>[call storage="choco_quick_test.ks"]</code></pre>
+      <p>書き出したZIPの <code>data/scenario/</code> に <code>choco_quick_test.ks</code> が入ります。音声は <code>data/bgm/</code> に配置する必要があります。</p>
+      <div class="help-recipe-extra"><strong>個別に再生したい場合</strong>
+        <p>歌詞：<code>[call storage="lyrics_show.ks"]</code> ／ 停止：<code>[call storage="lyrics_stop.ks"]</code></p>
+        <p>エンドロール：<code>[call storage="endroll_show.ks"]</code> ／ 停止：<code>[call storage="endroll_stop.ks"]</code></p>
+        <p>映像：<code>[call storage="credits_show.ks"]</code> ／ 停止：<code>[call storage="credits_stop.ks"]</code></p>
+        <p>歌詞の再生中に <code>credits_show.ks</code> を呼ぶと、同じ音声に同期して映像を重ねられます。</p>
+      </div>
+    </section>
+    <p>プロジェクトJSON（v2.4以降）は音声・画像・動画・フォント・プレビュー背景を含めて1ファイルで保存でき、次回も自動復元します。素材が多い場合、Base64化によりファイル容量が約33%増えます。旧バージョンのJSONは素材を含まないため再選択が必要です。フォント・映像素材の再配布条件も確認してください。</p>
+    <p class="help-nonofficial"><strong>非公式ツールについて：</strong>ChocoLyric Studioはティラノビルダー／ティラノスクリプトの公式製品ではない、独立した制作補助アプリです。ティラノ公式開発者のメール・SNSは本アプリの問い合わせ先ではありません。</p>
+    <button class="btn primary" id="closeHelpBtn">閉じる</button>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="renderer.js"></script>
+<script src="credits_core.js"></script>
+<script src="credits-core-source.js"></script>
+<script src="credits-runtime-source.js"></script><script src="runtime-source.js"></script><script src="endroll-painter.js"></script><script src="app.js"></script>
+</body></html>

@@ -1,0 +1,1546 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f0df">
+<title>ChocoLyric Studio | 歌詞・エンドロール・映像演出スタジオ</title>
+<style>
+:root{--cream:#fffaf0;--paper:#fffdf8;--vanilla:#f8f1e3;--milk:#f0e6d5;--milk2:#e9d8bc;--cocoa:#563527;--dark:#3e281f;--espresso:#251610;--muted:#947e6b;--line:#e8dcca;--accent:#ab7454;--gold:#d8b981;--rose:#e8b9a0;--shadow:0 9px 30px rgba(83,54,35,.052);font-synthesis:none;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--vanilla);color:var(--dark);font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",Meiryo,Arial,sans-serif;font-size:13px}button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer}input,textarea,select{outline:none}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,.timeline:focus-visible{outline:3px solid #ca9e73;outline-offset:2px}button:disabled{opacity:.45;cursor:default}button:not(:disabled){transition:background-color .18s,color .18s,transform .16s,border-color .16s,box-shadow .18s}button:not(:disabled):active{transform:translateY(1px)}button:hover:not(:disabled){filter:brightness(.985)}.hidden{display:none!important}.app-shell{min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(ellipse 80% 20% at 48% -10%,#fffefa 0%,transparent 90%),var(--vanilla)}
+.topbar{height:82px;min-height:82px;display:flex;align-items:center;justify-content:space-between;padding:0 27px 0 29px;gap:22px;background:#fffbf3;border-bottom:1px solid #eadbc5;box-shadow:0 4px 22px rgba(63,41,24,.035);z-index:2}.brand{display:flex;align-items:center;gap:12px;white-space:nowrap}.brand-icon{width:42px;height:42px;display:grid;place-items:center;background:linear-gradient(135deg,#634334,#3b231c);border-radius:13px;box-shadow:inset 0 2px 1px #fff1d629,0 4px 8px #2a170e28;transform:rotate(-5deg)}.brand-icon span{color:#f7d8a5;font-size:29px;font-family:Georgia,serif;transform:rotate(5deg)}.brand-name{font-family:Georgia,"Yu Mincho",serif;font-size:26px;letter-spacing:-1px;font-weight:700;color:#53382b;line-height:1}.brand-name span{color:#ae7955}.brand-name i{font-family:Georgia,serif;font-size:11px;font-weight:400;letter-spacing:.8px;color:#8e7160;margin-left:5px}.brand-sub{font-size:8.3px;letter-spacing:2.1px;color:#ab9180;margin-top:7px;font-weight:700}.top-actions{display:flex;align-items:center;gap:9px}.top-version{color:#af9d8b;font-size:9px;letter-spacing:1.6px;margin-right:11px;white-space:nowrap}.btn{height:37px;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #ded0bb;border-radius:9px;padding:0 15px;font-size:12px;font-weight:700;white-space:nowrap}.btn.ghost{background:#fffdf8;color:#6d5442}.btn.light{background:#f5e8d3;border-color:#e5d5bc;color:#68412d}.btn.primary{background:#6a4434;border-color:#6a4434;color:#fffaf1;box-shadow:0 3px 6px #50312118}.btn.primary:hover{background:#513022}.btn:hover{box-shadow:0 3px 10px #3a20150c}
+.workbench{width:100%;display:grid;grid-template-columns:300px minmax(440px,1fr) 337px;gap:16px;padding:17px;max-width:1920px;margin:0 auto;align-items:start;flex:1}.sidebar,.center-stage{min-width:0;display:flex;flex-direction:column;gap:16px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);overflow:hidden}.sidebar .panel{padding:19px}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}.section-heading h2{margin:5px 0 0;font-size:16px;letter-spacing:.1px;line-height:1.4;font-weight:750}.eyebrow{font-family:Arial,sans-serif;color:#b99577;letter-spacing:2px;font-size:9px;font-weight:800}.mini-mark{color:#bd916b;font-size:23px;align-self:flex-start}.upload-panel .dropzone{min-height:142px;border:1.5px dashed #d7b99a;background:linear-gradient(145deg,#fffdf8,#f8f0e1);border-radius:12px;display:flex;align-items:center;flex-direction:column;justify-content:center;text-align:center;cursor:pointer;gap:4px;transition:.2s}.upload-panel .dropzone:hover,.dropzone.dragover{border-color:#8c6346;background:#f7ead9}.upload-icon{width:39px;height:39px;display:grid;place-items:center;background:#f2e0c9;border-radius:50%;color:#7c4d36;font-family:Georgia,serif;font-size:25px;margin-bottom:4px}.drop-title{font-size:12px;font-weight:800;max-width:95%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.drop-detail{color:#9d8876;font-size:10px;letter-spacing:.5px}.upload-link{font-size:10px;color:#93694a;font-weight:800;margin-top:5px}.inline-imports{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}.import-btn{border:1px solid #e7d7c0;background:#fbf3e6;height:35px;border-radius:8px;padding:0 5px;color:#785d48;font-size:10px;font-weight:800;cursor:pointer}.import-btn:hover{background:#f4e5ce}.microcopy{color:#97816f;font-size:10.5px;line-height:1.85;margin:11px 0 8px}.file-status{display:flex;align-items:center;gap:7px;font-size:10px;color:#9e8167;overflow:hidden}.file-status span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.status-dot{width:7px;height:7px;border-radius:50%;background:#a8b98c;flex:none}
+.phrases-panel{display:flex;flex-direction:column;min-height:410px;max-height:calc(100vh - 410px);padding-bottom:10px!important}.list-heading{margin-bottom:12px}.count-pill{display:inline-grid;place-items:center;min-width:24px;height:22px;border-radius:9px;padding:0 5px;margin-left:3px;background:#f4e4cf;color:#80563d;font:700 10px Arial;vertical-align:2px}.icon-btn{width:31px;height:31px;border-radius:10px;border:1px solid #dac4a9;background:#f4e6d1;font-size:22px;color:#76523c;line-height:1}.list-switch{display:grid;grid-template-columns:1fr 1.2fr;gap:3px;padding:4px;background:#f5eee3;border-radius:10px;margin-bottom:10px}.switch-tab{border:0;border-radius:7px;background:transparent;padding:9px 3px;font-size:10px;color:#96826c;font-weight:800;white-space:nowrap}.switch-tab.active{background:#fffaf1;color:#694331;box-shadow:0 2px 8px #4a291216}.list-body{min-height:180px;overflow:auto;flex:1;margin-right:-9px;padding-right:9px;scrollbar-color:#d9c6b0 transparent;scrollbar-width:thin}.cue-item{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:68px;padding:9px 7px;border:1px solid transparent;border-bottom:1px solid #f0e6d9;border-radius:9px;cursor:pointer;margin-bottom:4px;position:relative}.cue-item:hover{background:#fcf5e9}.cue-item.selected{border-color:#d1ae90;background:linear-gradient(120deg,#f9ebd9,#fff9ef);box-shadow:inset 3px 0 #9b6749}.cue-index{border-radius:9px;width:30px;height:30px;background:#f5ead9;color:#9b7456;display:grid;place-items:center;font:700 11px Georgia,serif}.cue-item.selected .cue-index{background:#795039;color:#fff8e8}.cue-line{min-width:0}.cue-name{line-height:1.55;font-size:11.3px;font-weight:700;word-break:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.cue-time{font:10px Arial,sans-serif;color:#ae957f;margin-top:4px}.cue-time span{color:#c8b29d;padding:0 3px}.cue-actions{display:flex;flex-direction:column;gap:2px}.cue-more{height:22px;width:23px;background:transparent;border:0;border-radius:7px;color:#a9917c;font-size:15px}.cue-more:hover{background:#f1e3d2}.tap-item{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:9px;border:1px solid #ecd9c3;background:#fcf6ed;border-radius:9px;margin:0 0 7px;font-size:11.5px;line-height:1.5;color:#63462e;min-height:46px}.tap-item .tap-icon{font-size:14px;color:#ae7e55}.tap-item.used{opacity:.52;background:#e9e1d5;text-decoration:line-through}.tap-hint{color:#9b8570;font-size:10px;line-height:1.8;margin:3px 1px 12px}.list-footer{border-top:1px solid #ede1d1;padding-top:12px;display:flex;justify-content:space-between;gap:7px}.text-btn{border:0;background:transparent;padding:3px 0;color:#a88260;font-size:10px;font-weight:700;text-decoration:none}.text-btn:hover{text-decoration:underline;color:#74432b}.empty-list{padding:34px 18px;text-align:center;color:#ad9783;font-size:11px;line-height:1.9}
+.preview-panel{padding:0}.preview-head{padding:20px 22px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}.preview-head h2{font-size:17px;margin:5px 0 0}.preview-head h2 small{font-size:10px;font-weight:500;color:#ad9985;margin-left:10px}.preview-options,.screen-toolbar{display:flex;align-items:center;gap:12px}.small-toggle{display:flex;align-items:center;gap:6px;font-size:10px;color:#8b725e;cursor:pointer;white-space:nowrap}.small-toggle input{width:14px;height:14px;accent-color:#8b5e42}.preview-action{border:1px solid #e6d9c7;border-radius:8px;background:#fff9ee;width:32px;height:32px;font-size:18px}.screen-toolbar{background:#fbf4e9;min-height:44px;border-top:1px solid #eee1cf;border-bottom:1px solid #eee1cf;padding:7px 20px}.toolbar-label{font-size:10px;color:#9e8a78;font-weight:800;white-space:nowrap}.screen-toolbar select{font-size:11px;font-weight:750;padding:7px 25px 7px 10px;border:1px solid #e2d4bf;background:#fffdf9;border-radius:7px;max-width:230px}.custom-size{display:flex;align-items:center;gap:4px}.custom-size input{width:66px;min-width:0;padding:5px;border:1px solid #e7d9c6;border-radius:7px;background:#fff}.stage-hint{font-size:10px;color:#b19b83;margin-left:auto;text-align:right}.preview-area{padding:22px 26px 23px;background:radial-gradient(circle at 50% 38%,#eee3d1,#e8ddcc 70%);background-image:radial-gradient(#d6cab9 .75px,transparent .75px),radial-gradient(circle at 50% 38%,#eee3d1,#e8ddcc 70%);background-size:12px 12px,auto;background-position:0 0,0 0}.stage-mat{max-width:1040px;margin:auto}.canvas-wrap{background:#473029;position:relative;max-height:58vh;box-shadow:0 14px 32px #42291832,0 0 0 7px #f9f2e8;overflow:hidden;cursor:crosshair;user-select:none;touch-action:none;border:1px solid #604435}.canvas-wrap canvas{display:block;width:100%;height:auto;aspect-ratio:16/9}.canvas-grain{pointer-events:none;position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.025) 50%);background-size:auto 4px;mix-blend-mode:soft-light}.stage-ruler{height:18px;display:flex;align-items:center;justify-content:space-between;font:10px Arial;color:#ac9783}.bottom-ruler{margin-top:3px}.preview-foot{display:flex;align-items:center;justify-content:space-between;padding:12px 22px;gap:12px;border-top:1px solid #ede2d3;font-size:10px;color:#a18b78}.preview-badge{font:700 9px Arial;letter-spacing:1.5px;color:#947358;white-space:nowrap}.live-dot{width:6px;height:6px;background:#92b48b;border-radius:50%;display:inline-block;margin-right:5px;box-shadow:0 0 0 3px #cbdac2}.pill-muted{font:800 9px Arial;border:1px solid #e8dccc;background:#fcf7ef;padding:6px 8px;color:#b4a18a;border-radius:5px;white-space:nowrap}
+.transport-panel{padding:16px 21px 18px}.transport-header{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.time-group{display:flex;align-items:baseline;gap:8px;font-family:Arial,sans-serif;font-variant-numeric:tabular-nums}.time-now{font-size:22px;font-weight:800;color:#5c3f2e;letter-spacing:.3px}.time-separator{font-size:16px;color:#cebea8}.time-total{font-size:12px;color:#ad9985}.transport-buttons{display:flex;align-items:center;gap:7px}.tiny-btn{height:29px;min-width:31px;border:1px solid #ebdfce;border-radius:7px;background:#fffaf2;color:#8e7056;font-size:12px;font-weight:700}.play-btn{width:44px;height:42px;border-radius:12px;background:#6b4330;color:#fff8e9;border:1px solid #5e382a;font-size:19px;box-shadow:0 4px 8px #5b2c271b}.transport-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.timeline-label{display:flex;align-items:center;justify-content:space-between;margin:17px 0 6px;font:800 9px Arial;letter-spacing:1.1px;color:#b19a84}.timeline-label span:last-child{font-weight:500;letter-spacing:0}.timeline{height:75px;position:relative;border:1px solid #e9dccb;border-radius:10px;overflow:hidden;background:#fbf5ed;cursor:crosshair;touch-action:none}.timeline-grid{position:absolute;inset:0;background:repeating-linear-gradient(to right,transparent,transparent calc(10% - 1px),#e5d8c6 calc(10% - 1px),#e5d8c6 10%)}.timeline-cues{position:absolute;inset:0}.cue-bar{position:absolute;display:block;height:13px;top:21px;border:1px solid #caa078;border-radius:4px;background:#ead0b0;overflow:hidden;cursor:pointer;min-width:2px}.cue-bar:nth-child(3n+2){top:38px;background:#dbb78e}.cue-bar:nth-child(3n){top:55px;background:#cda782}.cue-bar.active{background:#87583d;border-color:#6d422d;box-shadow:0 0 0 1px #fff7ec}.playhead{height:100%;position:absolute;top:0;left:0;pointer-events:none;border-left:2px solid #a65842;z-index:4}.playhead:before{content:"";position:absolute;top:0;left:-5px;width:9px;height:11px;background:#a65842;border-radius:2px 2px 4px 4px}.playhead span{display:none}.transport-footer{display:flex;align-items:center;gap:14px;margin-top:10px;color:#a18b77;font-size:9px;flex-wrap:wrap}.transport-footer span{white-space:nowrap}.transport-footer i{width:10px;height:10px;border-radius:3px;display:inline-block;vertical-align:-1px;margin-right:4px}.legend-cream{background:#e3bc91}.legend-brown{background:#855239}.keyboard-hint{margin-left:auto;color:#b5a28c}.support-panel{display:flex;align-items:start;padding:19px 24px;gap:14px;background:linear-gradient(120deg,#fbf4e7,#fffaf1)}.support-ornament{font-size:28px;color:#b48c66}.support-panel strong{color:#785540;font-size:12px}.support-panel p{font-size:10.5px;line-height:1.9;color:#9c866f;margin:5px 0 0}
+.settings-panel{padding:19px!important}.edit-current{padding:12px 13px;border-radius:10px;background:#f9f1e7;border:1px solid #ead9c6;margin-bottom:16px}.edit-current .eyebrow{font-size:9px}.edit-current #selectedNumber{float:right;font:800 10px Arial;color:#ad927b}#cueText{display:block;width:100%;padding:10px 10px;background:#fffdf7;border:1px solid #dfccb6;border-radius:8px;resize:vertical;min-height:62px;margin-top:7px;line-height:1.7;font-weight:650;font-size:12px}#cueSelectedHint{font-size:9px;color:#af9781;margin:8px 0 0;line-height:1.4}.setting-group{border-top:1px solid #ecdfce;padding-top:15px;margin-top:15px}.group-title{display:flex;align-items:center;gap:7px;font-size:12px;margin-bottom:14px;color:#6a4938}.group-title>span{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#f3e5d5;color:#8a5d43;font-size:15px}.group-title small{margin-left:auto;font-size:9px;color:#b3a08c;font-weight:400}.form-field{display:flex;flex-direction:column;gap:7px;font-size:10px;color:#987f69;font-weight:700;min-width:0}.form-field input,.form-field select{width:100%;height:32px;padding:6px 9px;background:#fffdf8;border:1px solid #e5d6c4;border-radius:7px;font-size:11px;color:#684f3d}.form-field input:focus,.form-field select:focus{border-color:#a97f63}.two-fields{display:grid;grid-template-columns:1fr 1fr;gap:11px}.small-row{display:flex;gap:7px;margin-top:9px}.mini-button{flex:1;min-width:0;background:#f9efe2;border:1px solid #e7d6bf;border-radius:7px;font-size:9px;padding:8px 4px;font-weight:700;color:#9b7658}.mini-button:hover{background:#f0dec6}.range-field{margin:13px 0}.range-field>div{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}.range-field label{font-size:10px;color:#947a66;font-weight:700}.range-field output{font:800 10px Arial;color:#715341;background:#f7eee3;padding:4px 7px;border-radius:5px;min-width:47px;text-align:center}.range-field input,.fade-range{display:block;width:100%;accent-color:#8a5d40;cursor:pointer}input[type=range]{appearance:none;-webkit-appearance:none;height:5px;background:linear-gradient(to right,#b68560 0%,#d8c1a5 50%,#f2e8dc 100%);border-radius:9px;outline:none}input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:14px;height:14px;border:3px solid #fff9f0;background:#85543b;border-radius:50%;box-shadow:0 0 0 1px #b58e70,0 2px 4px #472b1c2c}input[type=range]::-moz-range-thumb{width:11px;height:11px;border:2px solid #fff9f0;background:#85543b;border-radius:50%}.field-row{display:flex;gap:10px;margin-top:12px}.grow{flex:1}.short{flex:0 0 87px}.color-line{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:10px;color:#907662;font-weight:700;margin:12px 0}.color-control{display:flex;align-items:center;gap:6px}.color-swatch{width:27px;height:27px;border-radius:50%;border:3px solid #fffaf3;box-shadow:0 0 0 1px #d9c7b5,0 1px 3px #56402a33;flex:none}.color-hex{width:77px;height:28px;border-radius:7px;border:1px solid #e8d9c6;background:#fffdf9;padding:5px 7px;font:800 10px Arial;color:#755844;text-transform:uppercase}.check-setting{display:flex;align-items:center;gap:9px;color:#806754;font-size:10.8px;cursor:pointer;margin:10px 0;min-height:22px}.check-setting input{appearance:none;position:absolute;opacity:0;width:1px;height:1px}.custom-check{width:17px;height:17px;display:inline-grid;place-items:center;border:1px solid #d7c2ae;border-radius:5px;background:#fffaf0;flex:none;transition:.2s}.check-setting input:checked + .custom-check{background:#8a5e44;border-color:#8a5e44}.check-setting input:checked + .custom-check:after{content:'✓';color:#fff7ec;font-size:12px;font-weight:800}.check-setting input:focus-visible+.custom-check{outline:2px solid #b48b6b}.check-setting output{margin-left:auto;font:800 10px Arial;color:#987359}.dependent.is-disabled{opacity:.42;pointer-events:none}.fade-range{margin:4px 0 15px}.global-settings{padding-bottom:5px}.background-upload{display:block;padding:9px;text-align:center;border:1px dashed #d8bda0;border-radius:8px;background:#fbf5ed;color:#936f54;font-size:10px;cursor:pointer;margin:10px 0 6px}.site-footer{padding:14px 23px;border-top:1px solid #e8dccb;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#af9a86;font:700 9px Arial;letter-spacing:1.2px;background:#fff9ed}.site-footer span:nth-child(2){letter-spacing:.3px;font-family:"Yu Mincho",serif;font-size:11px;color:#a98461}
+.popover{position:fixed;z-index:30;background:#fffaf2;border:1px solid #dac3a8;border-radius:15px;padding:13px;width:259px;box-shadow:0 18px 50px #38231e48}.popover-head{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:800;color:#6b4835;margin-bottom:7px}.popover-head button{border:0;background:transparent;font-size:20px;color:#8d725e}.popover canvas{display:block;width:230px;height:230px;cursor:crosshair;touch-action:none}.popover-bottom{display:flex;align-items:center;gap:8px;padding:5px 4px}.popover-bottom span{width:22px;height:22px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #dac6ae}.popover-bottom code{font-size:12px;font-weight:800;color:#77543c}.popover-bottom input{margin-left:auto;width:28px;height:28px;border:0;padding:0;background:transparent;cursor:pointer}.popover p{text-align:center;color:#a89078;font-size:9px;margin:8px 0 1px}
+dialog{border:1px solid #e2d1bb;border-radius:17px;padding:0;max-width:min(500px,92vw);width:100%;box-shadow:0 20px 70px #3c201855;background:#fffaf2;color:#4e3022}dialog::backdrop{background:#2c1912a1;backdrop-filter:blur(3px)}.modal-inner{padding:28px 30px 26px}.modal-eyebrow{color:#b58763;font:800 9px Arial;letter-spacing:2px}.modal-inner h2{font-size:21px;margin:8px 0 8px}.modal-inner p{line-height:1.75;color:#987e66;font-size:11px}.modal-inner .form-field{margin-top:18px}.modal-note{padding:12px;background:#f6ecdd;border-radius:9px}.export-file-list{display:flex;flex-direction:column;gap:6px;border:1px solid #e8d9c8;border-radius:10px;background:#fffdf8;padding:12px 14px;color:#84664f;font:11px monospace;overflow:auto}.export-file-list span:before{content:'◫';color:#a98768;margin-right:8px}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:21px}.help-inner ol{padding-left:20px;color:#775b47;line-height:1.95;font-size:12px}.help-inner li{margin-bottom:10px}.help-inner code{background:#f5e8d6;padding:3px;border-radius:3px;font-size:11px}.help-inner button{margin-left:auto;display:flex}.toast{position:fixed;z-index:40;bottom:25px;left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;min-width:220px;text-align:center;border:1px solid #a77f63;background:#5b3b2b;color:#fff9ec;box-shadow:0 9px 30px #4e271c55;border-radius:10px;padding:11px 20px;font-size:12px;transition:.24s}.toast.visible{transform:translate(-50%,0);opacity:1}
+@media (max-width:1390px){.workbench{grid-template-columns:267px minmax(390px,1fr) 306px;gap:12px;padding:12px}.topbar{padding:0 16px}.sidebar .panel{padding:14px!important}.preview-area{padding:19px 20px}.top-version{display:none}.transport-right{width:100%;justify-content:flex-end}.phrases-panel{max-height:calc(100vh - 375px)}}
+@media (max-width:1110px){.workbench{grid-template-columns:255px minmax(0,1fr);gap:13px}.right-sidebar{grid-column:2;grid-row:2}.right-sidebar .settings-panel{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}.right-sidebar .settings-panel>.section-heading,.right-sidebar .settings-panel>.edit-current{grid-column:1/-1}.topbar{flex-wrap:wrap;height:auto;min-height:82px;padding:12px 15px}.top-actions{flex-wrap:wrap}.phrases-panel{max-height:none}.preview-area{padding:15px}}
+@media (max-width:735px){.workbench{grid-template-columns:1fr}.left-sidebar,.right-sidebar{grid-column:1}.center-stage{grid-column:1;grid-row:1}.left-sidebar{grid-row:2}.right-sidebar{grid-row:3}.right-sidebar .settings-panel{display:block}.topbar{gap:12px}.top-actions{gap:5px}.top-actions .btn{height:32px;padding:0 9px;font-size:10px}.brand-name{font-size:23px}.brand-sub{font-size:7px}.stage-hint{display:none}.preview-head h2 small{display:block;margin-left:0}.preview-area{padding:14px 12px}.preview-head{padding:16px}.screen-toolbar{padding:7px 12px}.preview-foot{padding:11px}.transport-panel{padding:14px}.transport-header{justify-content:center}.transport-right{justify-content:center}.keyboard-hint{display:none}.site-footer{justify-content:center}.site-footer span:first-child,.site-footer span:last-child{display:none}}
+
+.apply-all-btn{display:block;width:100%;border:1px solid #ddc5a7;color:#785036;background:#f7e6cf;border-radius:8px;padding:9px 4px;font-size:10px;font-weight:800;margin-top:11px;letter-spacing:.1px}.apply-all-btn:hover{background:#edd6b6}
+
+/* Custom font upload / resource list */
+.custom-font-box{margin:10px 0 14px;padding:10px 11px;border-radius:11px;background:#fcf6ec;border:1px solid #e9d8c1}
+.custom-font-box .font-upload{margin:0;padding:9px 7px;background:#fffdf9;line-height:1.5;font-size:9.5px}
+.font-list{display:flex;flex-direction:column;gap:6px;margin-top:7px}.font-list:empty{display:none}
+.font-resource{display:flex;align-items:center;gap:8px;min-width:0;padding:7px 7px 7px 9px;border-radius:7px;border:1px solid #e6d6c2;background:#fffdf8}
+.font-resource>div{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.font-resource strong{font-size:10px;color:#69503d;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.font-resource small{font-size:9px;color:#a38670;line-height:1.3}
+.font-resource.missing{border-color:#d3ab82;background:#fff8ec}.font-resource.missing small{color:#aa653d}
+.font-resource button{height:23px;width:23px;flex:none;border:1px solid #e8d9c6;border-radius:6px;background:#f7ebde;color:#866047;font-size:15px}
+.font-hint{font-size:9px;color:#9c816d;line-height:1.65;margin:7px 0 0}
+.font-hint code{background:#efe1cd;border-radius:4px;padding:1px 3px;font-size:9px;color:#73503a}
+
+/* v1.2 - font-only safety export */
+.font-only-button{margin:10px 0 2px;width:100%;padding:9px 12px;font-size:12px;white-space:normal}
+
+/* v2.0 - synchronized end credits editor */
+[data-mode="lyrics"] .credits-only,[data-mode="lyrics"] .endroll-only,[data-mode="endroll"] .lyrics-only,[data-mode="endroll"] .credits-only,[data-mode="credits"] .lyrics-only,[data-mode="credits"] .endroll-only{display:none!important}
+.workspace-switch{display:flex;align-items:center;gap:9px;padding:10px 23px;background:#faf2e6;border-bottom:1px solid #e5d6bd}
+.workspace-tab{height:38px;background:#fffdf7;color:#8f745d;border:1px solid #e3d4c0;border-radius:10px;padding:0 18px;font-size:12px;font-weight:800;white-space:nowrap}
+.workspace-tab.active{background:#644331;border-color:#644331;color:#fffaf0;box-shadow:0 3px 12px #5b3b2a23}
+.workspace-caption{margin-left:auto;color:#b29b84;letter-spacing:.2px;font-size:10px}
+.credits-library .dropzone{min-height:126px;border:1.5px dashed #d7b99a;background:linear-gradient(140deg,#fffdf7,#f6e9d6);border-radius:12px;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;text-align:center}
+.credits-library .dropzone:hover,.credits-library .dropzone.dragover{border-color:#8c6346;background:#f6e7d3}
+.media-library-list{display:flex;flex-direction:column;gap:7px;margin-top:14px;max-height:290px;overflow-y:auto}
+.media-resource{display:flex;gap:9px;align-items:center;border:1px solid #e7d9c9;border-radius:9px;background:#fffcf7;padding:7px;text-align:left;min-width:0}
+.media-resource.active{background:#f4e7d5;border-color:#ae8566}
+.media-thumb{width:52px;height:43px;flex:none;border-radius:6px;background:#4e3225;display:grid;place-items:center;color:#fff3e0;font-size:23px;overflow:hidden}
+.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover}
+.media-meta{min-width:0;flex:1}.media-meta strong{display:block;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.media-meta small{display:block;font-size:9px;margin-top:4px;color:#a9907b}
+.media-add{min-width:32px;height:32px;border-radius:9px;background:#805842;color:#fff9ee;border:0;font-weight:800;font-size:18px}.media-remove{background:transparent;border:0;color:#ae8e76;font-size:19px;padding:4px}
+.credits-clips{display:flex;flex-direction:column;min-height:300px;max-height:calc(100vh - 550px)}
+.credits-clips #clipList{min-height:130px}.clip-item{grid-template-columns:32px minmax(0,1fr) auto}.clip-item .cue-name{white-space:nowrap;text-overflow:ellipsis;display:block}
+.clip-selected-name{margin-top:9px;font-size:13px;font-weight:800;overflow-wrap:anywhere;color:#6b4a37}
+.credits-editor .edit-current{margin-bottom:9px}.credits-editor .check-setting{font-size:11px}.credits-editor select{font-size:11px}
+.credits-export-hint{border:1px solid #e4cfb0;background:#faf0df;padding:12px;border-radius:10px;display:flex;flex-direction:column;gap:7px;line-height:1.7;color:#7e5a40;font-size:11px}
+.credits-export-hint strong{font-size:11px}.credits-export-hint span{font-size:10px}
+.credits-export-hint code{font-size:10px;background:#eddec9;border-radius:3px;padding:2px}
+.timeline-cues.credits-only .cue-bar{background:#b79f89;bottom:4px;height:19px}
+.timeline-cues.credits-only .cue-bar.active{background:#71462f}
+.timeline-cues.credits-only .cue-bar.has-fade:after{content:'';position:absolute;left:0;top:0;bottom:0;width:20%;background:linear-gradient(90deg,#f2e2beaa,transparent)}
+.preview-options .small-toggle{white-space:normal}
+@media(max-width:1100px){.workspace-caption{display:none}.credits-clips{max-height:none}.credits-editor{grid-column:2}}
+@media(max-width:735px){.workspace-switch{padding:9px 13px}.workspace-tab{flex:1;padding:0 7px;font-size:11px}.credits-editor{grid-column:1}}
+
+/* v2.2 - in-app usage guide and nonofficial attribution */
+#helpDialog{max-width:min(650px,94vw);max-height:min(88vh,900px);overflow-y:auto;overscroll-behavior:contain}
+#helpDialog .help-recipe{border:1px solid #e3d0b5;background:#fff8ec;border-radius:12px;padding:16px;margin:18px 0}
+#helpDialog .help-recipe h3{margin:0 0 9px;color:#62412f;font-size:14px}
+#helpDialog .help-recipe p{margin:8px 0;color:#856b54;line-height:1.7}
+#helpDialog .help-recipe pre{margin:12px 0;padding:16px;border-radius:10px;background:#422b22;color:#fff3df;white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:auto;line-height:1.85;font:12px/1.85 ui-monospace,SFMono-Regular,Consolas,monospace}
+#helpDialog .help-recipe pre code{background:none;color:inherit;padding:0;font:inherit}
+#helpDialog .help-recipe-extra{border-top:1px solid #e6d4c0;margin-top:12px;padding-top:12px;font-size:12px}
+#helpDialog .help-recipe-extra strong{color:#62412f}
+#helpDialog .help-recipe-extra code{white-space:normal;overflow-wrap:anywhere}
+#helpDialog .help-nonofficial{background:#f5eee4;border-left:3px solid #af8769;padding:12px 14px;border-radius:6px;color:#765640}
+
+
+/* v2.6 - scrolling endroll cards */
+.nonlyrics-only{}
+[data-mode="lyrics"] .nonlyrics-only{display:none!important}
+.timeline-cues.endroll-only .cue-bar{background:#d2c1a7;bottom:24px;height:15px}
+.timeline-cues.endroll-only .cue-bar.active{background:#8a6246}
+.endroll-list-panel{display:flex;flex-direction:column;min-height:320px;max-height:calc(100vh - 520px)}
+.endroll-editor .clip-selected-name{margin-bottom:8px}
+.endroll-card-chip{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;background:#f1e1cb;color:#80573f;font-size:10px;font-weight:800;margin-bottom:6px}
+.endroll-card-editor .form-field textarea,.endroll-card-editor textarea{width:100%;min-height:108px;padding:10px;border:1px solid #e4d4c0;border-radius:8px;background:#fffdf9;resize:vertical}
+.endroll-card-editor .entry-row{display:grid;grid-template-columns:1fr 1fr auto;gap:7px;align-items:end;margin:0 0 8px}
+.endroll-card-editor .entry-row button{height:34px;width:34px;border:1px solid #e7d8c6;border-radius:8px;background:#f7ebde;color:#866047;font-size:18px}
+.endroll-card-editor .editor-actions{display:flex;justify-content:space-between;gap:8px;margin-top:10px}
+.endroll-card-editor .mini-button.full{width:100%}
+.endroll-card-editor .micro-note{font-size:10px;color:#9f846d;line-height:1.7;margin-top:8px}
+.endroll-preview-box{border:1px solid #ead8c1;background:#fffaf2;border-radius:10px;padding:10px}
+
+/* v2.7: center all compact glyph buttons, show editable placeholders. */
+.icon-btn,.cue-more,.endroll-card-editor .entry-row button,.font-resource button{
+  display:inline-flex;align-items:center;justify-content:center;padding:0;line-height:1;vertical-align:middle;
+}
+.icon-btn{flex:0 0 31px;font-family:Arial,sans-serif;font-size:23px;font-weight:500}
+.endroll-card-editor input::placeholder,.endroll-card-editor textarea::placeholder,#cueText::placeholder{color:#b8a99b;opacity:1;font-weight:400}
+.endroll-style-group .endroll-sync-toggle{margin-bottom:4px}
+.endroll-style-card{border:1px solid #e9d9c5;background:#fcf7ef;border-radius:10px;padding:12px 11px;margin:11px 0}
+.endroll-style-heading{font-size:11px;font-weight:800;color:#80563d;margin-bottom:12px}
+.endroll-style-card .form-field{margin:11px 0}
+.endroll-style-card .form-field output{float:right;font:800 10px Arial;color:#80563d}
+.endroll-style-card .form-field input[type=range]{width:100%;height:5px;margin:4px 0 8px;padding:0;border:0;background:linear-gradient(to right,#b68560,#f2e8dc)}
+.endroll-style-card .color-line{margin:12px 0}
+.endroll-style-card.is-disabled,#endrollBgOptions.is-disabled{opacity:.45}
+.endroll-style-card.is-disabled *{cursor:default}
+.endroll-style-card .form-field select{max-width:100%;min-width:0}
+.endroll-card-editor .entry-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 34px}
+.endroll-card-editor .entry-row .form-field{min-width:0}
+
+/* v2.8: horizontal endroll placement and alignment controls */
+.endroll-position-group .endroll-horizontal-range{margin:9px 0 14px}
+.endroll-position-group .endroll-horizontal-range input{width:100%;display:block;margin:0}
+.endroll-range-labels{display:flex;justify-content:space-between;gap:5px;margin-top:11px;color:#a48972;font-size:9px;font-weight:700}
+.endroll-position-presets .mini-button.active{background:#8a5e44;color:#fffaf2;border-color:#8a5e44}
+.endroll-position-presets .mini-button:focus-visible{outline:2px solid #b38e73;outline-offset:2px}
+.endroll-position-group .microcopy{margin:11px 0 0;line-height:1.65}
+/* v2.9: relative body-only horizontal offset, independent from the heading. */
+.endroll-body-position{margin-top:18px;padding:13px 11px 12px;border-radius:10px;background:#fbf4e8;border:1px solid #e8d9c5}
+.endroll-body-position-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11px;color:#76503b;font-weight:800}
+.endroll-body-position-head output{font:800 10px Arial,sans-serif;color:#986749;white-space:nowrap}
+#endrollBodyOffsetX{display:block;width:100%;margin:15px 0 7px;accent-color:#95684a}
+.endroll-offset-reset{display:block;margin:12px 0 0 auto}
+.endroll-body-position .microcopy{margin:10px 0 0}
+
+</style>
+</head>
+<body data-mode="lyrics">
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand"><div class="brand-icon" aria-hidden="true"><span>♪</span></div><div><div class="brand-name">Choco<span>Lyric</span><i>studio</i></div><div class="brand-sub">TYRANOBUILDER × LYRICS & END CREDITS</div></div></div>
+    <div class="top-actions"><span class="top-version">BROWSER STUDIO / v2.9</span><button class="btn ghost" id="helpBtn">? <span>使い方</span></button><button class="btn ghost" id="loadProjectBtn">↥ <span>プロジェクトを開く</span></button><button class="btn light" id="saveProjectBtn">✧ <span>素材込みJSON保存</span></button><button class="btn primary" id="exportBtn">⇩ <span>ティラノ用に書き出す</span></button></div>
+  </header>
+  <nav class="workspace-switch" aria-label="制作モード">
+    <button type="button" id="modeLyrics" class="workspace-tab active">♫　歌詞・SRT演出</button>
+    <button type="button" id="modeEndroll" class="workspace-tab">☰　エンドロール</button>
+    <button type="button" id="modeCredits" class="workspace-tab">▣　エンドロール映像</button>
+    <span class="workspace-caption">同じ音声タイムラインで歌詞・クレジット・映像を同期</span>
+  </nav>
+  <div class="workbench">
+    <aside class="sidebar left-sidebar">
+      <section class="panel upload-panel">
+        <div class="section-heading"><div><span class="eyebrow">01 / IMPORT</span><h2>素材を読み込む</h2></div><span class="mini-mark">♫</span></div>
+        <label class="dropzone" id="audioDrop" for="audioInput"><span class="upload-icon">♫</span><span class="drop-title" id="audioTitle">音声ファイルを選ぶ</span><span class="drop-detail">MP3 / OGG / M4A / WAV</span><span class="upload-link">ファイルを選択　↗</span></label>
+        <input type="file" id="audioInput" accept="audio/*,.mp3,.ogg,.m4a,.wav,.aac,.webm" hidden>
+        <div class="inline-imports"><label class="btn import-btn" for="srtInput">▤　SRTを読み込む</label><label class="btn import-btn" for="txtInput">≡　歌詞TXTを読み込む</label></div>
+        <input type="file" id="srtInput" accept=".srt,text/plain" hidden><input type="file" id="txtInput" accept=".txt,text/plain" hidden>
+        <p class="microcopy">SRTは開始・終了時刻を自動反映。TXTは再生中に歌詞ボタンを押してタイミング入力できます。</p>
+        <div class="file-status"><span class="status-dot"></span><span id="importStatus">まだ素材を読み込んでいません</span></div>
+      </section>
+      <section class="panel phrases-panel lyrics-only">
+        <div class="section-heading list-heading"><div><span class="eyebrow">02 / LYRIC CUES</span><h2>歌詞タイムライン <span class="count-pill" id="cueCount">0</span></h2></div><button class="icon-btn" id="addCueBtn" title="現在の再生位置に歌詞を追加">＋</button></div>
+        <div class="list-switch"><button class="switch-tab active" data-tab="cues">配置済みの歌詞</button><button class="switch-tab" data-tab="tap">タイミング入力 <span id="unplacedCount"></span></button></div>
+        <div class="list-body" id="cueList"></div><div class="list-body hidden" id="tapList"></div>
+        <div class="list-footer"><button class="text-btn" id="clearCuesBtn">⌫　歌詞をすべて消去</button><button class="text-btn" id="exportSrtBtn">SRT保存 ⇩</button></div>
+      </section>
+      
+      <section class="panel endroll-only endroll-list-panel">
+        <div class="section-heading list-heading"><div><span class="eyebrow">02 / ENDROLL CARDS</span><h2>エンドロールカード <span class="count-pill" id="endrollCount">0</span></h2></div><button class="icon-btn" id="addEndrollCardBtn" title="カードを追加">＋</button></div>
+        <div class="field-row" style="margin-bottom:10px;align-items:end"><label class="form-field grow">追加する項目<select id="endrollTemplate"><option value="custom">任意（入力して決める）</option><option value="idea">原案</option><option value="scenario">シナリオ</option><option value="bg">イラスト/背景</option><option value="standing">イラスト/立ち絵</option><option value="otherart">イラスト/他素材</option><option value="cast">声優</option><option value="bgm">BGM</option><option value="song">主題歌</option><option value="se">効果音</option><option value="script">スクリプト</option><option value="modeling">２Dモデリング</option><option value="supporter">サポーター</option><option value="testplay">テストプレイ</option></select></label></div>
+        <div class="list-body" id="endrollCardList"></div>
+        <div class="list-footer"><button class="text-btn" id="clearEndrollCardsBtn">⌫　カードをすべて消去</button></div>
+      </section>
+      <section class="panel credits-only credits-library">
+        <div class="section-heading"><div><span class="eyebrow">02 / END CREDITS MEDIA</span><h2>映像素材</h2></div><span class="mini-mark">▣</span></div>
+        <label class="dropzone credits-drop" id="mediaDrop" for="mediaInput"><span class="upload-icon">▧</span><span class="drop-title">画像・動画を読み込む</span><span class="drop-detail">PNG / JPG / WEBP / GIF / MP4 / WEBM</span><span class="upload-link">複数選択して追加　↗</span></label>
+        <input type="file" id="mediaInput" accept="image/*,video/mp4,video/webm,video/ogg,.mp4,.webm,.ogv" multiple hidden>
+        <p class="microcopy">素材を選んで「現在位置に挿入」。読み込んだ元ファイルをそのままZIPに保存します。</p>
+        <div id="mediaLibrary" class="media-library-list"></div>
+      </section>
+      <section class="panel credits-only credits-clips">
+        <div class="section-heading"><div><span class="eyebrow">03 / TIMING</span><h2>映像タイムライン <span class="count-pill" id="clipCount">0</span></h2></div><button class="icon-btn" id="addClipBtn" title="選択中の素材を現在位置に追加">＋</button></div>
+        <div class="list-body" id="clipList"></div>
+        <div class="list-footer"><button class="text-btn" id="clearClipsBtn">⌫　映像をすべて消去</button></div>
+      </section>
+    </aside>
+    <main class="center-stage">
+      <section class="panel preview-panel">
+        <div class="preview-head"><div><span class="eyebrow">LIVE CANVAS</span><h2>プレビュー <small>実際のゲーム画面に合わせて確認</small></h2></div><div class="preview-options"><label class="small-toggle lyrics-only"><input id="forceSelected" type="checkbox"><span>選択中を常時表示</span></label><label class="small-toggle nonlyrics-only"><input id="previewLyricsWithCredits" type="checkbox" checked><span>歌詞も重ねる</span></label><button class="preview-action" id="fitBtn" title="プレビューにフィット">⛶</button></div></div>
+        <div class="screen-toolbar"><label class="toolbar-label">ゲーム画面</label><select id="screenSize"><option value="1920x1080">1920 × 1080　/ FHD</option><option value="1280x720">1280 × 720　/ HD</option><option value="1600x900">1600 × 900</option><option value="1366x768">1366 × 768</option><option value="960x540">960 × 540</option><option value="1024x768">1024 × 768　/ 4:3</option><option value="800x600">800 × 600　/ 4:3</option><option value="640x480">640 × 480　/ 4:3</option><option value="custom">カスタムサイズ</option></select><div id="customSize" class="custom-size hidden"><input id="customWidth" type="number" min="320" max="3840" value="1920" aria-label="横幅"><span>×</span><input id="customHeight" type="number" min="240" max="2160" value="1080" aria-label="高さ"></div><span class="stage-hint">プレビュー上をクリック・ドラッグして位置を変更できます</span></div>
+        <div class="preview-area" id="previewArea"><div class="stage-mat"><div class="stage-ruler top-ruler"><span>0</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div><div class="canvas-wrap" id="canvasWrap"><canvas id="previewCanvas" width="1920" height="1080"></canvas><div class="canvas-grain"></div></div><div class="stage-ruler bottom-ruler"><span>0</span><span id="screenInfo">1920 × 1080 px</span><span>100%</span></div></div></div>
+        <div class="preview-foot"><span class="preview-badge"><span class="live-dot"></span> LIVE PREVIEW</span><span id="previewCueInfo">歌詞を選択して位置・色・演出を調整</span><span class="pill-muted">60 FPS</span></div>
+      </section>
+      <section class="panel transport-panel">
+        <div class="transport-header"><div class="time-group"><span class="time-now" id="currentTime">00:00.00</span><span class="time-separator">/</span><span class="time-total" id="totalTime">00:00.00</span></div><div class="transport-buttons"><button class="tiny-btn" id="back1Btn" title="1秒戻る">−1s</button><button class="tiny-btn" id="backFrameBtn" title="0.1秒戻る">‹</button><button class="play-btn" id="playBtn" title="再生 / 一時停止（Space）">▶</button><button class="tiny-btn" id="forwardFrameBtn" title="0.1秒進む">›</button><button class="tiny-btn" id="forward1Btn" title="1秒進む">+1s</button></div><div class="transport-right"><label class="small-toggle"><input type="checkbox" id="loopPreview"><span>ループ</span></label><button class="text-btn" id="setStartBtn">IN を現在位置に</button><button class="text-btn" id="setEndBtn">OUT を現在位置に</button></div></div>
+        <div class="timeline-label"><span>TIME LINE</span><span id="timelineRange">00:00 — 00:00</span></div>
+        <div class="timeline" id="timeline" tabindex="0" aria-label="再生位置タイムライン"><div class="timeline-grid" id="timelineGrid"></div><div class="timeline-cues lyrics-only" id="timelineCues"></div><div class="timeline-cues endroll-only" id="timelineEndroll"></div><div class="timeline-cues credits-only" id="timelineCredits"></div><div class="playhead" id="playhead"><span></span></div></div>
+        <div class="transport-footer"><span class="lyrics-only"><i class="legend-cream"></i>歌詞の表示区間</span><span class="lyrics-only"><i class="legend-brown"></i>選択中の歌詞</span><span class="endroll-only"><i class="legend-cream"></i>エンドロールの流れる区間</span><span class="endroll-only"><i class="legend-brown"></i>選択中のカード</span><span class="credits-only"><i class="legend-cream"></i>素材の表示区間</span><span class="credits-only"><i class="legend-brown"></i>選択中の素材</span><span class="keyboard-hint lyrics-only">SPACE：再生 / ← →：0.1秒 / ENTER：次の歌詞を配置</span><span class="keyboard-hint endroll-only">SPACE：再生 / ← →：0.1秒 / 左の＋：カード追加</span><span class="keyboard-hint credits-only">SPACE：再生 / ← →：0.1秒 / 左の＋：現在位置に挿入</span></div>
+      </section>
+      <section class="panel support-panel"><div class="support-ornament">✦</div><div><strong>ちょこっとヒント</strong><p>SRTを使えば歌詞の表示タイミングを一括設定。再生を聴きながら細かい秒数を調整して、ティラノビルダーでそのまま使える演出ファイルを出力できます。</p></div></section>
+    </main>
+    <aside class="sidebar right-sidebar">
+      
+      <section class="panel endroll-only endroll-editor">
+        <div class="section-heading"><div><span class="eyebrow">04 / ENDROLL</span><h2>流れるクレジット</h2></div><span class="mini-mark">☰</span></div>
+        <div class="setting-group"><div class="group-title"><span>◷</span><strong>再生区間</strong></div>
+          <div class="two-fields"><label class="form-field">開始（秒）<input type="number" step="0.01" min="0" id="endrollStart"></label><label class="form-field">終了（秒）<input type="number" step="0.01" min="0" id="endrollEnd"></label></div>
+          <div class="small-row"><button class="mini-button" id="endrollNowStart">現在位置を開始に設定</button><button class="mini-button" id="endrollNowEnd">現在位置を終了に設定</button></div>
+          <label class="form-field">流れる方向<select id="endrollDirection"><option value="bottomToTop">下から上へ</option><option value="topToBottom">上から下へ</option></select></label>
+        </div>
+        <div class="setting-group endroll-position-group">
+          <div class="group-title"><span>↔</span><strong>横位置・文字揃え</strong></div>
+          <div class="range-field endroll-horizontal-range">
+            <div><label for="endrollPositionX">エンドロールの横位置</label><output id="endrollPositionXOutput">50%（中央）</output></div>
+            <input type="range" id="endrollPositionX" min="0" max="100" step="1" value="50" aria-label="エンドロールの横位置 左0% 中央50% 右100%">
+            <div class="endroll-range-labels"><span>左端 0%</span><span>中央 50%</span><span>右端 100%</span></div>
+          </div>
+          <label class="form-field">文字の揃え方
+            <select id="endrollTextAlign"><option value="left">左揃え</option><option value="center">中央揃え</option><option value="right">右揃え</option></select>
+          </label>
+          <div class="small-row endroll-position-presets">
+            <button type="button" class="mini-button" data-endroll-preset="left">左寄せ</button>
+            <button type="button" class="mini-button" data-endroll-preset="center">中央</button>
+            <button type="button" class="mini-button" data-endroll-preset="right">右寄せ</button>
+          </div>
+          <p class="microcopy">クレジット全体の位置と文字揃えを指定できます。見出しと本文をまとめて移動します。</p>
+          <div class="endroll-body-position">
+            <div class="endroll-body-position-head">
+              <label for="endrollBodyOffsetX">本文だけの横位置</label>
+              <output id="endrollBodyOffsetXOutput">0%（調整なし）</output>
+            </div>
+            <input type="range" id="endrollBodyOffsetX" min="-40" max="40" step="1" value="0" aria-label="本文だけの横位置。マイナスで左、プラスで右へ移動">
+            <div class="endroll-range-labels"><span>← 左へ -40%</span><span>0%</span><span>右へ +40% →</span></div>
+            <button type="button" class="mini-button endroll-offset-reset" id="endrollBodyOffsetReset">本文位置をリセット</button>
+            <p class="microcopy">【 】の見出しは動かさず、本文・クレジット名のみを左右にずらします。左寄せ・右寄せでも調整できます。数値は画面幅に対する割合です。</p>
+          </div>
+        </div>
+        <div class="setting-group">
+          <div class="group-title"><span>▣</span><strong>選択中のカード</strong></div>
+          <div id="endrollSelectedTitle" class="clip-selected-name">カードを選択してください</div>
+          <div id="endrollCardEditor" class="endroll-card-editor microcopy">左の一覧からカードを選択すると、ここで内容を編集できます。</div>
+        </div>
+        <div class="setting-group endroll-style-group">
+          <div class="group-title"><span>◉</span><strong>エンドロールの文字設定</strong></div>
+          <label class="check-setting endroll-sync-toggle"><input id="endrollSameStyle" type="checkbox"><span class="custom-check"></span><span>見出しと本文の設定を一括調整</span></label>
+          <p class="microcopy">ONの場合、見出しの設定を変更すると本文にも反映します。</p>
+          <label class="background-upload" for="endrollFontInput">＋ フォントファイルを追加（TTF / OTF / WOFF / WOFF2）</label>
+          <input type="file" id="endrollFontInput" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2" multiple hidden>
+          <p class="microcopy">追加すると、見出し・本文のフォント一覧から選択できます。書き出しZIPにも同梱されます。</p>
+          <div class="endroll-style-card" id="endrollTitleSettings">
+            <div class="endroll-style-heading">【 】 項目名・見出し</div>
+            <label class="form-field">フォント<select id="endrollTitleFont" class="endroll-font-select"></select></label>
+            <label class="form-field">文字サイズ <output id="endrollTitleSizeOutput">42 px</output><input id="endrollTitleSize" type="range" min="12" max="200" step="1"></label>
+            <div class="color-line"><span>文字色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollTitleColor" title="見出し文字色"></button><input class="color-hex" data-hex="endrollTitleColor" aria-label="見出し文字色HEX" maxlength="7"></div></div>
+            <label class="form-field">縁取りの太さ（0でOFF）<output id="endrollTitleStrokeWidthOutput">6 px</output><input id="endrollTitleStrokeWidth" type="range" min="0" max="24" step="1"></label>
+            <div class="color-line"><span>縁取り色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollTitleStrokeColor" title="見出し縁取り色"></button><input class="color-hex" data-hex="endrollTitleStrokeColor" aria-label="見出し縁取り色HEX" maxlength="7"></div></div>
+          </div>
+          <div class="endroll-style-card" id="endrollBodySettings">
+            <div class="endroll-style-heading">本文・クレジット名</div>
+            <label class="form-field">フォント<select id="endrollBodyFont" class="endroll-font-select"></select></label>
+            <label class="form-field">文字サイズ <output id="endrollBodySizeOutput">30 px</output><input id="endrollBodySize" type="range" min="12" max="200" step="1"></label>
+            <div class="color-line"><span>文字色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollBodyColor" title="本文文字色"></button><input class="color-hex" data-hex="endrollBodyColor" aria-label="本文文字色HEX" maxlength="7"></div></div>
+            <label class="form-field">縁取りの太さ（0でOFF）<output id="endrollBodyStrokeWidthOutput">5 px</output><input id="endrollBodyStrokeWidth" type="range" min="0" max="24" step="1"></label>
+            <div class="color-line"><span>縁取り色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollBodyStrokeColor" title="本文縁取り色"></button><input class="color-hex" data-hex="endrollBodyStrokeColor" aria-label="本文縁取り色HEX" maxlength="7"></div></div>
+          </div>
+          <div class="endroll-style-card endroll-background-card">
+            <div class="endroll-style-heading">クレジットの背景</div>
+            <label class="check-setting"><input id="endrollBgEnabled" type="checkbox"><span class="custom-check"></span><span>角丸の背景パネルを表示する</span></label>
+            <div id="endrollBgOptions">
+              <div class="color-line"><span>パネルの色</span><div class="color-control"><button type="button" class="color-swatch" data-color="endrollBgColor" title="背景パネルの色"></button><input class="color-hex" data-hex="endrollBgColor" aria-label="背景パネル色HEX" maxlength="7"></div></div>
+              <label class="form-field">背景の不透明度 <output id="endrollBgOpacityOutput">56 %</output><input id="endrollBgOpacity" type="range" min="0" max="100" step="1"></label>
+            </div>
+          </div>
+        </div>
+        <div class="setting-group">
+          <div class="group-title"><span>✦</span><strong>表示ルール</strong></div>
+          <p class="microcopy">描画優先順は「歌詞（最前面） → エンドロール → 映像」です。クレジット全体が指定区間の中で一定速度で流れます。</p>
+        </div>
+      </section>
+      <section class="panel credits-only credits-editor">
+        <div class="section-heading"><div><span class="eyebrow">04 / VISUAL STYLING</span><h2>映像の表示・切り替え</h2></div><span class="mini-mark">✦</span></div>
+        <div class="edit-current"><span class="eyebrow">SELECTED VISUAL</span><div id="clipSelectedName" class="clip-selected-name">素材を選択してください</div><div id="clipSelectedInfo" class="microcopy">音声に合わせてプレビューできます</div></div>
+        <div class="setting-group"><div class="group-title"><span>◷</span><strong>タイミング</strong></div>
+          <div class="two-fields"><label class="form-field">表示開始（秒）<input type="number" step="0.01" min="0" id="clipStart"></label><label class="form-field">表示終了（秒）<input type="number" step="0.01" min="0" id="clipEnd"></label></div>
+          <label class="check-setting"><input type="checkbox" id="clipAutoEnd"><span class="custom-check"></span><span>次の素材への切り替えまで表示</span></label>
+          <div class="small-row"><button class="mini-button" id="clipNowStart">現在位置を開始に設定</button><button class="mini-button" id="clipNowEnd">現在位置を終了に設定</button></div>
+        </div>
+        <div class="setting-group"><div class="group-title"><span>◌</span><strong>画像の切り替え</strong></div>
+          <label class="check-setting"><input type="checkbox" id="clipCrossfade" checked><span class="custom-check"></span><span>クロスフェードで切り替える</span></label>
+          <div class="range-field"><div><label for="clipFade">切り替え時間</label><output id="clipFadeOutput">1.00 秒</output></div><input type="range" id="clipFade" min="0.1" max="5" step="0.1" value="1"></div>
+          <label class="form-field">画面への配置<select id="clipFit"><option value="cover">画面を埋める（中央トリミング）</option><option value="contain">画像全体を表示（余白あり）</option></select></label>
+          <div id="clipVideoLoopGroup" class="video-loop-group hidden">
+            <label class="check-setting"><input type="checkbox" id="clipVideoLoop"><span class="custom-check"></span><span>動画をループ再生する</span></label>
+            <p class="microcopy">ON：この素材の表示区間中、終わるたびに先頭から再生します。OFF：動画終了後は最後のフレームを表示します。映像内の音声は常にミュートです。</p>
+          </div>
+        </div>
+        <div class="setting-group"><div class="group-title"><span>▷</span><strong>プレビューと書き出し</strong></div>
+          <p class="microcopy">動画の音声はミュートされ、選択した楽曲が共通の再生時計です。歌詞の前面表示を保持しながら、映像のみ切り替えます。</p>
+          <div class="credits-export-hint"><strong>書き出しには画像・動画を同梱</strong><span>生成する <code>credits_show.ks</code> は歌詞用 <code>lyrics_show.ks</code> と並行動作できます。</span></div>
+        </div>
+      </section>
+      <section class="panel settings-panel lyrics-only"><div class="section-heading"><div><span class="eyebrow">03 / STYLING</span><h2>歌詞の演出を調整</h2></div><span class="mini-mark">✦</span></div>
+        <div class="edit-current"><span class="eyebrow">SELECTED PHRASE</span><div id="selectedNumber">— / 0</div><textarea id="cueText" rows="2" placeholder="ここに歌詞を入力"></textarea><p id="cueSelectedHint">左の歌詞一覧で編集する行を選択</p><button class="apply-all-btn" id="applyAllStyleBtn">✦　この見た目・位置をすべての歌詞に適用</button></div>
+        <div class="setting-group"><div class="group-title"><span>◷</span><strong>表示タイミング</strong></div><div class="two-fields"><label class="form-field">開始（秒）<input id="cueStart" type="number" min="0" step="0.01"></label><label class="form-field">終了（秒）<input id="cueEnd" type="number" min="0" step="0.01"></label></div><div class="small-row"><button class="mini-button" id="copyStartBtn">◂ 現在位置 → 開始</button><button class="mini-button" id="copyEndBtn">◂ 現在位置 → 終了</button></div></div>
+        <div class="setting-group"><div class="group-title"><span>⌖</span><strong>位置と文字</strong></div><div class="range-field"><div><label for="posX">横位置 X</label><output id="posXOutput">960 px</output></div><input id="posX" type="range" min="0" max="1920" step="1"></div><div class="range-field"><div><label for="posY">縦位置 Y</label><output id="posYOutput">845 px</output></div><input id="posY" type="range" min="0" max="1080" step="1"></div><div class="field-row"><label class="form-field grow">フォント<select id="fontFamily"><option value='"Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif'>游ゴシック / 日本語</option><option value='"Hiragino Mincho ProN", "Yu Mincho", serif'>明朝体 / 日本語</option><option value='Meiryo, sans-serif'>メイリオ</option><option value='"Noto Sans JP", "Yu Gothic", sans-serif'>Noto Sans JP</option><option value='"Noto Serif JP", "Yu Mincho", serif'>Noto Serif JP</option><option value='Arial, sans-serif'>Arial</option><option value='Georgia, serif'>Georgia</option><option value='"Times New Roman", serif'>Times New Roman</option></select></label><label class="form-field short">太さ<select id="fontWeight"><option value="400">標準</option><option value="700">太字</option><option value="900">極太</option></select></label></div><div class="custom-font-box"><label class="background-upload font-upload" for="fontInput">＋ フォントファイルを追加（TTF / OTF / WOFF / WOFF2）</label><input type="file" id="fontInput" accept=".ttf,.otf,.woff,.woff2,font/ttf,font/otf,font/woff,font/woff2" multiple hidden><div id="fontList" class="font-list"></div><button type="button" class="mini-button font-only-button" id="downloadFontsOnlyBtn">↓ フォントのみZIPで保存（予備）</button><p class="font-hint">読み込んだフォントはプレビューで使用でき、ゲーム用ZIPの <code>data/others/font/</code> に自動同梱されます。</p></div><div class="range-field"><div><label for="fontSize">フォントサイズ</label><output id="fontSizeOutput">66 px</output></div><input id="fontSize" type="range" min="14" max="200" step="1"></div><div class="field-row"><label class="form-field grow">文字揃え<select id="align"><option value="left">左揃え</option><option value="center">中央揃え</option><option value="right">右揃え</option></select></label><label class="form-field short">字間（px）<input id="letterSpacing" type="number" min="-10" max="50" step="1"></label></div><div class="color-line"><span>文字色</span><div class="color-control"><button class="color-swatch" data-color="color" aria-label="文字色を色相リングで変更"></button><input class="color-hex" data-hex="color" aria-label="文字色HEX" maxlength="7"></div></div></div>
+        <div class="setting-group"><div class="group-title"><span>◉</span><strong>縁取り・影</strong></div><label class="check-setting"><input type="checkbox" id="stroke"><span class="custom-check"></span><span>文字に縁取りを付ける</span></label><div class="color-line dependent" data-dependent="stroke"><span>縁取りの色</span><div class="color-control"><button class="color-swatch" data-color="strokeColor" aria-label="縁取り色を色相リングで変更"></button><input class="color-hex" data-hex="strokeColor" aria-label="縁取りHEX" maxlength="7"></div></div><div class="range-field dependent" data-dependent="stroke"><div><label for="strokeWidth">縁取りの太さ</label><output id="strokeWidthOutput">5 px</output></div><input id="strokeWidth" type="range" min="0" max="18" step="1"></div><label class="check-setting"><input type="checkbox" id="shadow"><span class="custom-check"></span><span>やわらかいドロップシャドウ</span></label><div class="color-line dependent" data-dependent="shadow"><span>影の色</span><div class="color-control"><button class="color-swatch" data-color="shadowColor" aria-label="影色を色相リングで変更"></button><input class="color-hex" data-hex="shadowColor" aria-label="影のHEX" maxlength="7"></div></div></div>
+        <div class="setting-group"><div class="group-title"><span>✧</span><strong>アニメーション</strong></div><label class="form-field">動きの種類<select id="animation"><option value="none">通常表示（静止）</option><option value="typewriter">タイプライター</option><option value="jumpTypewriter">ジャンプ・タイプライター</option><option value="scaleReveal">文字ごとに拡大して登場</option><option value="wave">ゆらゆらウェーブ</option><option value="jump">ジャンプを繰り返す</option><option value="jumpInOut">登場・退場時にジャンプ</option><option value="float">ふわっと浮かび上がる</option><option value="slide">横からスライドイン</option><option value="zoom">拡大しながら登場</option></select></label><div class="range-field"><div><label for="animSpeed">アニメーション速度</label><output id="animSpeedOutput">16</output></div><input id="animSpeed" type="range" min="1" max="60" step="1"></div><div class="range-field"><div><label for="animIntensity">動きの大きさ</label><output id="animIntensityOutput">28 px</output></div><input id="animIntensity" type="range" min="0" max="100" step="1"></div></div>
+        <div class="setting-group"><div class="group-title"><span>◌</span><strong>表示・消去エフェクト</strong></div><label class="check-setting"><input id="fadeIn" type="checkbox"><span class="custom-check"></span><span>フェードイン</span><output id="fadeInDurationOutput">0.34s</output></label><input class="fade-range" id="fadeInDuration" type="range" min="0.05" max="2" step="0.05"><label class="check-setting"><input id="fadeOut" type="checkbox"><span class="custom-check"></span><span>フェードアウト</span><output id="fadeOutDurationOutput">0.34s</output></label><input class="fade-range" id="fadeOutDuration" type="range" min="0.05" max="2" step="0.05"></div>
+        <div class="setting-group global-settings"><div class="group-title"><span>▣</span><strong>プレビュー背景</strong><small>ゲームには出力されません</small></div><div class="color-line"><span>背景色</span><div class="color-control"><button class="color-swatch" data-color="background" aria-label="背景色を色相リングで変更"></button><input class="color-hex" data-hex="background" aria-label="背景色HEX" maxlength="7"></div></div><label class="background-upload" for="bgImageInput">＋ プレビュー背景画像を追加</label><input type="file" id="bgImageInput" accept="image/*" hidden><button class="text-btn" id="removeBgBtn">背景画像を解除</button></div>
+      </section>
+    </aside>
+  </div>
+  <footer class="site-footer"><span>CHOCO LYRIC STUDIO</span><span>♡　あなたの物語に、歌詞の演出を。</span><span>OFFLINE READY ・ NO SERVER REQUIRED</span></footer>
+</div>
+<input type="file" id="projectInput" accept=".json,application/json" hidden>
+<div class="popover hidden" id="colorPopover"><div class="popover-head"><span>カラーサークル</span><button id="closeColor" aria-label="閉じる">×</button></div><canvas id="colorWheel" width="230" height="230"></canvas><div class="popover-bottom"><span id="colorPreviewDot"></span><code id="colorCurrent">#FFF8E9</code><input id="nativePicker" type="color" title="OS標準カラーピッカー"></div><p>外側：色相 / 中央：彩度・明るさ</p></div>
+<dialog id="exportDialog"><form method="dialog" class="modal-inner"><div class="modal-eyebrow">EXPORT / TYRANOBUILDER</div><h2>ゲーム用スクリプトを書き出す</h2><p>プレビューと同じ描画処理をKS内に組み込みます。独立したJSファイルの配置は不要です。</p><label class="form-field">ゲーム内の音声ファイル名（読み込み時の名前を保持）<input id="exportAudioName" type="text" placeholder="morning_song.mp3"></label><label class="check-setting export-check"><input type="checkbox" id="bundleAudio" checked><span class="custom-check"></span><span>読み込んだ音声もZIPに含める</span></label><p class="modal-note"><code>[call storage="choco_start.ks"]</code>で再生できます（歌詞のみ・映像のみでも使用可）。エンドロール・映像は歌詞の音声時計を参照するため二重再生しません。画像・動画素材、音声、追加フォントは読み込み時のファイル名のままZIPに同梱します。</p><div class="export-file-list"><span>data/scenario/choco_start.ks</span><span>data/scenario/choco_quick_test.ks</span><span>data/scenario/lyrics_show.ks</span><span>data/scenario/lyrics_stop.ks</span><span>data/scenario/endroll_show.ks</span><span>data/scenario/endroll_stop.ks</span><span id="exportAudioPreview">data/bgm/your_song.mp3</span><span id="exportMediaPreview" class="hidden"></span><span id="exportFontsPreview" class="hidden"></span><span>README_導入手順.txt</span></div><div class="modal-actions"><button type="button" class="btn ghost" id="closeExportBtn">キャンセル</button><button type="button" class="btn primary" id="confirmExportBtn">ZIPをダウンロード ⇩</button></div></form></dialog>
+<dialog id="helpDialog" aria-labelledby="helpTitle">
+  <div class="modal-inner help-inner">
+    <div class="modal-eyebrow">HOW TO USE / TYRANOBUILDER</div>
+    <h2 id="helpTitle">ChocoLyric の使い方</h2>
+    <ol>
+      <li><strong>音声を読み込む：</strong>MP3などを選択します。音声がなくてもSRTの歌詞を編集できます。</li>
+      <li><strong>歌詞のタイミング：</strong>SRTなら開始・終了時刻を自動で設定。TXTなら「タイミング入力」で再生しながら登録します。</li>
+      <li><strong>演出を調整：</strong>歌詞を選び、スライダー・カラーサークル・プレビューから位置や見た目を設定します。</li>
+      <li><strong>フォント：</strong>TTF / OTF / WOFF / WOFF2を読み込めます。ゲーム用ZIPには <code>data/others/font/</code> に同梱します。</li>
+      <li><strong>エンドロール：</strong>カードを追加して、原案・CAST・主題歌などのクレジットを流せます。方向は上向き・下向きから選択できます。</li>
+      <li><strong>エンドロール映像：</strong>画像・動画を追加し、再生時刻に合わせて配置。クロスフェードの有無、動画ごとのループ再生も指定できます。</li>
+      <li><strong>ゲーム用に出力：</strong>「ティラノ用に書き出す」でZIPを保存し、ZIPの <code>data</code> フォルダをゲームプロジェクトへ統合します。</li>
+    </ol>
+    <section class="help-recipe" aria-label="ティラノビルダーへの導入例">
+      <h3>ティラノビルダーでの呼び出し例</h3>
+      <p>ティラノスクリプトコンポーネント（KS）に、必要な場面ごとに以下を記述します。</p>
+      <p><strong>① ゲーム冒頭（任意・1回のみ）</strong></p>
+      <pre><code>[call storage="choco_setup.ks"]</code></pre>
+      <p><strong>② 音楽・歌詞・映像を開始したい場面</strong></p>
+      <pre><code>[call storage="choco_start.ks"]</code></pre>
+      <p><strong>③ 音楽を終了したい別の場面</strong></p>
+      <pre><code>[call storage="choco_stop.ks"]</code></pre>
+      <p><strong>※ ②と③を続けて書くと、即停止します。</strong> <code>[call]</code>は曲の再生終了を待ちません。</p>
+      <p><strong>動作確認には次の1行だけを使用してください。</strong> 初期化・開始・15秒待機・停止まで自動実行します。</p>
+      <pre><code>[call storage="choco_quick_test.ks"]</code></pre>
+      <p>書き出したZIPの <code>data/scenario/</code> に <code>choco_quick_test.ks</code> が入ります。音声は <code>data/bgm/</code> に配置する必要があります。</p>
+      <div class="help-recipe-extra"><strong>個別に再生したい場合</strong>
+        <p>歌詞：<code>[call storage="lyrics_show.ks"]</code> ／ 停止：<code>[call storage="lyrics_stop.ks"]</code></p>
+        <p>エンドロール：<code>[call storage="endroll_show.ks"]</code> ／ 停止：<code>[call storage="endroll_stop.ks"]</code></p>
+        <p>映像：<code>[call storage="credits_show.ks"]</code> ／ 停止：<code>[call storage="credits_stop.ks"]</code></p>
+        <p>歌詞の再生中に <code>credits_show.ks</code> を呼ぶと、同じ音声に同期して映像を重ねられます。</p>
+      </div>
+    </section>
+    <p>プロジェクトJSON（v2.4以降）は音声・画像・動画・フォント・プレビュー背景を含めて1ファイルで保存でき、次回も自動復元します。素材が多い場合、Base64化によりファイル容量が約33%増えます。旧バージョンのJSONは素材を含まないため再選択が必要です。フォント・映像素材の再配布条件も確認してください。</p>
+    <p class="help-nonofficial"><strong>非公式ツールについて：</strong>ChocoLyric Studioはティラノビルダー／ティラノスクリプトの公式製品ではない、独立した制作補助アプリです。ティラノ公式開発者のメール・SNSは本アプリの問い合わせ先ではありません。</p>
+    <button class="btn primary" id="closeHelpBtn">閉じる</button>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+/* Tyrano Lyrics Studio - shared pixel renderer for editor and game */
+(function(root){
+'use strict';
+var DEFAULTS = {
+  x: 960, y: 845, fontFamily: '"Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif',
+  fontSize: 66, fontWeight: '700', color: '#FFF8E9', align: 'center',
+  letterSpacing: 2, lineHeight: 1.38, maxWidth: 90, angle: 0,
+  stroke: true, strokeColor: '#4D281E', strokeWidth: 5,
+  shadow: true, shadowColor: '#21100E', shadowBlur: 10,
+  fadeIn: true, fadeOut: true, fadeInDuration: 0.34, fadeOutDuration: 0.34,
+  animation: 'none', animationDuration: 0.52, speed: 16, intensity: 28
+};
+function clamp(n,a,b){ return Math.max(a,Math.min(b,Number(n)||0)); }
+function ease(n){ n=clamp(n,0,1); return 1-Math.pow(1-n,3); }
+function graphemes(s){
+  if(typeof Intl!=='undefined' && Intl.Segmenter){
+    if(!graphemes.segmenter) graphemes.segmenter = new Intl.Segmenter('ja',{granularity:'grapheme'});
+    return Array.from(graphemes.segmenter.segment(String(s||'')),x=>x.segment);
+  }
+  return Array.from(String(s||''));
+}
+function styleFor(cue){ return Object.assign({},DEFAULTS, cue && cue.style || {}); }
+function paint(ctx,s,stageWidth){
+  ctx.font = s.fontWeight+' '+s.fontSize+'px '+s.fontFamily;
+  ctx.fillStyle=s.color;
+  ctx.strokeStyle=s.strokeColor;
+  ctx.lineWidth=Math.max(0,Number(s.strokeWidth)||0);
+  ctx.lineJoin='round';
+  ctx.miterLimit=2;
+  ctx.textBaseline='middle';
+  ctx.textAlign='left';
+}
+function textWidth(ctx,txt,space){
+  var chunks=graphemes(txt); var w=0;
+  for(var i=0;i<chunks.length;i++) w+=ctx.measureText(chunks[i]).width + (i?space:0);
+  return w;
+}
+function wrapText(ctx,text,maxWidth,space){
+  var out=[];
+  String(text||'').split('\n').forEach(function(block){
+    var line='',width=0;
+    graphemes(block).forEach(function(ch){
+      var charWidth=ctx.measureText(ch).width+(line?space:0);
+      if(line && width+charWidth>maxWidth){out.push(line);line=ch;width=ctx.measureText(ch).width;}
+      else {line+=ch; width+=charWidth;}
+    });
+    out.push(line);
+  });
+  return out.length?out:[''];
+}
+function drawGlyph(ctx,g,x,y,s,alpha,scale){
+  if(alpha<=0 || !g)return;
+  ctx.save();ctx.globalAlpha*=clamp(alpha,0,1);ctx.translate(x,y);
+  if(scale!==1) ctx.scale(scale,scale);
+  if(s.shadow){
+    ctx.shadowColor=s.shadowColor;
+    ctx.shadowBlur=s.shadowBlur;
+    ctx.shadowOffsetY=2;
+  }
+  if(s.stroke && s.strokeWidth>0)ctx.strokeText(g,0,0);
+  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  ctx.fillText(g,0,0);ctx.restore();
+}
+function getOpacity(cue,s,time){
+  var alpha=1;
+  if(s.fadeIn) alpha*=clamp((time-cue.start)/Math.max(0.01,s.fadeInDuration),0,1);
+  if(s.fadeOut) alpha*=clamp((cue.end-time)/Math.max(0.01,s.fadeOutDuration),0,1);
+  return alpha;
+}
+function drawCue(ctx,cue,time,opts){
+  opts=opts||{};
+  if(!cue || !cue.text || !opts.force && (time<cue.start || time>=cue.end))return null;
+  var s=styleFor(cue);
+  var sec=Math.max(0,time-cue.start), total=Math.max(0.05,cue.end-cue.start);
+  if(opts.force && (time<cue.start || time>=cue.end))sec=Math.min(total/2,Math.max(0.55,s.animationDuration));
+  var alpha=opts.force?1:getOpacity(cue,s,time);
+  if(alpha<0.001)return null;
+  var anim=s.animation||'none', stageW=opts.width||1920;
+  var revealText=String(cue.text);
+  if(anim==='typewriter'||anim==='jumpTypewriter'){
+    var count=Math.floor(sec*Math.max(1,s.speed));
+    var chars=graphemes(revealText), str='',seen=0;
+    for(var v=0;v<chars.length;v++){
+      if(chars[v]==='\n'){str+='\n';continue;}
+      if(seen>=count)break;
+      str+=chars[v];seen++;
+    }
+    revealText=str;
+  }
+  ctx.save();paint(ctx,s,stageW);
+  var textMax=stageW*clamp(s.maxWidth,15,100)/100;
+  var lines=wrapText(ctx,revealText,textMax,s.letterSpacing);
+  var height=s.fontSize*s.lineHeight, allHeight=height*lines.length;
+  var movement=1-ease(sec/Math.max(0.05,s.animationDuration));
+  var offsetX=0, offsetY=0, scale=1;
+  if(anim==='float'){offsetY=s.intensity*movement;alpha*=1-movement;}
+  if(anim==='slide'){offsetX=s.intensity*4*movement;alpha*=1-movement;}
+  if(anim==='zoom'){scale=1-0.42*movement;alpha*=1-movement;}
+  if(anim==='pop'){scale=1+0.2*Math.sin(Math.min(1,sec/Math.max(0.05,s.animationDuration))*Math.PI)*movement;}
+  ctx.globalAlpha=alpha;
+  var x=Number(s.x)||0,y=Number(s.y)||0;
+  ctx.translate(x+offsetX,y+offsetY);ctx.rotate((Number(s.angle)||0)*Math.PI/180);ctx.scale(scale,scale);
+  var charOffset=0, boundWidth=0;
+  lines.forEach(function(line,li){
+    var w=textWidth(ctx,line,s.letterSpacing);boundWidth=Math.max(boundWidth,w);
+    var startX=s.align==='left'?0:s.align==='right'?-w:-w/2;
+    var ly=(li-(lines.length-1)/2)*height;
+    var gx=startX;
+    graphemes(line).forEach(function(ch){
+      var cw=ctx.measureText(ch).width;
+      var cy=ly,gscale=1,gAlpha=1;
+      if(anim==='wave' || anim==='jump'){
+        var phase=sec*(Number(s.speed)||16)*0.55+charOffset*0.63;
+        cy-=(anim==='jump'?Math.abs(Math.sin(phase)):Math.sin(phase))*s.intensity*0.6;
+      } else if(anim==='jumpTypewriter'){
+        var e=sec-(charOffset+1)/Math.max(1,s.speed);
+        if(e>=0 && e<0.35)cy-=Math.sin(e/0.35*Math.PI)*s.intensity;
+      } else if(anim==='scaleReveal'){
+        var st=sec-charOffset/Math.max(1,s.speed);
+        var p=ease(st/0.19);
+        gAlpha=p;gscale=0.22+0.78*p;
+      } else if(anim==='jumpInOut'){
+        var q=Math.max(0,Math.min(1,sec/(s.animationDuration||0.5)));
+        var r=Math.max(0,Math.min(1,(total-sec)/(s.animationDuration||0.5)));
+        var power=Math.max(0,1-q,1-r);
+        cy-=Math.abs(Math.sin(sec*(Number(s.speed)||16)*0.55+charOffset*.72))*s.intensity*power;
+      }
+      drawGlyph(ctx,ch,gx,cy,s,gAlpha,gscale);
+      gx+=cw+s.letterSpacing;charOffset++;
+    });
+    charOffset++;
+  });
+  ctx.restore();
+  return {x:x,y:y,width:boundWidth,height:allHeight};
+}
+function draw(ctx,cues,time,options){
+  options=options||{};
+  var sorted=(cues||[]).slice().sort((a,b)=>(a.layer||0)-(b.layer||0) || a.start-b.start);
+  sorted.forEach(function(cue){drawCue(ctx,cue,time,options);});
+}
+root.LyricsPainter={defaults:DEFAULTS,draw:draw,drawCue:drawCue,styleFor:styleFor,clamp:clamp,graphemes:graphemes};
+})(typeof window!=='undefined'?window:globalThis);
+
+</script>
+<script>
+/* ChocoLyric Credits - shared timeline and transition logic (editor + Tyrano) */
+(function(root){
+'use strict';
+function safeNumber(v, fallback){var n=Number(v);return isFinite(n)?n:fallback;}
+function sorted(clips){return (Array.isArray(clips)?clips:[]).filter(function(c){return c && c.assetId;}).slice().sort(function(a,b){return safeNumber(a.start,0)-safeNumber(b.start,0);});}
+function active(clips,time){
+  var ordered=sorted(clips),t=Math.max(0,safeNumber(time,0)),out=[];
+  for(var i=0;i<ordered.length;i++){
+    var c=ordered[i],next=ordered[i+1],previous=ordered[i-1];
+    var begin=Math.max(0,safeNumber(c.start,0));
+    var end=Math.max(begin+0.03,safeNumber(c.end,begin+5));
+    var fadeNext=next&&next.crossfade?Math.max(0,safeNumber(next.fade,1)):0;
+    if(next){
+      var switchEnd=Math.max(0,safeNumber(next.start,0))+fadeNext;
+      end=Math.min(c.autoEnd===false?end:switchEnd,switchEnd);
+    }
+    if(t<begin||t>=end)continue;
+    var opacity=1;
+    if(previous && c.crossfade){
+      var fade=Math.max(0,safeNumber(c.fade,1));
+      if(fade>0 && t<begin+fade){opacity=Math.max(0,Math.min(1,(t-begin)/fade));}
+    }
+    if(next&&next.crossfade){
+      var nStart=Math.max(0,safeNumber(next.start,0));
+      var f=Math.max(0,safeNumber(next.fade,1));
+      if(f>0&&t>=nStart&&t<nStart+f){opacity*=Math.max(0,Math.min(1,1-(t-nStart)/f));}
+    }
+    if(opacity>0.0001)out.push({clip:c,alpha:opacity,index:i,localTime:Math.max(0,t-begin)});
+  }
+  return out;
+}
+root.ChocoCreditsCore={active:active,sorted:sorted};
+})(window);
+
+</script>
+<script>
+window.TYRANO_CREDITS_CORE_SOURCE="/* ChocoLyric Credits - shared timeline and transition logic (editor + Tyrano) */\n(function(root){\n'use strict';\nfunction safeNumber(v, fallback){var n=Number(v);return isFinite(n)?n:fallback;}\nfunction sorted(clips){return (Array.isArray(clips)?clips:[]).filter(function(c){return c && c.assetId;}).slice().sort(function(a,b){return safeNumber(a.start,0)-safeNumber(b.start,0);});}\nfunction active(clips,time){\n  var ordered=sorted(clips),t=Math.max(0,safeNumber(time,0)),out=[];\n  for(var i=0;i<ordered.length;i++){\n    var c=ordered[i],next=ordered[i+1],previous=ordered[i-1];\n    var begin=Math.max(0,safeNumber(c.start,0));\n    var end=Math.max(begin+0.03,safeNumber(c.end,begin+5));\n    var fadeNext=next&&next.crossfade?Math.max(0,safeNumber(next.fade,1)):0;\n    if(next){\n      var switchEnd=Math.max(0,safeNumber(next.start,0))+fadeNext;\n      end=Math.min(c.autoEnd===false?end:switchEnd,switchEnd);\n    }\n    if(t<begin||t>=end)continue;\n    var opacity=1;\n    if(previous && c.crossfade){\n      var fade=Math.max(0,safeNumber(c.fade,1));\n      if(fade>0 && t<begin+fade){opacity=Math.max(0,Math.min(1,(t-begin)/fade));}\n    }\n    if(next&&next.crossfade){\n      var nStart=Math.max(0,safeNumber(next.start,0));\n      var f=Math.max(0,safeNumber(next.fade,1));\n      if(f>0&&t>=nStart&&t<nStart+f){opacity*=Math.max(0,Math.min(1,1-(t-nStart)/f));}\n    }\n    if(opacity>0.0001)out.push({clip:c,alpha:opacity,index:i,localTime:Math.max(0,t-begin)});\n  }\n  return out;\n}\nroot.ChocoCreditsCore={active:active,sorted:sorted};\n})(window);\n";
+
+</script>
+<script>
+window.TYRANO_CREDITS_RUNTIME_SOURCE = "/* ChocoLyric Credits - embedded in credits_show.ks (no external JS download) */\n(function(root){\n'use strict';\nvar session=null;\nfunction resourceURL(path){return String(path||'').split('/').map(function(s){return encodeURIComponent(s);}).join('/');}\nfunction stage(){return document.querySelector('.tyrano_base')||document.querySelector('#tyrano_base')||document.body;}\nfunction stop(){\n  var s=session;session=null;if(!s)return;\n  cancelAnimationFrame(s.raf);\n  if(s.audio && s.ownsAudio){s.audio.pause();s.audio.removeAttribute('src');s.audio.load();}\n  Object.keys(s.assets).forEach(function(key){var a=s.assets[key];if(a.video){a.node.pause();a.node.removeAttribute('src');a.node.load();}});\n  if(s.host.parentNode)s.host.parentNode.removeChild(s.host);\n}\nfunction start(data){\n  stop(); data=data||{};\n  var host=document.createElement('div'),parent=stage(),media=Object.create(null);\n  host.id='choco-credits-overlay';\n  Object.assign(host.style,{position:'absolute',left:'0',top:'0',width:'100%',height:'100%',zIndex:'99994',pointerEvents:'none',overflow:'hidden'});\n  if(getComputedStyle(parent).position==='static')parent.style.position='relative';\n  parent.appendChild(host);\n  var lyricsAudio=root.TyranoLyrics && root.TyranoLyrics.getAudio && root.TyranoLyrics.getAudio();\n  var ownsAudio=!lyricsAudio,audio=lyricsAudio||new Audio();\n  if(ownsAudio){audio.preload='auto';audio.src=data.audio||'';}\n  var s={host:host,assets:media,raf:0,audio:audio,ownsAudio:ownsAudio};session=s;\n  (Array.isArray(data.assets)?data.assets:[]).forEach(function(asset){\n    if(!asset||!asset.id||!asset.path)return;\n    var video=asset.type==='video',node=document.createElement(video?'video':'img');\n    if(video){node.muted=true;node.defaultMuted=true;node.playsInline=true;node.preload='auto';node.setAttribute('playsinline','');}\n    node.src=new URL(resourceURL(asset.path),document.baseURI).href;\n    Object.assign(node.style,{position:'absolute',inset:'0',width:'100%',height:'100%',display:'none',opacity:'0',objectFit:'cover',pointerEvents:'none'});\n    host.appendChild(node);media[asset.id]={node:node,video:video};\n  });\n  function tick(){\n    if(session!==s)return;\n    var at=audio.currentTime||0;\n    var active=root.ChocoCreditsCore.active(data.clips,at),visible=Object.create(null);\n    active.forEach(function(v){\n      var a=media[v.clip.assetId];if(!a)return;\n      var n=a.node;visible[v.clip.assetId]=true;n.style.display='block';\n      n.style.opacity=String(v.alpha);n.style.zIndex=String(10+v.index);n.style.objectFit=v.clip.fit==='contain'?'contain':'cover';\n      if(a.video){\n        n.loop=!!v.clip.loop;\n        var duration=Number(n.duration),hasDuration=isFinite(duration)&&duration>0;\n        var endFrame=hasDuration?Math.max(0,duration-0.04):0;\n        var finished=hasDuration&&!v.clip.loop&&v.localTime>=endFrame;\n        var desired=hasDuration?(v.clip.loop?v.localTime%duration:Math.min(v.localTime,endFrame)):v.localTime;\n        if(n.readyState>=1&&!n.seeking&&Math.abs(n.currentTime-desired)>(finished?0.035:0.32)){try{n.currentTime=desired;}catch(e){}}\n        if(finished){if(!n.paused)n.pause();}\n        else if(!audio.paused&&n.paused&&!n.ended&&!a.pending){a.pending=true;var pr=n.play();if(pr&&pr.then)pr.then(function(){a.pending=false;},function(){a.pending=false;});else a.pending=false;}\n        if(audio.paused&&!n.paused)n.pause();\n      }\n    });\n    Object.keys(media).forEach(function(id){if(!visible[id]){var a=media[id];a.node.style.display='none';if(a.video&&!a.node.paused)a.node.pause();}});\n    if(audio.ended&&ownsAudio){stop();return;}\n    if(lyricsAudio&&(!root.TyranoLyrics||root.TyranoLyrics.getAudio()!==lyricsAudio)&&audio.paused){stop();return;}\n    s.raf=requestAnimationFrame(tick);\n  }\n  s.raf=requestAnimationFrame(tick);\n  if(ownsAudio){\n    function showUnlock(){if(session!==s||s.unlock)return;var b=document.createElement('button');b.textContent='▶ エンドロールを再生';b.type='button';\n      Object.assign(b.style,{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',background:'#563525',color:'#fff8eb',border:'2px solid #f9e4cc',padding:'18px 26px',borderRadius:'12px',pointerEvents:'auto',cursor:'pointer',zIndex:'10000',fontSize:'22px'});\n      host.appendChild(b);s.unlock=b;b.addEventListener('click',function(){audio.play().then(function(){b.remove();s.unlock=null;}).catch(function(err){console.error('[ChocoCredits] 音声再生失敗',err);});});}\n    audio.addEventListener('ended',function(){if(session===s)stop();});\n    audio.addEventListener('error',function(){\n      console.error('[ChocoCredits] 音声読込失敗:',data.audio);\n      if(session!==s||s.errorMessage)return;\n      if(s.unlock){s.unlock.remove();s.unlock=null;}\n      var box=document.createElement('div');box.setAttribute('role','alert');\n      box.style.cssText='position:absolute;left:8%;right:8%;top:35%;z-index:99999;padding:22px;background:#421b1bef;color:#fff8e9;border:2px solid #ffd7aa;border-radius:14px;font:20px/1.5 sans-serif;white-space:pre-wrap;pointer-events:none;';\n      box.textContent='ChocoLyric：音声ファイルを読み込めません。\\n'+data.audio+'\\nZIP内のdata/bgmフォルダ・ファイル名を確認してください。';\n      host.appendChild(box);s.errorMessage=box;\n    });\n    audio.play().catch(showUnlock);\n  }\n  return {stop:stop,audio:audio};\n}\nroot.ChocoCredits={start:start,stop:stop,getAudio:function(){return session&&session.audio;}};\n})(window);\n";
+
+</script><script>
+window.TYRANO_LYRICS_RUNTIME_SOURCE = "/* Tyrano Lyrics Studio - shared pixel renderer for editor and game */\n(function(root){\n'use strict';\nvar DEFAULTS = {\n  x: 960, y: 845, fontFamily: '\"Yu Gothic\", \"Hiragino Kaku Gothic ProN\", Meiryo, sans-serif',\n  fontSize: 66, fontWeight: '700', color: '#FFF8E9', align: 'center',\n  letterSpacing: 2, lineHeight: 1.38, maxWidth: 90, angle: 0,\n  stroke: true, strokeColor: '#4D281E', strokeWidth: 5,\n  shadow: true, shadowColor: '#21100E', shadowBlur: 10,\n  fadeIn: true, fadeOut: true, fadeInDuration: 0.34, fadeOutDuration: 0.34,\n  animation: 'none', animationDuration: 0.52, speed: 16, intensity: 28\n};\nfunction clamp(n,a,b){ return Math.max(a,Math.min(b,Number(n)||0)); }\nfunction ease(n){ n=clamp(n,0,1); return 1-Math.pow(1-n,3); }\nfunction graphemes(s){\n  if(typeof Intl!=='undefined' && Intl.Segmenter){\n    if(!graphemes.segmenter) graphemes.segmenter = new Intl.Segmenter('ja',{granularity:'grapheme'});\n    return Array.from(graphemes.segmenter.segment(String(s||'')),x=>x.segment);\n  }\n  return Array.from(String(s||''));\n}\nfunction styleFor(cue){ return Object.assign({},DEFAULTS, cue && cue.style || {}); }\nfunction paint(ctx,s,stageWidth){\n  ctx.font = s.fontWeight+' '+s.fontSize+'px '+s.fontFamily;\n  ctx.fillStyle=s.color;\n  ctx.strokeStyle=s.strokeColor;\n  ctx.lineWidth=Math.max(0,Number(s.strokeWidth)||0);\n  ctx.lineJoin='round';\n  ctx.miterLimit=2;\n  ctx.textBaseline='middle';\n  ctx.textAlign='left';\n}\nfunction textWidth(ctx,txt,space){\n  var chunks=graphemes(txt); var w=0;\n  for(var i=0;i<chunks.length;i++) w+=ctx.measureText(chunks[i]).width + (i?space:0);\n  return w;\n}\nfunction wrapText(ctx,text,maxWidth,space){\n  var out=[];\n  String(text||'').split('\\n').forEach(function(block){\n    var line='',width=0;\n    graphemes(block).forEach(function(ch){\n      var charWidth=ctx.measureText(ch).width+(line?space:0);\n      if(line && width+charWidth>maxWidth){out.push(line);line=ch;width=ctx.measureText(ch).width;}\n      else {line+=ch; width+=charWidth;}\n    });\n    out.push(line);\n  });\n  return out.length?out:[''];\n}\nfunction drawGlyph(ctx,g,x,y,s,alpha,scale){\n  if(alpha<=0 || !g)return;\n  ctx.save();ctx.globalAlpha*=clamp(alpha,0,1);ctx.translate(x,y);\n  if(scale!==1) ctx.scale(scale,scale);\n  if(s.shadow){\n    ctx.shadowColor=s.shadowColor;\n    ctx.shadowBlur=s.shadowBlur;\n    ctx.shadowOffsetY=2;\n  }\n  if(s.stroke && s.strokeWidth>0)ctx.strokeText(g,0,0);\n  ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0;\n  ctx.fillText(g,0,0);ctx.restore();\n}\nfunction getOpacity(cue,s,time){\n  var alpha=1;\n  if(s.fadeIn) alpha*=clamp((time-cue.start)/Math.max(0.01,s.fadeInDuration),0,1);\n  if(s.fadeOut) alpha*=clamp((cue.end-time)/Math.max(0.01,s.fadeOutDuration),0,1);\n  return alpha;\n}\nfunction drawCue(ctx,cue,time,opts){\n  opts=opts||{};\n  if(!cue || !cue.text || !opts.force && (time<cue.start || time>=cue.end))return null;\n  var s=styleFor(cue);\n  var sec=Math.max(0,time-cue.start), total=Math.max(0.05,cue.end-cue.start);\n  if(opts.force && (time<cue.start || time>=cue.end))sec=Math.min(total/2,Math.max(0.55,s.animationDuration));\n  var alpha=opts.force?1:getOpacity(cue,s,time);\n  if(alpha<0.001)return null;\n  var anim=s.animation||'none', stageW=opts.width||1920;\n  var revealText=String(cue.text);\n  if(anim==='typewriter'||anim==='jumpTypewriter'){\n    var count=Math.floor(sec*Math.max(1,s.speed));\n    var chars=graphemes(revealText), str='',seen=0;\n    for(var v=0;v<chars.length;v++){\n      if(chars[v]==='\\n'){str+='\\n';continue;}\n      if(seen>=count)break;\n      str+=chars[v];seen++;\n    }\n    revealText=str;\n  }\n  ctx.save();paint(ctx,s,stageW);\n  var textMax=stageW*clamp(s.maxWidth,15,100)/100;\n  var lines=wrapText(ctx,revealText,textMax,s.letterSpacing);\n  var height=s.fontSize*s.lineHeight, allHeight=height*lines.length;\n  var movement=1-ease(sec/Math.max(0.05,s.animationDuration));\n  var offsetX=0, offsetY=0, scale=1;\n  if(anim==='float'){offsetY=s.intensity*movement;alpha*=1-movement;}\n  if(anim==='slide'){offsetX=s.intensity*4*movement;alpha*=1-movement;}\n  if(anim==='zoom'){scale=1-0.42*movement;alpha*=1-movement;}\n  if(anim==='pop'){scale=1+0.2*Math.sin(Math.min(1,sec/Math.max(0.05,s.animationDuration))*Math.PI)*movement;}\n  ctx.globalAlpha=alpha;\n  var x=Number(s.x)||0,y=Number(s.y)||0;\n  ctx.translate(x+offsetX,y+offsetY);ctx.rotate((Number(s.angle)||0)*Math.PI/180);ctx.scale(scale,scale);\n  var charOffset=0, boundWidth=0;\n  lines.forEach(function(line,li){\n    var w=textWidth(ctx,line,s.letterSpacing);boundWidth=Math.max(boundWidth,w);\n    var startX=s.align==='left'?0:s.align==='right'?-w:-w/2;\n    var ly=(li-(lines.length-1)/2)*height;\n    var gx=startX;\n    graphemes(line).forEach(function(ch){\n      var cw=ctx.measureText(ch).width;\n      var cy=ly,gscale=1,gAlpha=1;\n      if(anim==='wave' || anim==='jump'){\n        var phase=sec*(Number(s.speed)||16)*0.55+charOffset*0.63;\n        cy-=(anim==='jump'?Math.abs(Math.sin(phase)):Math.sin(phase))*s.intensity*0.6;\n      } else if(anim==='jumpTypewriter'){\n        var e=sec-(charOffset+1)/Math.max(1,s.speed);\n        if(e>=0 && e<0.35)cy-=Math.sin(e/0.35*Math.PI)*s.intensity;\n      } else if(anim==='scaleReveal'){\n        var st=sec-charOffset/Math.max(1,s.speed);\n        var p=ease(st/0.19);\n        gAlpha=p;gscale=0.22+0.78*p;\n      } else if(anim==='jumpInOut'){\n        var q=Math.max(0,Math.min(1,sec/(s.animationDuration||0.5)));\n        var r=Math.max(0,Math.min(1,(total-sec)/(s.animationDuration||0.5)));\n        var power=Math.max(0,1-q,1-r);\n        cy-=Math.abs(Math.sin(sec*(Number(s.speed)||16)*0.55+charOffset*.72))*s.intensity*power;\n      }\n      drawGlyph(ctx,ch,gx,cy,s,gAlpha,gscale);\n      gx+=cw+s.letterSpacing;charOffset++;\n    });\n    charOffset++;\n  });\n  ctx.restore();\n  return {x:x,y:y,width:boundWidth,height:allHeight};\n}\nfunction draw(ctx,cues,time,options){\n  options=options||{};\n  var sorted=(cues||[]).slice().sort((a,b)=>(a.layer||0)-(b.layer||0) || a.start-b.start);\n  sorted.forEach(function(cue){drawCue(ctx,cue,time,options);});\n}\nroot.LyricsPainter={defaults:DEFAULTS,draw:draw,drawCue:drawCue,styleFor:styleFor,clamp:clamp,graphemes:graphemes};\n})(typeof window!=='undefined'?window:globalThis);\n\n\n/* Tyrano Lyrics Studio runtime, bundled with the same renderer used in the preview */\n(function(root){\n'use strict';\nvar player=null;\nvar loadedFonts={};\nfunction resourceURL(path){return String(path||'').split('/').map(function(s){try{return encodeURIComponent(decodeURIComponent(s));}catch(e){return encodeURIComponent(s);}}).join('/');}\nfunction loadFonts(fonts){\n  if(!Array.isArray(fonts)||!fonts.length)return Promise.resolve();\n  if(!window.FontFace||!document.fonts){console.warn('[TyranoLyrics] この環境ではカスタムフォントが利用できません');return Promise.resolve();}\n  return Promise.all(fonts.map(function(font){\n    if(!font||typeof font.family!=='string'||!/^ChocoLyric_[a-z0-9_-]+$/i.test(font.family)||typeof font.path!=='string'||!/^data\\/others\\/font\\/[^/]+\\.(ttf|otf|woff2?)$/i.test(font.path))return Promise.resolve();\n    var key=font.family+'|'+font.path;\n    if(loadedFonts[key])return loadedFonts[key];\n    var promise;\n    try{\n      var fileUrl=new URL(resourceURL(font.path),document.baseURI).href;\n      var face=new FontFace(font.family,'url('+JSON.stringify(fileUrl)+')');\n      promise=face.load().then(function(){document.fonts.add(face);}).catch(function(err){delete loadedFonts[key];console.error('[TyranoLyrics] フォント読込エラー:',font.path,err);});\n    }catch(err){console.error('[TyranoLyrics] フォント設定エラー:',font.path,err);promise=Promise.resolve();}\n    loadedFonts[key]=promise;\n    return promise;\n  }));\n}\nfunction stop(){\n  if(!player)return;\n  var p=player;player=null;\n  cancelAnimationFrame(p.raf);\n  if(p.audio){p.audio.pause();p.audio.removeAttribute('src');p.audio.load();}\n  if(p.host && p.host.parentNode)p.host.parentNode.removeChild(p.host);\n}\nfunction stage(){\n  return document.querySelector('.tyrano_base') || document.querySelector('#tyrano_base') || document.body;\n}\nfunction start(data){\n  stop();\n  data=data||{};\n  var width=Math.max(1,Number(data.width)||1920),height=Math.max(1,Number(data.height)||1080);\n  var parent=stage(), host=document.createElement('div');\n  host.id='tyrano-lyrics-overlay';\n  Object.assign(host.style,{position:'absolute',left:'0',top:'0',width:'100%',height:'100%',zIndex:'99996',pointerEvents:'none',overflow:'hidden'});\n  if(getComputedStyle(parent).position==='static')parent.style.position='relative';\n  var canvas=document.createElement('canvas');\n  canvas.width=width;canvas.height=height;\n  Object.assign(canvas.style,{width:'100%',height:'100%',display:'block',pointerEvents:'none'});\n  host.appendChild(canvas);parent.appendChild(host);\n  var ctx=canvas.getContext('2d'), audio=new Audio();\n  audio.preload='auto';audio.loop=false;audio.src=data.audio||'';\n  var p={host:host,audio:audio,raf:0,ctx:ctx};player=p;\n  var cues=Array.isArray(data.cues)?data.cues:[];\n  var drawing=function(){\n    if(player!==p)return;\n    ctx.clearRect(0,0,width,height);\n    if(root.LyricsPainter)root.LyricsPainter.draw(ctx,cues,audio.currentTime||0,{width:width,height:height});\n    p.raf=requestAnimationFrame(drawing);\n  };\n  p.raf=requestAnimationFrame(drawing);\n  function showUnlock(){\n    if(player!==p || p.unlock)return;\n    var btn=document.createElement('button');btn.type='button';btn.textContent='▶ 歌詞付き音声を再生';\n    Object.assign(btn.style,{position:'absolute',left:'50%',top:'50%',transform:'translate(-50%,-50%)',padding:'18px 28px',background:'#4d281e',color:'#fff9ee',fontSize:'22px',borderRadius:'16px',border:'2px solid #fff1cf',cursor:'pointer',pointerEvents:'auto',boxShadow:'0 15px 40px #21100e77'});\n    host.appendChild(btn);p.unlock=btn;\n    btn.addEventListener('click',function(){audio.play().then(function(){btn.remove();p.unlock=null;}).catch(function(e){console.warn('[TyranoLyrics] 再生失敗',e);});});\n  }\n  audio.addEventListener('ended',function(){\n    if(player!==p)return;\n    if(typeof data.onEnd==='function'){try{data.onEnd();}catch(e){console.error(e);}}\n    if(data.removeOnEnd!==false)stop();\n  });\n  audio.addEventListener('error',function(){\n    console.error('[TyranoLyrics] 音声ファイルを開けません:',data.audio);\n    if(player!==p)return;\n    if(p.unlock){p.unlock.remove();p.unlock=null;}\n    if(p.errorMessage)return;\n    var box=document.createElement('div');\n    box.setAttribute('role','alert');\n    box.style.cssText='position:absolute;left:8%;right:8%;top:35%;z-index:99999;padding:22px;background:#421b1bef;color:#fff8e9;border:2px solid #ffd7aa;border-radius:14px;font:20px/1.5 sans-serif;white-space:pre-wrap;pointer-events:none;';\n    box.textContent='ChocoLyric：音声ファイルを読み込めません。\\n' + data.audio + '\\nZIP内のdata/bgmフォルダ・ファイル名を確認してください。';\n    host.appendChild(box);p.errorMessage=box;\n  });\n  loadFonts(data.fonts).then(function(){if(player===p)audio.play().catch(function(){showUnlock();});});\n  return {stop:stop,pause:function(){audio.pause();},play:function(){return audio.play();},audio:audio};\n}\nroot.TyranoLyrics={start:start,stop:stop,getAudio:function(){return player&&player.audio;}};\n})(window);\n";
+
+</script><script>
+/* Endroll canvas painter: identical code in editor preview and exported KS runtime. */
+window.ChocoEndrollPainter = function paintEndroll(ctx, config, time, width, height) {
+  config=config||{};
+  var cards=Array.isArray(config.cards)?config.cards:[];
+  var start=Number(config.start)||0;
+  var end=Math.max(start+0.1,Number(config.end)||20);
+  if(!cards.length || time<start || time>end) return;
+  width=Math.max(1,Number(width)||1920);height=Math.max(1,Number(height)||1080);
+  var defaults={
+    title:{fontFamily:'"Yu Mincho", "Hiragino Mincho ProN", serif',fontWeight:'700',fontSize:42,color:'#FFF7EC',strokeColor:'#20120E',strokeWidth:6},
+    body:{fontFamily:'"Yu Gothic", Meiryo, sans-serif',fontWeight:'500',fontSize:30,color:'#FFF7EC',strokeColor:'#20120E',strokeWidth:5},
+    background:{enabled:true,color:'#22140F',opacity:56}
+  };
+  var all=config.style||{}, style={
+    title:Object.assign({},defaults.title,all.title||{}),
+    body:Object.assign({},defaults.body,all.body||{}),
+    background:Object.assign({},defaults.background,all.background||{})
+  };
+  if(all.sameStyle)style.body=Object.assign({},style.title);
+  var blocks=[];
+  function wrapLine(line,txtStyle,maxWidth){
+    ctx.save();ctx.font=String(txtStyle.fontWeight||'500')+' '+(Number(txtStyle.fontSize)||30)+'px '+txtStyle.fontFamily;
+    var pieces=[],segment='',chars=Array.from(String(line||''));
+    chars.forEach(function(c){var next=segment+c;
+      if(segment && ctx.measureText(next).width>maxWidth){pieces.push(segment);segment=c;}else segment=next;
+    });
+    pieces.push(segment);ctx.restore();return pieces;
+  }
+  function textLines(card){
+    var lines=[];
+    if(card.type==='bgm'||card.type==='song'){
+      if(card.composer)lines.push('作曲：'+card.composer);
+      if(card.arranger)lines.push('編曲：'+card.arranger);
+      if(card.type==='song'&&card.singer)lines.push('歌唱：'+card.singer);
+    }else if(card.type==='cast'){
+      lines=(card.entries||[]).filter(function(e){return e.role||e.actor;}).map(function(e){return (e.role||'')+' 役 / '+(e.actor||'');});
+    }else lines=String(card.lines||'').replace(/\r/g,'').split(/\n+/).map(function(x){return x.trim();}).filter(Boolean);
+    return lines.length?lines:[''];
+  }
+  var titleFont=style.title,bodyFont=style.body;
+  var tSize=Math.max(8,Number(titleFont.fontSize)||42), bSize=Math.max(8,Number(bodyFont.fontSize)||30);
+  var tH=tSize*1.35,bH=bSize*1.45;
+  var padX=Math.max(18,Math.round(width*.04)),padY=Math.max(10,Math.round(height*.02));
+  var maxW=width*.78, textMax=Math.max(20,maxW-padX*2);
+  var cardGap=Math.round(height*.04),titleGap=Math.round(height*.017);
+  cards.forEach(function(card){
+    var title='【'+(card.label || '任意')+'】';
+    var titleLines=wrapLine(title,titleFont,textMax);
+    var lines=[];textLines(card).forEach(function(line){lines.push.apply(lines,wrapLine(line,bodyFont,textMax));});
+    var widest=width*.12;
+    ctx.save();
+    ctx.font=String(titleFont.fontWeight)+' '+tSize+'px '+titleFont.fontFamily;
+    titleLines.forEach(function(line){widest=Math.max(widest,ctx.measureText(line).width);});
+    ctx.font=String(bodyFont.fontWeight)+' '+bSize+'px '+bodyFont.fontFamily;
+    lines.forEach(function(line){widest=Math.max(widest,ctx.measureText(line).width);});
+    ctx.restore();
+    var boxW=Math.min(maxW,widest+padX*2);
+    var boxH=padY*2+titleLines.length*tH+titleGap+lines.length*bH;
+    blocks.push({title:titleLines,body:lines,boxW:boxW,boxH:boxH});
+  });
+  // The whole group shares a common horizontal column. Aligning each variable-width
+  // card inside it keeps all titles and names on one visual left/center/right axis.
+  // A percentage of 0/50/100 means left edge/center/right edge of the available area.
+  var columnW=blocks.reduce(function(w,b){return Math.max(w,b.boxW);},0);
+  var positionX=Math.max(0,Math.min(100,Number(config.positionX==null?50:config.positionX)||0))/100;
+  var textAlign=['left','center','right'].indexOf(config.textAlign)>=0?config.textAlign:'center';
+  // Relative horizontal displacement is always applied to body text only.
+  // Percent of canvas width preserves positioning across resolution settings.
+  // Default 0 reproduces the original v2.8 coordinates exactly.
+  var bodyOffsetX=Math.max(-40,Math.min(40,Number(config.bodyOffsetX)||0))*width/100;
+  var columnX=(width-columnW)*positionX;
+  var totalH=blocks.reduce(function(v,b){return v+b.boxH;},0)+Math.max(0,blocks.length-1)*cardGap;
+  var progress=Math.max(0,Math.min(1,(time-start)/(end-start)));
+  var up=config.direction!=='topToBottom',fromY=up?height+40:-totalH-40,toY=up?-totalH-40:height+40;
+  var y=fromY+(toY-fromY)*progress;
+  function roundRect(x,yy,w,h,r){
+    ctx.beginPath();ctx.moveTo(x+r,yy);ctx.arcTo(x+w,yy,x+w,yy+h,r);
+    ctx.arcTo(x+w,yy+h,x,yy+h,r);ctx.arcTo(x,yy+h,x,yy,r);ctx.arcTo(x,yy,x+w,yy,r);ctx.closePath();
+  }
+  function drawText(line,txtStyle,x,yy,fs,align){
+    if(!line)return;
+    ctx.save();
+    ctx.font=String(txtStyle.fontWeight||'500')+' '+fs+'px '+txtStyle.fontFamily;
+    ctx.fillStyle=txtStyle.color||'#FFF7EC';ctx.textAlign=align;ctx.textBaseline='top';
+    ctx.lineJoin='round';ctx.miterLimit=2;
+    var stroke=Number(txtStyle.strokeWidth)||0;
+    if(stroke>0){ctx.strokeStyle=txtStyle.strokeColor||'#20120E';ctx.lineWidth=stroke;ctx.strokeText(line,x,yy);}
+    ctx.fillText(line,x,yy);
+    ctx.restore();
+  }
+  blocks.forEach(function(block){
+    var x=columnX+(textAlign==='left'?0:textAlign==='right'?columnW-block.boxW:(columnW-block.boxW)/2),cy=y+padY;
+    var textX=textAlign==='left'?x+padX:textAlign==='right'?x+block.boxW-padX:x+block.boxW/2;
+    var bodyX=textX+bodyOffsetX;
+    ctx.save();
+    if(style.background.enabled!==false){
+      var rgb=String(style.background.color||'#22140F');
+      var alpha=Math.max(0,Math.min(100,style.background.opacity==null?56:Number(style.background.opacity)))/100;
+      // Keep heading at its original coordinate, while extending the backdrop
+      // whenever the independently positioned body would otherwise escape it.
+      var bgLeft=x,bgRight=x+block.boxW;
+      if(bodyOffsetX!==0){
+        ctx.font=String(bodyFont.fontWeight||'500')+' '+bSize+'px '+bodyFont.fontFamily;
+        block.body.forEach(function(line){
+          if(!line)return;
+          var w=ctx.measureText(line).width;
+          var left=textAlign==='left'?bodyX:textAlign==='right'?bodyX-w:bodyX-w/2;
+          bgLeft=Math.min(bgLeft,left-padX);
+          bgRight=Math.max(bgRight,left+w+padX);
+        });
+      }
+      roundRect(bgLeft,y,bgRight-bgLeft,block.boxH,Math.min(22,(bgRight-bgLeft)/3,block.boxH/3));
+      ctx.globalAlpha=alpha;ctx.fillStyle=rgb;ctx.fill();ctx.globalAlpha=1;
+    }
+    block.title.forEach(function(line){drawText(line,titleFont,textX,cy,tSize,textAlign);cy+=tH;});
+    cy+=titleGap;
+    block.body.forEach(function(line){drawText(line,bodyFont,bodyX,cy,bSize,textAlign);cy+=bH;});
+    ctx.restore();y+=block.boxH+cardGap;
+  });
+};
+
+</script><script>
+/* ChocoLyric Studio | vanilla JS - no external libraries */
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const P=window.LyricsPainter;
+let nextId=0;
+const clone=o=>JSON.parse(JSON.stringify(o));
+const clamp=P.clamp;
+const ENDROLL_STYLE_DEFAULTS={
+  sameStyle:false,
+  title:{fontFamily:'"Yu Mincho", "Hiragino Mincho ProN", serif',fontWeight:'700',fontSize:42,color:'#FFF7EC',strokeColor:'#20120E',strokeWidth:6},
+  body:{fontFamily:'"Yu Gothic", Meiryo, sans-serif',fontWeight:'500',fontSize:30,color:'#FFF7EC',strokeColor:'#20120E',strokeWidth:5},
+  background:{enabled:true,color:'#22140F',opacity:56}
+};
+const state={width:1920,height:1080,bgColor:'#38241e',bgImage:null,bgObjectURL:null,bgFile:null,
+  cues:[],tapLines:[],fonts:[],selectedId:null,time:0,duration:120,
+  audio:null,audioFile:null,audioUrl:null,audioPlaying:false,virtualPlaying:false,virtualAt:0,virtualStart:0,
+  loop:false,force:false,needUi:true,mode:"lyrics",mediaAssets:[],creditClips:[],selectedAssetId:null,selectedClipId:null,endroll:{start:0,end:20,direction:'bottomToTop',positionX:50,textAlign:'center',bodyOffsetX:0,cards:[],style:clone(ENDROLL_STYLE_DEFAULTS)},selectedEndrollCardId:null};
+const canvas=$('previewCanvas'),ctx=canvas.getContext('2d');
+const editorFields=['cueText','cueStart','cueEnd','posX','posY','fontFamily','fontWeight','fontSize','align','letterSpacing','stroke','strokeWidth','shadow','animation','animSpeed','animIntensity','fadeIn','fadeOut','fadeInDuration','fadeOutDuration'];
+let toastTimer=null;
+function toast(msg){let t=$('toast');t.textContent=msg;t.classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('visible'),2900);}
+function uid(){return 'cl_'+Date.now().toString(36)+'_'+(++nextId);}
+function num(n,d=0){let v=Number(n);return Number.isFinite(v)?v:d;}
+function two(n){return String(n).padStart(2,'0');}
+function fmt(sec){sec=Math.max(0,num(sec));return `${two(Math.floor(sec/60))}:${two(Math.floor(sec%60))}.${two(Math.floor((sec%1)*100))}`;}
+function srtStamp(sec){let ms=Math.round(Math.max(0,num(sec))*1000);const h=Math.floor(ms/3600000);ms%=3600000;const m=Math.floor(ms/60000);ms%=60000;const s=Math.floor(ms/1000);return `${two(h)}:${two(m)}:${two(s)},${String(ms%1000).padStart(3,'0')}`;}
+function parseStamp(s){let match=String(s||'').trim().match(/^(?:(\d{1,3}):)?(\d{1,2}):(\d{1,2})(?:[,.](\d{1,3}))?$/);if(!match)return null;let h=num(match[1]),m=num(match[2]),sec=num(match[3]),ms=num((match[4]||'').padEnd(3,'0'));if(m>59||sec>59)return null;return h*3600+m*60+sec+ms/1000;}
+function parseSRT(input){let out=[],blocks=String(input).replace(/^\uFEFF/,'').replace(/\r\n?/g,'\n').trim().split(/\n\s*\n/);for(let block of blocks){let lines=block.split('\n').map(l=>l.trimEnd());if(/^\s*\d+\s*$/.test(lines[0]))lines.shift();let row=lines.shift()||'';let m=row.match(/^\s*(\S+)\s*-->\s*(\S+)(?:\s+.*)?$/);if(!m)continue;let start=parseStamp(m[1]),end=parseStamp(m[2]);let text=lines.join('\n').trim();if(start===null||end===null||end<=start||!text)continue;out.push({id:uid(),start,end,text,layer:0,style:null});}return out.sort((a,b)=>a.start-b.start||a.end-b.end);}
+function cue(){return state.cues.find(c=>c.id===state.selectedId)||null;}
+function cueById(id){return state.cues.find(c=>c.id===id)||null;}
+function duration(){let last=Math.max(10,...state.cues.map(c=>c.end+2),...state.creditClips.map(c=>c.end+2),state.endroll.end+2,0);return Math.max(last,Number.isFinite(state.audio?.duration)?state.audio.duration:0);}
+function refreshDuration(){state.duration=duration();$('totalTime').textContent=fmt(state.duration);$('timelineRange').textContent=`00:00 — ${fmt(state.duration)}`;}
+function emptyStyle(x=state.width/2,y=state.height*.79){return {...clone(P.defaults),x,y,fontSize:Math.round(state.height*.061),strokeWidth:Math.max(2,Math.round(state.height*.0048)),intensity:Math.round(state.height*.026)};}
+function freshCue(text,start,end,style){return {id:uid(),text:String(text||''),start:Math.max(0,start),end:Math.max(start+.06,end),layer:0,style:clone(style||emptyStyle())};}
+function defaultSelectCue(){if(!cue())state.selectedId=state.cues[0]?.id||null;}
+function selectCue(id,seek=true){if(!cueById(id))return;state.selectedId=id;let c=cue();if(seek){let t=c.start+Math.min(.48,Math.max(.02,(c.end-c.start)*.35));setTime(t,true);}renderUI();}
+function updateCanvasSize(){canvas.width=state.width;canvas.height=state.height;canvas.style.aspectRatio=`${state.width}/${state.height}`;$('screenInfo').textContent=`${state.width} × ${state.height} px`;$('posX').max=state.width;$('posY').max=state.height;renderPreview();}
+function setSize(w,h){w=Math.round(clamp(w,320,3840));h=Math.round(clamp(h,240,2160));let rx=w/state.width,ry=h/state.height;state.cues.forEach(c=>{c.style.x=Math.round(c.style.x*rx);c.style.y=Math.round(c.style.y*ry);c.style.fontSize=Math.max(12,Math.round(c.style.fontSize*ry));c.style.strokeWidth=Math.max(0,Math.round(c.style.strokeWidth*ry));c.style.intensity=Math.round(c.style.intensity*ry);});for(const part of ['title','body']){let st=state.endroll.style[part];st.fontSize=Math.max(12,Math.round(st.fontSize*ry));st.strokeWidth=Math.max(0,Math.round(st.strokeWidth*ry));}state.width=w;state.height=h;updateCanvasSize();renderUI();}
+function timeUpdate(){let t=state.audio && !state.audio.paused ? state.audio.currentTime:state.time;if(state.virtualPlaying){t=state.virtualStart+(performance.now()-state.virtualAt)/1000;if(t>=state.duration){if(state.loop){state.virtualStart=0;state.virtualAt=performance.now();t=0;}else{t=state.duration;state.virtualPlaying=false;}}}state.time=clamp(t,0,Math.max(1,state.duration));}
+function setTime(t,seekMedia=true){state.time=clamp(t,0,Math.max(1,state.duration));if(seekMedia && state.audio){try{state.audio.currentTime=state.time;}catch(e){}}if(state.virtualPlaying){state.virtualStart=state.time;state.virtualAt=performance.now();}updateTimeUI();renderPreview();}
+function updateTimeUI(){$('currentTime').textContent=fmt(state.time);$('playhead').style.left=`${clamp(state.time/state.duration*100,0,100)}%`;$('playBtn').textContent=(state.audio && !state.audio.paused)||state.virtualPlaying?'❚❚':'▶';}
+function playPause(){if(state.audio){if(state.audio.paused){let promise=state.audio.play();promise&&promise.catch(()=>toast('音声を再生できません。形式を確認してください。'));}else state.audio.pause();}else{if(state.virtualPlaying){state.virtualPlaying=false;}else{if(state.time>=state.duration-.02)state.time=0;state.virtualPlaying=true;state.virtualStart=state.time;state.virtualAt=performance.now();}}updateTimeUI();}
+function audioChanged(file){if(state.audio){state.audio.pause();state.audio.remove();state.audio=null;}if(state.audioUrl){URL.revokeObjectURL(state.audioUrl);state.audioUrl=null;}state.audioFile=file||null;state.virtualPlaying=false;
+  if(!file){$('audioTitle').textContent='音声ファイルを選ぶ';$('exportAudioName').readOnly=false;$('exportAudioName').value='';$('importStatus').textContent='まだ素材を読み込んでいません';refreshDuration();return;}
+  state.audioUrl=URL.createObjectURL(file);let a=new Audio();a.preload='metadata';a.src=state.audioUrl;state.audio=a;
+  a.addEventListener('loadedmetadata',()=>{refreshDuration();renderTimeline();toast(`音声を読み込みました：${fmt(a.duration)}`);});
+  a.addEventListener('ended',()=>{if(state.loop){a.currentTime=0;a.play().catch(()=>{});}updateTimeUI();});
+  a.addEventListener('play',updateTimeUI);a.addEventListener('pause',updateTimeUI);
+  $('audioTitle').textContent=file.name;$('exportAudioName').value=file.name;$('exportAudioName').readOnly=true;$('importStatus').textContent='音声：'+file.name;
+  refreshDuration();renderUI();
+}
+function drawBackground(){const w=state.width,h=state.height;ctx.fillStyle=state.bgColor;ctx.fillRect(0,0,w,h);
+  if(state.bgImage){let iw=state.bgImage.width,ih=state.bgImage.height,scale=Math.max(w/iw,h/ih);let rw=iw*scale,rh=ih*scale;ctx.drawImage(state.bgImage,(w-rw)/2,(h-rh)/2,rw,rh);return;}
+  ctx.save();let a=ctx.createRadialGradient(w*.5,h*.24,w*.05,w*.5,h*.45,w*.88);a.addColorStop(0,'#f3d6a31d');a.addColorStop(1,'#13080600');ctx.fillStyle=a;ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='#f3e0ba0e';ctx.lineWidth=Math.max(1,w/1600);ctx.strokeRect(w*.04,h*.07,w*.92,h*.86);
+  ctx.restore();
+}
+function renderPreview(){ctx.clearRect(0,0,state.width,state.height);drawBackground();drawCreditMedia(ctx,state.time);drawEndroll(ctx,state.time);if(state.mode!=="credits"&&state.mode!=="endroll"||$("previewLyricsWithCredits").checked)P.draw(ctx,state.cues,state.time,{width:state.width,height:state.height});let c=cue();if(c && state.mode==="lyrics" && state.force && (state.time<c.start||state.time>=c.end))P.drawCue(ctx,c,state.time,{width:state.width,force:true});
+  if(c && state.mode==="lyrics" && !(state.audio&&!state.audio.paused) && !state.virtualPlaying){ctx.save();let x=c.style.x,y=c.style.y,len=Math.max(10,state.width*.007);ctx.strokeStyle='#f6cb807f';ctx.lineWidth=Math.max(1,state.width/1900);ctx.beginPath();ctx.moveTo(x-len,y);ctx.lineTo(x+len,y);ctx.moveTo(x,y-len);ctx.lineTo(x,y+len);ctx.stroke();ctx.beginPath();ctx.arc(x,y,len*.37,0,Math.PI*2);ctx.stroke();ctx.restore();}
+}
+function frame(){timeUpdate();if((state.audio&&!state.audio.paused)||state.virtualPlaying)renderPreview();updateTimeUI();requestAnimationFrame(frame);}
+function el(tag,cl,txt){const node=document.createElement(tag);if(cl)node.className=cl;if(txt!=null)node.textContent=txt;return node;}
+function renderCueList(){const container=$('cueList'),previousScroll=container.scrollTop;container.textContent='';let cues=state.cues.slice().sort((a,b)=>a.start-b.start||a.end-b.end);$('cueCount').textContent=cues.length;
+  if(!cues.length){container.append(el('div','empty-list','まだ歌詞はありません。SRTを読み込むか、＋ボタンで追加してください。'));return;}
+  cues.forEach((c,index)=>{let row=el('div','cue-item'+(c.id===state.selectedId?' selected':''));row.tabIndex=0;row.dataset.id=c.id;
+    row.append(el('div','cue-index',two(index+1)));
+    let content=el('div','cue-line');content.append(el('div','cue-name',c.text?c.text.replace(/\n/g,' / '):'（歌詞を入力）'));
+    let when=el('div','cue-time');when.append(document.createTextNode(fmt(c.start)));
+    when.append(el('span','', '→'));when.append(document.createTextNode(fmt(c.end)));content.append(when);row.append(content);
+    let buttons=el('div','cue-actions');let dup=el('button','cue-more','⧉');dup.title='複製';dup.addEventListener('click',e=>{e.stopPropagation();let nc=freshCue(c.text,c.end,c.end+(c.end-c.start),c.style);state.cues.push(nc);refreshDuration();selectCue(nc.id);});buttons.append(dup);
+    let del=el('button','cue-more','×');del.title='削除';del.addEventListener('click',e=>{e.stopPropagation();removeCue(c.id);});buttons.append(del);row.append(buttons);
+    row.addEventListener('click',()=>selectCue(c.id));row.addEventListener('keydown',e=>{if(e.key==='Enter')selectCue(c.id);});container.append(row);
+  });
+  container.scrollTop=previousScroll;
+  if(cue())$('previewCueInfo').textContent=`選択中： ${cue().text.replace(/\n/g,' / ').slice(0,42)}`;
+}
+function renderTapList(){const c=$('tapList');c.textContent='';let pending=state.tapLines.filter(x=>!x.usedId).length;$('unplacedCount').textContent=pending?`(${pending})`:'';
+  if(!state.tapLines.length){c.append(el('div','empty-list','歌詞TXTの各行を読み込み、再生中にクリックするとその時刻に配置されます。'));return;}
+  let hint=el('p','tap-hint','▶ 再生しながら下の歌詞を押すと、その時点が開始時刻になります。もう一度押すと配置を解除します。');c.append(hint);
+  state.tapLines.forEach((line,i)=>{let b=el('button','tap-item'+(line.usedId?' used':''));b.append(el('span','tap-icon',line.usedId?'✓':'＋'));b.append(el('span','',line.text));b.title=line.usedId?'クリックで配置を解除':'現在の再生位置に配置';b.addEventListener('click',()=>tapLine(i));c.append(b);});
+}
+function renderTimeline(){refreshDuration();let container=$('timelineCues');container.textContent='';let d=state.duration||1;state.cues.slice().sort((a,b)=>a.start-b.start).forEach(c=>{let b=el('div','cue-bar'+(c.id===state.selectedId?' active':''));b.style.left=(100*c.start/d)+'%';b.style.width=(100*Math.max(0,c.end-c.start)/d)+'%';b.title=`${c.text}\n${fmt(c.start)}～${fmt(c.end)}`;b.addEventListener('pointerdown',e=>e.stopPropagation());b.addEventListener('click',e=>{e.stopPropagation();selectCue(c.id);});container.append(b);});
+  renderCreditTimeline();
+}
+function updateDependent(){for(const name of ['stroke','shadow'])document.querySelectorAll('[data-dependent="'+name+'"]').forEach(elm=>elm.classList.toggle('is-disabled',!$(name).checked));$('fadeInDuration').disabled=!$('fadeIn').checked;$('fadeOutDuration').disabled=!$('fadeOut').checked;}
+const fieldMap={cueText:'text',cueStart:'start',cueEnd:'end',posX:'x',posY:'y',fontFamily:'fontFamily',fontWeight:'fontWeight',fontSize:'fontSize',align:'align',letterSpacing:'letterSpacing',stroke:'stroke',strokeWidth:'strokeWidth',shadow:'shadow',animation:'animation',animSpeed:'speed',animIntensity:'intensity',fadeIn:'fadeIn',fadeOut:'fadeOut',fadeInDuration:'fadeInDuration',fadeOutDuration:'fadeOutDuration'};
+const fieldsBoolean=new Set(['stroke','shadow','fadeIn','fadeOut']);
+const fieldsText=new Set(['cueText','fontFamily','fontWeight','align','animation']);
+const ENDROLL_COLORS={endrollBgColor:['background','color'],endrollTitleColor:['title','color'],endrollTitleStrokeColor:['title','strokeColor'],endrollBodyColor:['body','color'],endrollBodyStrokeColor:['body','strokeColor']};
+function colorValue(key){if(ENDROLL_COLORS[key]){const [part,prop]=ENDROLL_COLORS[key];return state.endroll.style[part][prop];}return key==='background'?state.bgColor:cue()?.style[key]||P.defaults[key];}
+function syncColorInputs(){document.querySelectorAll('[data-color]').forEach(b=>{b.style.background=colorValue(b.dataset.color);});document.querySelectorAll('[data-hex]').forEach(inp=>{inp.value=colorValue(inp.dataset.hex);});}
+function syncEditor(){let c=cue();editorFields.forEach(id=>{$(id).disabled=!c;});if(!c){$('cueText').value='';$('selectedNumber').textContent='— / '+state.cues.length;syncColorInputs();return;}
+  let sorted=state.cues.slice().sort((a,b)=>a.start-b.start);$('selectedNumber').textContent=`${two(sorted.findIndex(x=>x.id===c.id)+1)} / ${two(sorted.length)}`;
+  editorFields.forEach(id=>{let key=fieldMap[id];let val=id==='cueText'?c.text:(['cueStart','cueEnd'].includes(id)?c[key]:c.style[key]);if(fieldsBoolean.has(id))$(id).checked=!!val;else $(id).value=val??'';});
+  const out=[['posX','px'],['posY','px'],['fontSize','px'],['strokeWidth','px'],['animSpeed',''],['animIntensity','px'],['fadeInDuration','s'],['fadeOutDuration','s']];out.forEach(([id,suffix])=>{$(id+'Output').textContent=`${$(id).value}${suffix}`;});syncColorInputs();updateDependent();}
+function renderUI(){defaultSelectCue();renderCueList();renderTapList();renderTimeline();syncEditor();renderEndrollUI();renderCreditsUI();updateTimeUI();renderPreview();}
+function removeCue(id){state.cues=state.cues.filter(x=>x.id!==id);state.tapLines.forEach(x=>{if(x.usedId===id)x.usedId=null;});if(state.selectedId===id)state.selectedId=state.cues[0]?.id||null;renderUI();}
+function tapLine(i){let line=state.tapLines[i];if(!line)return;if(line.usedId){removeCue(line.usedId);toast('配置を解除しました');return;}
+  let now=state.audio?state.audio.currentTime:state.time;
+  let style=cue()?clone(cue().style):emptyStyle();
+  let prev=state.cues.slice().filter(x=>x.start<now).sort((a,b)=>b.start-a.start)[0];
+  if(prev && prev.end>now && now>prev.start+.05)prev.end=now;
+  let newCue=freshCue(line.text,now,now+3.6,style);line.usedId=newCue.id;state.cues.push(newCue);state.selectedId=newCue.id;
+  refreshDuration();renderUI();toast(`歌詞を配置しました　${fmt(now)}`);
+}
+function setActiveTab(tab){document.querySelectorAll('.switch-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));$('cueList').classList.toggle('hidden',tab!=='cues');$('tapList').classList.toggle('hidden',tab!=='tap');}
+function parseHex(value){let m=String(value||'').trim().toUpperCase().match(/^#?([0-9A-F]{6})$/);return m?'#'+m[1]:null;}
+function applyColor(key,value){let hex=parseHex(value);if(!hex)return;
+  if(ENDROLL_COLORS[key]){let [part,prop]=ENDROLL_COLORS[key];state.endroll.style[part][prop]=hex;if(state.endroll.style.sameStyle&&part==='title')state.endroll.style.body[prop]=hex;}
+  else if(key==='background')state.bgColor=hex;else if(cue())cue().style[key]=hex;
+  syncColorInputs();renderPreview();}
+// Custom circular HSV picker with a rectangular saturation/value patch in its centre.
+let cp={target:null,h:30,s:.3,v:1,active:null};const wheel=$('colorWheel'),wctx=wheel.getContext('2d');
+function hsvToRgb(h,s,v){h=((h%360)+360)%360;let c=v*s,x=c*(1-Math.abs(h/60%2-1)),m=v-c,r=0,g=0,b=0;if(h<60){r=c;g=x;}else if(h<120){r=x;g=c;}else if(h<180){g=c;b=x;}else if(h<240){g=x;b=c;}else if(h<300){r=x;b=c;}else{r=c;b=x;}return [r,g,b].map(n=>Math.round((n+m)*255));}
+function rgbToHsv(r,g,b){r/=255;g/=255;b/=255;let max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min,h=0;if(d){switch(max){case r:h=(g-b)/d%6;break;case g:h=(b-r)/d+2;break;default:h=(r-g)/d+4;}h*=60;if(h<0)h+=360;}return {h,s:max===0?0:d/max,v:max};}
+function rgbToHex(a){return '#'+a.map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase();}
+function hexToHsv(value){let h=parseHex(value)||'#FFFFFF';return rgbToHsv(parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16));}
+function drawColorWheel(){const W=230,cx=115,cy=115,r=100,inner=83,sq=63;wctx.clearRect(0,0,W,W);for(let deg=0;deg<360;deg+=1){wctx.beginPath();wctx.arc(cx,cy,r,deg*Math.PI/180,(deg+2)*Math.PI/180);wctx.arc(cx,cy,inner,(deg+2)*Math.PI/180,deg*Math.PI/180,true);wctx.closePath();wctx.fillStyle=rgbToHex(hsvToRgb(deg,1,1));wctx.fill();}
+  let bx=cx-sq,by=cy-sq,ss=sq*2;wctx.fillStyle=rgbToHex(hsvToRgb(cp.h,1,1));wctx.fillRect(bx,by,ss,ss);
+  let grad=wctx.createLinearGradient(bx,0,bx+ss,0);grad.addColorStop(0,'#FFFFFF');grad.addColorStop(1,'#FFFFFF00');wctx.fillStyle=grad;wctx.fillRect(bx,by,ss,ss);
+  grad=wctx.createLinearGradient(0,by,0,by+ss);grad.addColorStop(0,'#00000000');grad.addColorStop(1,'#000000');wctx.fillStyle=grad;wctx.fillRect(bx,by,ss,ss);
+  wctx.strokeStyle='#FFFFFF';wctx.lineWidth=3;let theta=cp.h*Math.PI/180;wctx.beginPath();wctx.arc(cx+((r+inner)/2)*Math.cos(theta),cy+((r+inner)/2)*Math.sin(theta),7,0,Math.PI*2);wctx.stroke();wctx.strokeStyle='#372019';wctx.lineWidth=1;wctx.strokeRect(bx,by,ss,ss);
+  let xx=bx+cp.s*ss,yy=by+(1-cp.v)*ss;wctx.beginPath();wctx.arc(xx,yy,5.5,0,Math.PI*2);wctx.strokeStyle=cp.v>.5?'#3f271a':'#fff';wctx.lineWidth=2;wctx.stroke();let result=rgbToHex(hsvToRgb(cp.h,cp.s,cp.v));$('colorPreviewDot').style.background=result;$('colorCurrent').textContent=result;$('nativePicker').value=result;
+}
+function openColor(target,b){if(!ENDROLL_COLORS[target]&&target!=='background'&&!cue())return;cp.target=target;Object.assign(cp,hexToHsv(colorValue(target)));drawColorWheel();let p=$('colorPopover'),rect=b.getBoundingClientRect();p.classList.remove('hidden');const left=Math.min(window.innerWidth-270,Math.max(8,rect.left-170)),top=rect.top+36;const above=top+340>window.innerHeight; p.style.left=left+'px';p.style.top=(above?Math.max(8,rect.top-339):top)+'px';}
+function colorPoint(e){let r=wheel.getBoundingClientRect();return {x:(e.clientX-r.left)*230/r.width-115,y:(e.clientY-r.top)*230/r.height-115};}
+function wheelChange(e){if(!cp.target)return;let p=colorPoint(e),rad=Math.hypot(p.x,p.y);if(cp.active==='ring'){cp.h=((Math.atan2(p.y,p.x)*180/Math.PI)%360+360)%360;}else{cp.s=clamp((p.x+63)/126,0,1);cp.v=clamp(1-(p.y+63)/126,0,1);}drawColorWheel();applyColor(cp.target,rgbToHex(hsvToRgb(cp.h,cp.s,cp.v)));}
+// A file's displayed name and ZIP member basename must stay unchanged.
+// Reject unsafe names rather than silently replacing characters.
+function originalName(name){
+  const result=String(name||'').replace(/\\/g,'/').split('/').pop();
+  if(!result||result==='.'||result==='..'||/[\x00-\x1f/:*?"<>|]/.test(result))
+    throw new Error('使用できない素材ファイル名です：'+String(name));
+  return result;
+}
+// Encode each URL segment (not the path separators) so #, %, Japanese and
+// other user-supplied characters remain literal ZIP names but resolve as URLs.
+function resourceURL(path){return String(path).split('/').map(encodeURIComponent).join('/');}
+// Font faces are loaded from user files for canvas preview. Imported font binaries
+// are included in both game ZIP and self-contained project JSON.
+function fontValue(font){return '"'+font.family+'", "Yu Gothic", sans-serif';}
+function fontExportName(font){return originalName(font.name);}
+function fontExportPath(font){return 'data/others/font/'+fontExportName(font);}
+function renderFontManager(){
+  const select=$('fontFamily');const fontSelects=[select,$('endrollTitleFont'),$('endrollBodyFont')];fontSelects.forEach(sel=>sel.querySelectorAll('option[data-custom-font]').forEach(x=>x.remove()));
+  for(const font of state.fonts){let opt=document.createElement('option');opt.dataset.customFont=font.id;opt.value=fontValue(font);opt.textContent=(font.file?'✦ ':'⚠ ')+font.name+(font.file?'':'（再読み込みが必要）');fontSelects.forEach(sel=>sel.append(opt.cloneNode(true)));}
+  const list=$('fontList');list.replaceChildren();
+  for(const font of state.fonts){
+    const row=el('div','font-resource'+(font.file?'':' missing'));
+    const labels=el('div');labels.append(el('strong','',font.name));labels.append(el('small','',font.file?'読み込み済み・ZIPに自動同梱':'ファイル未接続・同名ファイルを再選択'));
+    const button=el('button','', '×');button.type='button';button.title=font.name+' を削除';button.setAttribute('aria-label',font.name+' を削除');
+    button.addEventListener('click',()=>removeFont(font.id));row.append(labels,button);list.append(row);
+  }
+  let ready=state.fonts.filter(f=>f.file).length,missing=state.fonts.filter(f=>!f.file).length;
+  const preview=$('exportFontsPreview');preview.classList.toggle('hidden',!(ready||missing));
+  preview.textContent=ready?'data/others/font/（'+ready+' ファイル）':'data/others/font/（再読み込みが必要）';
+}
+function discardFontFace(font){if(font.face){try{document.fonts.delete(font.face);}catch(_){}}if(font.url){URL.revokeObjectURL(font.url);}font.face=null;font.url=null;font.file=null;}
+function removeFont(id){
+  const font=state.fonts.find(f=>f.id===id);if(!font)return;
+  const replacement=P.defaults.fontFamily;state.cues.forEach(c=>{if(c.style.fontFamily===fontValue(font))c.style.fontFamily=replacement;});for(const part of ['title','body']){if(state.endroll.style[part].fontFamily===fontValue(font))state.endroll.style[part].fontFamily=ENDROLL_STYLE_DEFAULTS[part].fontFamily;}
+  discardFontFace(font);state.fonts=state.fonts.filter(f=>f.id!==id);
+  renderFontManager();renderUI();toast('フォントを削除しました');
+}
+function resetFonts(){state.fonts.forEach(discardFontFace);state.fonts=[];renderFontManager();}
+async function importFont(file,selectForCue=true){
+  if(!file||!(/\.(ttf|otf|woff2?)$/i).test(file.name))throw new Error('TTF / OTF / WOFF / WOFF2 のみ対応しています');
+  if(file.size===0||file.size>100*1024*1024)throw new Error('フォントのファイルサイズを確認してください（最大100MB）');
+  const old=state.fonts.find(f=>f.name.toLowerCase()===file.name.toLowerCase());
+  const id=old?.id||uid().replace('cl_','clfont_');
+  const family=old?.family||('ChocoLyric_'+id);
+  const url=URL.createObjectURL(file);
+  let face=null;
+  try{
+    face=new FontFace(family,'url('+JSON.stringify(url)+')');
+    await face.load();document.fonts.add(face);
+  }catch(err){URL.revokeObjectURL(url);throw new Error('フォントを開けません：'+file.name);}
+  if(old){discardFontFace(old);Object.assign(old,{file,url,face,name:file.name,family});}
+  else state.fonts.push({id,name:file.name,family,file,url,face});
+  if(selectForCue&&cue())cue().style.fontFamily=fontValue(old||state.fonts[state.fonts.length-1]);
+  renderFontManager();renderUI();renderPreview();
+}
+async function importFonts(files,selectForCue=true){
+  let count=0,errors=[];
+  for(const file of files){try{await importFont(file,selectForCue);count++;}catch(err){errors.push(err.message);}}
+  if(errors.length)toast(errors[0]+(errors.length>1?' ほか'+(errors.length-1)+'件':''));
+  else if(count)toast(count+'件のフォントを追加しました。書き出しZIPに自動同梱されます');
+}
+function missingUsedFonts(){return state.fonts.filter(f=>!f.file&&(state.cues.some(c=>c.style?.fontFamily===fontValue(f))||['title','body'].some(part=>state.endroll.style[part].fontFamily===fontValue(f))));}
+function download(blob,filename){let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
+function exportSRT(){let cues=state.cues.slice().sort((a,b)=>a.start-b.start);if(!cues.length){toast('書き出す歌詞がありません');return;}
+  let contents='\uFEFF'+cues.map((c,i)=>`${i+1}\r\n${srtStamp(c.start)} --> ${srtStamp(c.end)}\r\n${c.text.trim()}`).join('\r\n\r\n')+'\r\n';download(new Blob([contents],{type:'text/plain;charset=utf-8'}),'lyrics.srt');toast('SRTを書き出しました');}
+// Project JSON v4+: original user media is embedded as data: URLs (Base64).
+// This makes a single JSON portable, including audio, images, videos and fonts.
+function fileAsDataURL(file){return new Promise((resolve,reject)=>{
+  if(!file){resolve(null);return;}
+  let reader=new FileReader();reader.onload=()=>resolve(reader.result);
+  reader.onerror=()=>reject(reader.error||new Error(file.name+' の読み込みに失敗しました'));
+  reader.readAsDataURL(file);
+});}
+async function fileFromDataURL(dataURL,name,type){
+  if(typeof dataURL!=='string'||!/^data:[^,]*;base64,/i.test(dataURL))throw new Error('素材データが破損しています：'+name);
+  // fetch(data:) only decodes locally; there is no server upload or network request.
+  const response=await fetch(dataURL);
+  if(!response.ok)throw new Error('素材を復元できません：'+name);
+  const blob=await response.blob();
+  return new File([blob],name,{type:type||blob.type||'application/octet-stream'});
+}
+function withProjectButton(button,working,text){
+  button.disabled=working;
+  const label=button.querySelector('span');
+  if(label)label.textContent=working?text:(button.id==='saveProjectBtn'?'素材込みJSON保存':'プロジェクトを開く');
+}
+async function saveProject(){
+  const button=$('saveProjectBtn');if(button.disabled)return;
+  const sources=[state.audioFile,state.bgFile,...state.fonts.map(f=>f.file),...state.mediaAssets.map(a=>a.file)].filter(Boolean);
+  const totalBytes=sources.reduce((sum,f)=>sum+f.size,0);
+  if(totalBytes>200*1024*1024&&!confirm('素材の合計が約'+(totalBytes/1048576).toFixed(1)+'MBあります。JSONは約'+(totalBytes*4/3/1048576).toFixed(1)+'MB以上になり、保存・読み込み時にメモリを多く使用します。続けますか？'))return;
+  withProjectButton(button,true,'素材を保存中…');
+  try{
+    let done=0;
+    async function encoded(file){
+      if(!file)return null;
+      const dataURL=await fileAsDataURL(file);
+      const label=button.querySelector('span');if(label)label.textContent='素材を保存中… '+(++done)+'/'+sources.length;
+      // Yield between large files so the UI can repaint.
+      await new Promise(r=>setTimeout(r,0));
+      return dataURL;
+    }
+    const data={version:5,app:'ChocoLyric',embeddedAssets:true,width:state.width,height:state.height,
+      bgColor:state.bgColor,cues:state.cues,tapLines:state.tapLines,creditClips:state.creditClips,endroll:state.endroll,
+      audioFileName:state.audioFile?.name||null,
+      audio:state.audioFile?{name:state.audioFile.name,type:state.audioFile.type,dataURL:await encoded(state.audioFile)}:null,
+      background:state.bgFile?{name:state.bgFile.name,type:state.bgFile.type,dataURL:await encoded(state.bgFile)}:null,
+      fonts:[],mediaAssets:[]};
+    for(const font of state.fonts){data.fonts.push({id:font.id,name:font.name,family:font.family,
+      type:font.file?.type||'',dataURL:await encoded(font.file)});}
+    for(const asset of state.mediaAssets){data.mediaAssets.push({id:asset.id,name:asset.name,type:asset.type,
+      mimeType:asset.file?.type||'',size:asset.size,dataURL:await encoded(asset.file)});}
+    const out=new Blob([JSON.stringify(data)],{type:'application/json;charset=utf-8'});
+    download(out,'chocolyric_project_full.json');
+    toast('素材を含むプロジェクトJSONを保存しました（'+(out.size/1048576).toFixed(1)+'MB）');
+  }catch(err){console.error(err);toast('JSON保存失敗：'+err.message);}
+  finally{withProjectButton(button,false);}
+}
+function attachBackground(file){
+  if(state.bgObjectURL)URL.revokeObjectURL(state.bgObjectURL);
+  state.bgFile=file||null;state.bgObjectURL=null;state.bgImage=null;
+  if(!file){renderPreview();return;}
+  const url=URL.createObjectURL(file);state.bgObjectURL=url;
+  const im=new Image();im.onload=()=>{if(state.bgObjectURL===url){state.bgImage=im;renderPreview();}};
+  im.onerror=()=>toast('背景画像を復元できません：'+file.name);
+  im.src=url;
+}
+async function loadProject(data){
+  if(!data||!Array.isArray(data.cues))throw new Error('ChocoLyric JSONの形式が正しくありません');
+  pauseAll();audioChanged(null);resetFonts();resetAssets();attachBackground(null);
+  state.mediaAssets=(Array.isArray(data.mediaAssets)?data.mediaAssets:[])
+    .filter(a=>a&&typeof a.name==='string'&&['video','image'].includes(a.type))
+    .map(a=>({id:String(a.id||uid()),name:a.name,size:num(a.size),type:a.type,file:null,objectUrl:null,element:null}));
+  state.creditClips=(Array.isArray(data.creditClips)?data.creditClips:[])
+    .filter(c=>c&&state.mediaAssets.some(a=>a.id===c.assetId))
+    .map(c=>({id:String(c.id||uid()),assetId:c.assetId,start:Math.max(0,num(c.start)),
+      end:Math.max(num(c.start)+.05,num(c.end,num(c.start)+6)),autoEnd:c.autoEnd!==false,
+      crossfade:!!c.crossfade,fade:clamp(num(c.fade,1),.1,5),fit:c.fit==='contain'?'contain':'cover',loop:c.loop===true}));
+  state.endroll=normalizeEndroll(data.endroll);
+  state.selectedEndrollCardId=state.endroll.cards[0]?.id||null;
+  state.selectedAssetId=state.mediaAssets[0]?.id||null;state.selectedClipId=sortedClips()[0]?.id||null;
+  $('exportAudioName').value=data.audioFileName||data.audio?.name||'';
+  state.width=Math.round(clamp(data.width||1920,320,3840));state.height=Math.round(clamp(data.height||1080,240,2160));
+  state.cues=data.cues.map(c=>({id:c.id||uid(),text:String(c.text||''),start:num(c.start),
+    end:Math.max(num(c.start)+.06,num(c.end)),layer:num(c.layer),style:{...emptyStyle(),...c.style}}));
+  state.tapLines=Array.isArray(data.tapLines)?data.tapLines:[];
+  const savedFonts=(Array.isArray(data.fonts)?data.fonts:[]).filter(f=>f&&typeof f.name==='string'
+    &&/\.(ttf|otf|woff2?)$/i.test(f.name)&&typeof f.family==='string'
+    &&/^ChocoLyric_[a-z0-9_-]+$/i.test(f.family));
+  state.fonts=savedFonts.map(f=>({id:String(f.id||uid()),name:f.name,family:f.family,file:null,url:null,face:null}));
+  state.bgColor=parseHex(data.bgColor)||'#38241E';state.selectedId=state.cues[0]?.id||null;state.time=0;
+  let size=state.width+'x'+state.height;
+  $('screenSize').value=[...$('screenSize').options].some(o=>o.value===size)?size:'custom';
+  $('customSize').classList.toggle('hidden',$('screenSize').value!=='custom');
+  $('customWidth').value=state.width;$('customHeight').value=state.height;
+  updateCanvasSize();renderUI();renderFontManager();
+  const issues=[];
+  if(data.audio?.dataURL){try{audioChanged(await fileFromDataURL(data.audio.dataURL,data.audio.name||'audio.mp3',data.audio.type));}
+    catch(e){issues.push(e.message);}}
+  if(data.background?.dataURL){try{attachBackground(await fileFromDataURL(data.background.dataURL,data.background.name||'preview.png',data.background.type));}
+    catch(e){issues.push(e.message);}}
+  for(const f of savedFonts){
+    if(!f.dataURL)continue;
+    try{await importFont(await fileFromDataURL(f.dataURL,f.name,f.type),false);}
+    catch(e){issues.push(e.message);}
+  }
+  const savedAssets=Array.isArray(data.mediaAssets)?data.mediaAssets:[];
+  for(const original of savedAssets){
+    if(!original.dataURL)continue;
+    try{
+      const file=await fileFromDataURL(original.dataURL,original.name,original.mimeType);
+      // Reconnect to the same asset id so all existing credits clips stay valid.
+      const asset=state.mediaAssets.find(a=>a.id===original.id);
+      if(!asset)continue;
+      asset.file=file;asset.size=file.size;asset.objectUrl=URL.createObjectURL(file);
+      if(asset.type==='image'){
+        const img=new Image();img.src=asset.objectUrl;img.onload=renderPreview;
+        img.onerror=()=>toast('画像の復元に失敗：'+asset.name);asset.element=img;
+      }else{
+        const video=document.createElement('video');video.muted=true;video.defaultMuted=true;
+        video.playsInline=true;video.preload='auto';video.src=asset.objectUrl;asset.element=video;
+        video.addEventListener('seeked',renderPreview);video.addEventListener('loadeddata',renderPreview);
+        video.addEventListener('error',()=>toast('動画を再生できません：'+asset.name));
+      }
+    }catch(e){issues.push(e.message);}
+  }
+  refreshDuration();renderFontManager();renderUI();renderPreview();
+  if(issues.length)toast('一部の素材を復元できません：'+issues[0]);
+  else if(data.version>=4)toast('JSONから歌詞・音声・画像・動画・フォントを復元しました');
+  else toast('旧形式JSONを開きました。素材は必要に応じて再読み込みしてください');
+}
+function pauseAll(){state.virtualPlaying=false;if(state.audio)state.audio.pause();}
+function makeSrtText(){let cues=state.cues.slice().sort((a,b)=>a.start-b.start);return '\uFEFF'+cues.map((c,i)=>`${i+1}\r\n${srtStamp(c.start)} --> ${srtStamp(c.end)}\r\n${c.text}`).join('\r\n\r\n')+'\r\n';}
+function txt(str){return new TextEncoder().encode(str);}
+function zipStore(files){let chunks=[],central=[],offset=0,now=new Date(),dosTime=((now.getHours()&31)<<11)|((now.getMinutes()&63)<<5)|((now.getSeconds()/2|0)&31),dosDate=(((now.getFullYear()-1980)&127)<<9)|(((now.getMonth()+1)&15)<<5)|(now.getDate()&31);
+  const table=(()=>{let t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+  function crc(bytes){let c=0xFFFFFFFF;for(let i=0;i<bytes.length;i++)c=table[(c^bytes[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+  function view(bytes){return new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength);}
+  const seenNames=new Set();
+  for(const file of files){if(seenNames.has(file.path.toLowerCase()))throw new Error('ZIP内のファイル名が重複しています：'+file.path);seenNames.add(file.path.toLowerCase());let name=txt(file.path.replace(/\\/g,'/')),data=file.data instanceof Uint8Array?file.data:new Uint8Array(file.data),sum=crc(data);if(data.byteLength>0xFFFFFFFF)throw new Error('ZIP上限サイズを超えています');
+    let head=new Uint8Array(30+name.length),v=view(head);v.setUint32(0,0x04034b50,true);v.setUint16(4,20,true);v.setUint16(6,0x0800,true);v.setUint16(8,0,true);v.setUint16(10,dosTime,true);v.setUint16(12,dosDate,true);v.setUint32(14,sum,true);v.setUint32(18,data.length,true);v.setUint32(22,data.length,true);v.setUint16(26,name.length,true);head.set(name,30);chunks.push(head,data);
+    let cHead=new Uint8Array(46+name.length),cv=view(cHead);cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint16(8,0x0800,true);cv.setUint16(10,0,true);cv.setUint16(12,dosTime,true);cv.setUint16(14,dosDate,true);cv.setUint32(16,sum,true);cv.setUint32(20,data.length,true);cv.setUint32(24,data.length,true);cv.setUint16(28,name.length,true);cv.setUint32(42,offset,true);cHead.set(name,46);central.push(cHead);offset+=head.length+data.length;
+  }
+  let centLen=central.reduce((n,x)=>n+x.length,0),end=new Uint8Array(22),e=view(end);e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,centLen,true);e.setUint32(16,offset,true);return new Blob([...chunks,...central,end],{type:'application/zip'});
+}
+function scriptShow(audioName){const config={width:state.width,height:state.height,audio:resourceURL('data/bgm/'+audioName),removeOnEnd:true,fonts:state.fonts.filter(f=>f.file).map(f=>({family:f.family,path:fontExportPath(f)})),cues:state.cues.map(c=>({start:Number(c.start.toFixed(3)),end:Number(c.end.toFixed(3)),text:c.text,style:c.style,layer:c.layer||0}))};
+  // JSON.stringify escapes all text safely, including quotes and newlines.
+  // Keep the runtime in the .ks script. This avoids Windows download tools
+  // quarantining a separately generated executable .js file.
+  const runtime=window.TYRANO_LYRICS_RUNTIME_SOURCE;
+  if(!runtime)throw new Error('歌詞描画エンジンが読み込まれていません');
+  return `; ChocoLyric Studio / self-contained lyric scene\r\n; 追加のJavaScriptファイルは不要です。\r\n[iscript]\r\nif (!window.TyranoLyrics || !window.LyricsPainter) {\r\n${runtime}\r\n}\r\nwindow.TyranoLyrics.start(${JSON.stringify(config,null,2)});\r\n[endscript]\r\n[return]\r\n`;
+}
+function scriptStop(){return `; ChocoLyric Studio / playback stop\r\n[iscript]\r\nif (window.TyranoLyrics) window.TyranoLyrics.stop();\r\n[endscript]\r\n[return]\r\n`;}
+function exportReadme(audioName){
+  const lyrics=!!state.cues.length, endroll=!!state.endroll.cards.length, credits=!!state.creditClips.length;
+  const modes=[lyrics?'歌詞':null,endroll?'エンドロール':null,credits?'映像':null].filter(Boolean).join(' + ')||'なし';
+  const display='[call storage="choco_start.ks"]';
+  const endAll='[call storage="choco_stop.ks"]';
+  const fontList=state.fonts.filter(f=>f.file).map(f=>'  '+fontExportPath(f)).join('\r\n');
+  const mediaList=state.mediaAssets.filter(a=>a.file).map(a=>'  '+mediaPath(a)).join('\r\n');
+  return `ChocoLyric Studio v2.9 - ティラノビルダー導入手順\r\n`+
+    `=========================================\r\n\r\n【収録モード】${modes}\r\n`+
+    `【画面サイズ】${state.width} × ${state.height} / ゲーム設定の解像度と揃えてください\r\n\r\n`+
+    `1. ZIPの data フォルダをゲームプロジェクトの data フォルダへ統合します。\r\n`+
+    `2. ゲームの冒頭で（任意）\r\n   [call storage="choco_setup.ks"]\r\n`+
+    `3. 再生開始したいKSに以下を挿入します。\r\n   ${display}\r\n`+
+    `4. 停止したい【別の場面】で以下を挿入します。\r\n   ${endAll}\r\n\r\n`+
+    (lyrics?`・歌詞のみ [call storage=\"lyrics_show.ks\"] / 停止 [call storage=\"lyrics_stop.ks\"]\r\n`:``)+
+    (endroll?`・エンドロールのみ [call storage=\"endroll_show.ks\"] / 停止 [call storage=\"endroll_stop.ks\"]\r\n`:``)+
+    (credits?`・映像のみ [call storage=\"credits_show.ks\"] / 停止 [call storage=\"credits_stop.ks\"]\r\n`:``)+
+    ((lyrics||endroll)&&credits?`・歌詞/エンドロールの再生中に[call storage=\"credits_show.ks\"]を実行しても、音声は二重再生されません。\r\n`:``)+
+    `\r\n【重要：開始と停止を続けて書かないでください】\r\n`+
+    `初期化は冒頭（任意）： [call storage="choco_setup.ks"]\r\n`+
+    `開始する場面： [call storage="choco_start.ks"]\r\n`+
+    `停止する別の場面： [call storage="choco_stop.ks"]\r\n`+
+    `※ [call]は音声終了まで待たずに処理が進むので、開始直後に停止を置くと音が聞こえません。\r\n\r\n`+
+    `【動作確認・最初はこれだけ】\r\n`+
+    `[call storage="choco_quick_test.ks"]\r\n`+
+    `この1行で初期化→開始→15秒待機→停止を実行します。\r\n`+
+    `音声は data/bgm/${audioName} に実際に存在する必要があります。\r\n`+
+    `\r\n【書き出し素材】\r\n`+
+    `音声 data/bgm/${audioName}（ZIPにない場合は手動配置）\r\n`+
+    (fontList?`ユーザーフォント\r\n${fontList}\r\n`:``)+
+    (mediaList?`画像・動画（元のファイルをそのまま同梱）\r\n${mediaList}\r\n`:``)+
+    `\r\n【重要】\r\n`+
+    `・描画優先順は 映像（z-index:99994） → エンドロール（99995） → 歌詞（99996） です。\r\n`+
+    `・両方の描画は同一のHTML5 Audio再生時計に同期します。動画内の音声はミュートします。\r\n`+
+    `・動画のループ設定は表示クリップごとに個別指定。ONは表示中に繰り返し、OFFは再生終了後も最後のフレームを保持します。\r\n`+
+    `・既存の[playbgm]で同じ曲を再生中の場合は音が重なります。必要に応じて[stopbgm]してください。\r\n`+
+    `・[call]は再生終了まで待たずに戻ります。シナリオのジャンプや停止は任意のタイミングで実行してください。\r\n`+
+    `・動画形式は使用するティラノビルダー/NW.jsのコーデック対応に依存します（MP4 H.264 / WebM推奨）。\r\n`+
+    `・OSやブラウザによってはクリックしないと音声の再生が許可されず、再生用ボタンが表示されます。\r\n`+
+    `・音声が再生できないときはゲーム画面にファイルパスとエラーを表示します。\r\n`+
+    `・外部JavaScriptファイルは不要です。ゲーム内で起動するコードはKSに組み込み済みです。\r\n`+
+    `・ユーザー追加フォント・素材のゲームへの同梱や再配布の利用許諾を確認してください。\r\n`+
+    `・プロジェクトJSON（v2.4以降）は音声・フォント・画像・動画・プレビュー背景の実ファイルをBase64として含み、次回の読み込みで自動復元します。\r\n`+
+    `・実ゲームのセーブ/ロードやジャンプをまたぐ動作は、お使いのティラノビルダーでテストしてください。\r\n`+
+    endrollReadme()+creditsReadme(audioName)+
+    `\r\n【開発元の区別】\r\n`+
+    `ChocoLyric Studioはティラノビルダー／ティラノスクリプトの公式製品ではなく、独立した非公式の制作補助アプリです。\r\n`+
+    `ティラノ公式開発者のメール・SNSはこのアプリの問い合わせ先ではありません。\r\n`;
+}
+async function exportZip(){
+  if(!state.cues.length&&!state.creditClips.length&&!state.endroll.cards.length){toast('歌詞・エンドロール・映像のいずれかを配置してください');return;}
+  const missing=missingUsedFonts();if(missing.length){toast('使用中のフォント「'+missing[0].name+'」を再読み込みしてください');return;}
+  const missingMedia=missingUsedMedia();if(missingMedia.length){toast('使用中の画像・動画「'+missingMedia[0].name+'」を再読み込みしてください');return;}
+  if($('bundleAudio').checked&&!state.audioFile){toast('音声ファイルが未登録です。音声を読み込むか、同梱チェックを外してdata/bgmへ手動配置してください');return;}
+  const audioName=originalName(state.audioFile?.name||$('exportAudioName').value||'your_song.mp3');
+  const b=$('confirmExportBtn');b.disabled=true;b.textContent='ZIPを作成中…';
+  try{
+    const files=[{path:'data/scenario/choco_setup.ks',data:txt(setupScript())},
+      {path:'data/scenario/choco_stop.ks',data:txt(comboStopScript())},
+      {path:'README_導入手順.txt',data:txt(exportReadme(audioName))}];
+    if(state.cues.length){
+      files.push({path:'data/scenario/lyrics_show.ks',data:txt(scriptShow(audioName))});
+      files.push({path:'data/scenario/lyrics_stop.ks',data:txt(scriptStop())});
+      files.push({path:'lyrics_export.srt',data:txt(makeSrtText())});
+    }
+    if(state.endroll.cards.length){
+      files.push({path:'data/scenario/endroll_show.ks',data:txt(showEndrollScript(audioName))});
+      files.push({path:'data/scenario/endroll_stop.ks',data:txt(endrollStopScript())});
+      files.push({path:'endroll_timeline.json',data:txt(JSON.stringify(state.endroll,null,2))});
+    }
+    if(state.creditClips.length){
+      files.push({path:'data/scenario/credits_show.ks',data:txt(showCreditsScript(audioName))});
+      files.push({path:'data/scenario/credits_stop.ks',data:txt(creditsStopScript())});
+      files.push({path:'credits_timeline.json',data:txt(JSON.stringify({clips:state.creditClips,assets:state.mediaAssets.map(a=>({id:a.id,type:a.type,name:a.name,path:mediaPath(a)}))},null,2))});
+    }
+    files.push({path:'data/scenario/choco_start.ks',data:txt(comboStartScript())});
+    files.push({path:'data/scenario/choco_quick_test.ks',data:txt(quickTestScript())});
+    for(const font of state.fonts){if(font.file)files.push({path:fontExportPath(font),data:new Uint8Array(await font.file.arrayBuffer())});}
+    // Preserve original image and video file bytes. No recompression / transcoding.
+    for(const asset of state.mediaAssets){if(asset.file)files.push({path:mediaPath(asset),data:new Uint8Array(await asset.file.arrayBuffer())});}
+    if($('bundleAudio').checked&&state.audioFile)files.push({path:'data/bgm/'+audioName,data:new Uint8Array(await state.audioFile.arrayBuffer())});
+    let blob=zipStore(files);download(blob,'ChocoLyric_TyranoBuilder_Credits_v2.8.zip');$('exportDialog').close();toast('ティラノビルダー用ZIPを保存しました');
+  }catch(err){console.error(err);toast('書き出しに失敗しました：'+err.message);}
+  finally{b.disabled=false;b.textContent='ZIPをダウンロード ⇩';}
+}
+async function downloadFontsOnly(){
+  const fonts=state.fonts.filter(f=>f.file);
+  if(!fonts.length){toast('ダウンロードできるフォントがありません。先にフォントを追加してください');return;}
+  const button=$('downloadFontsOnlyBtn');button.disabled=true;
+  try{
+    const files=[{path:'README_フォント.txt',data:txt('ChocoLyric Studio v2.6\r\nZIP内の data/others/font フォルダを、ゲームの同名フォルダへコピーしてください。\r\n※ 歌詞用スクリプトは「ティラノ用に書き出す」から別途出力してください。\r\n')}];
+    for(const font of fonts)files.push({path:fontExportPath(font),data:new Uint8Array(await font.file.arrayBuffer())});
+    download(zipStore(files),'ChocoLyric_Fonts_Only.zip');
+    toast(fonts.length+'件のフォントをZIPで保存しました');
+  }catch(err){console.error(err);toast('フォントのZIP保存に失敗しました：'+err.message);}
+  finally{button.disabled=false;}
+}
+function importSrtText(data,name,silent=false){let cues=parseSRT(data);if(!cues.length){toast('SRTのタイムコードを読み取れませんでした');return;}pauseAll();state.cues=cues.map(c=>({...c,style:emptyStyle()}));state.tapLines=[];state.selectedId=cues[0].id;setTime(cues[0].start+Math.min(.65,(cues[0].end-cues[0].start)*.5));$('importStatus').textContent='SRT：'+name;renderUI();if(!silent)toast(`SRTを読み込みました：${cues.length}フレーズ`);}
+function importTxtText(data,name){let lines=String(data||'').replace(/^\uFEFF/,'').split(/\r?\n/).map(x=>x.replace(/^\d{3}[\s　:：.．)）_-]*/, '').trim()).filter(Boolean);if(!lines.length){toast('歌詞が空です');return;}state.tapLines=lines.map(t=>({text:t,usedId:null}));renderUI();setActiveTab('tap');$('importStatus').textContent='TXT：'+name;toast(`${lines.length}フレーズ。音声再生中に歌詞ボタンをクリックしてください`);}
+function bindInputs(){for(const id of editorFields){$(id).addEventListener('input',()=>{let c=cue();if(!c)return;let key=fieldMap[id];let v=fieldsBoolean.has(id)?$(id).checked:fieldsText.has(id)?$(id).value:num($(id).value);
+      if(id==='cueText')c.text=v;else if(id==='cueStart'){c.start=Math.max(0,v);c.end=Math.max(c.start+.06,c.end);if(!state.audio||state.audio.paused)state.time=c.start+.05;}
+      else if(id==='cueEnd')c.end=Math.max(c.start+.06,v);else c.style[key]=v;
+      if(id==='cueStart'||id==='cueEnd')refreshDuration();renderCueList();renderTimeline();
+      if(id==='cueText')renderCueList();
+      if(id==='cueStart'||id==='cueEnd'){let active=document.activeElement;let index=id==='cueStart'?'cueEnd':'cueStart';$(index).value=c[index==='cueStart'?'start':'end'];}
+      if(id==='posX'||id==='posY'||id==='fontSize'||id==='strokeWidth'||id==='animSpeed'||id==='animIntensity'||id==='fadeInDuration'||id==='fadeOutDuration')$(id+'Output').textContent=$(id).value+(['posX','posY','fontSize','strokeWidth','animIntensity'].includes(id)?' px':['fadeInDuration','fadeOutDuration'].includes(id)?'s':'');
+      if(fieldsBoolean.has(id))updateDependent();renderPreview();
+    });}
+}
+
+// ---- Scrolling endroll cards editor ----
+const ENDROLL_TEMPLATES={
+  custom:{label:'任意',kind:'lines',customLabel:true},idea:{label:'原案',kind:'lines'},scenario:{label:'シナリオ',kind:'lines'},bg:{label:'イラスト/背景',kind:'lines'},standing:{label:'イラスト/立ち絵',kind:'lines'},otherart:{label:'イラスト/他素材',kind:'lines'},
+  cast:{label:'CAST',kind:'cast'},bgm:{label:'BGM',kind:'bgm'},song:{label:'主題歌',kind:'song'},se:{label:'効果音',kind:'lines'},script:{label:'スクリプト',kind:'lines'},modeling:{label:'２Dモデリング',kind:'lines'},supporter:{label:'サポーター',kind:'lines'},testplay:{label:'テストプレイ',kind:'lines'}
+};
+function normalizeEndrollStyle(saved){
+  saved=saved&&typeof saved==='object'?saved:{};
+  const style=clone(ENDROLL_STYLE_DEFAULTS);style.sameStyle=!!saved.sameStyle;
+  for(const part of ['title','body']){
+    const val=saved[part]&&typeof saved[part]==='object'?saved[part]:{};
+    if(typeof val.fontFamily==='string'&&val.fontFamily.length<250)style[part].fontFamily=val.fontFamily;
+    if(['400','500','600','700','900'].includes(String(val.fontWeight)))style[part].fontWeight=String(val.fontWeight);
+    style[part].fontSize=clamp(num(val.fontSize,style[part].fontSize),12,200);
+    style[part].strokeWidth=clamp(num(val.strokeWidth,style[part].strokeWidth),0,24);
+    style[part].color=parseHex(val.color)||style[part].color;
+    style[part].strokeColor=parseHex(val.strokeColor)||style[part].strokeColor;
+  }
+  const bg=saved.background||{};
+  style.background.enabled=bg.enabled!==false;
+  style.background.color=parseHex(bg.color)||style.background.color;
+  style.background.opacity=clamp(num(bg.opacity,style.background.opacity),0,100);
+  if(style.sameStyle)style.body=clone(style.title);
+  return style;
+}
+function normalizeEndroll(data){
+  data=data&&typeof data==='object'?data:{};
+  const cards=Array.isArray(data.cards)?data.cards.map(c=>normalizeEndrollCard(c)).filter(Boolean):[];
+  return {start:Math.max(0,num(data.start,0)),end:Math.max(num(data.start,0)+0.1,num(data.end,cards.length?20:10)),direction:data.direction==='topToBottom'?'topToBottom':'bottomToTop',positionX:clamp(num(data.positionX,50),0,100),textAlign:['left','center','right'].includes(data.textAlign)?data.textAlign:'center',bodyOffsetX:clamp(num(data.bodyOffsetX,0),-40,40),cards,style:normalizeEndrollStyle(data.style)};
+}
+function normalizeEndrollCard(card){
+  if(!card||!card.type||!ENDROLL_TEMPLATES[card.type])return null;
+  const temp=ENDROLL_TEMPLATES[card.type];
+  const out={id:String(card.id||uid()),type:card.type,label:card.label==null?String(temp.label||'クレジット'):String(card.label)};
+  if(temp.kind==='lines'){out.lines=String(card.lines||'').replace(/\r/g,'');}
+  else if(temp.kind==='bgm'){out.composer=String(card.composer||'');out.arranger=String(card.arranger||'');}
+  else if(temp.kind==='song'){out.composer=String(card.composer||'');out.arranger=String(card.arranger||'');out.singer=String(card.singer||'');}
+  else if(temp.kind==='cast'){out.entries=Array.isArray(card.entries)?card.entries.map(e=>({role:String(e.role||''),actor:String(e.actor||'')})):[{role:'',actor:''}];if(!out.entries.length)out.entries=[{role:'',actor:''}];}
+  return out;
+}
+function createEndrollCard(type){
+  const t=ENDROLL_TEMPLATES[type]||ENDROLL_TEMPLATES.custom;
+  return normalizeEndrollCard({id:uid().replace('cl_','er_'),type,label:type==='custom'?'':t.label,lines:''});
+}
+function selectedEndrollCard(){return state.endroll.cards.find(c=>c.id===state.selectedEndrollCardId)||null;}
+function endrollDuration(){return Math.max(0.1,state.endroll.end-state.endroll.start);}
+function addEndrollCard(type){const c=createEndrollCard(type);state.endroll.cards.push(c);state.selectedEndrollCardId=c.id;if(state.endroll.end<=state.endroll.start+.1)state.endroll.end=state.endroll.start+20;renderUI();}
+function removeEndrollCard(id){state.endroll.cards=state.endroll.cards.filter(c=>c.id!==id);if(state.selectedEndrollCardId===id)state.selectedEndrollCardId=state.endroll.cards[0]?.id||null;renderUI();}
+function duplicateEndrollCard(id){const src=state.endroll.cards.find(c=>c.id===id);if(!src)return;const dup=JSON.parse(JSON.stringify(src));dup.id=uid().replace('cl_','er_');state.endroll.cards.splice(state.endroll.cards.indexOf(src)+1,0,dup);state.selectedEndrollCardId=dup.id;renderUI();}
+function endrollCardSummary(card){const t=ENDROLL_TEMPLATES[card.type];if(!card)return '';if(t.kind==='lines')return (card.lines||'').split(/\n+/).filter(Boolean).slice(0,2).join(' / ')||'内容を入力';if(t.kind==='bgm')return ['作曲：'+(card.composer||'—'),'編曲：'+(card.arranger||'—')].join(' / ');if(t.kind==='song')return ['作曲：'+(card.composer||'—'),'編曲：'+(card.arranger||'—'),'歌唱：'+(card.singer||'—')].join(' / ');if(t.kind==='cast')return (card.entries||[]).slice(0,2).map(e=>(e.role||'役')+' / '+(e.actor||'—')).join(' / ')||'配役を入力';return '';}
+function renderEndrollCardList(){const list=$('endrollCardList'); if(!list) return; const prev=list.scrollTop; list.replaceChildren(); $('endrollCount').textContent=state.endroll.cards.length; if(!state.endroll.cards.length){list.append(el('div','empty-list','追加する項目を選んで「＋」を押すと、エンドロール用のカードを作成できます。')); return;} state.endroll.cards.forEach((card,idx)=>{const row=el('div','cue-item'+(card.id===state.selectedEndrollCardId?' selected':'')); row.append(el('div','cue-index',two(idx+1))); const body=el('div','cue-line'); const chip=el('div','endroll-card-chip',card.label||ENDROLL_TEMPLATES[card.type].label); body.append(chip); body.append(el('div','cue-name',endrollCardSummary(card))); row.append(body); const actions=el('div','cue-actions'); const dup=el('button','cue-more','⧉'); dup.title='複製'; dup.addEventListener('click',e=>{e.stopPropagation();duplicateEndrollCard(card.id);}); actions.append(dup); const del=el('button','cue-more','×'); del.title='削除'; del.addEventListener('click',e=>{e.stopPropagation();removeEndrollCard(card.id);}); actions.append(del); row.append(actions); row.addEventListener('click',()=>{state.selectedEndrollCardId=card.id;renderEndrollUI();renderTimeline();renderPreview();}); list.append(row);}); list.scrollTop=prev; }
+function renderEndrollEditor(){const target=$('endrollCardEditor'); const card=selectedEndrollCard(); const title=$('endrollSelectedTitle'); if(!target||!title) return; if(!card){title.textContent='カードを選択してください'; target.classList.add('microcopy'); target.textContent='左の一覧からカードを選択すると、ここで内容を編集できます。'; return;} title.textContent=(card.label||'クレジット')+' を編集'; const t=ENDROLL_TEMPLATES[card.type]; target.className='endroll-card-editor'; let html='<label class="form-field">見出し<input type="text" id="endrollLabel" placeholder="例：原案・制作・CAST" value="'+escapeHtml(card.label||'')+'"></label>'; if(t.customLabel||card.type==='custom') html+='<p class="micro-note">任意カードでは見出し名を自由に変更できます。</p>'; if(t.kind==='lines'){ html+='<label class="form-field">内容（改行で複数行）<textarea id="endrollLines" placeholder="例：山田 太郎\n佐藤 花子">'+escapeHtml(card.lines||'')+'</textarea></label><p class="micro-note">表示例：<br>【'+escapeHtml(card.label||'項目')+'】<br>名前<br>名前</p>'; }
+  else if(t.kind==='bgm'){ html+='<label class="form-field">作曲<input type="text" id="endrollComposer" placeholder="例：山田 太郎" value="'+escapeHtml(card.composer||'')+'"></label><label class="form-field">編曲<input type="text" id="endrollArranger" placeholder="例：佐藤 花子" value="'+escapeHtml(card.arranger||'')+'"></label><p class="micro-note">表示例：<br>【BGM】<br>作曲：＊＊＊<br>編曲：＊＊＊</p>'; }
+  else if(t.kind==='song'){ html+='<label class="form-field">作曲<input type="text" id="endrollComposer" placeholder="例：山田 太郎" value="'+escapeHtml(card.composer||'')+'"></label><label class="form-field">編曲<input type="text" id="endrollArranger" placeholder="例：佐藤 花子" value="'+escapeHtml(card.arranger||'')+'"></label><label class="form-field">歌唱<input type="text" id="endrollSinger" placeholder="例：歌い手名" value="'+escapeHtml(card.singer||'')+'"></label><p class="micro-note">表示例：<br>【主題歌】<br>作曲：＊＊＊<br>編曲：＊＊＊<br>歌唱：＊＊＊</p>'; }
+  else if(t.kind==='cast'){ html+='<div id="endrollCastRows"></div><div class="editor-actions"><button type="button" class="mini-button full" id="addCastRowBtn">＋ 配役を追加</button></div><p class="micro-note">表示例：<br>【CAST】<br>＊＊＊ 役 / ＊＊＊</p>'; }
+  target.innerHTML=html; const label=$('endrollLabel'); if(label) label.addEventListener('input',e=>{card.label=e.target.value; renderEndrollCardList(); renderPreview();}); const lines=$('endrollLines'); if(lines) lines.addEventListener('input',e=>{card.lines=e.target.value; renderEndrollCardList(); renderPreview();}); const comp=$('endrollComposer'); if(comp) comp.addEventListener('input',e=>{card.composer=e.target.value; renderEndrollCardList(); renderPreview();}); const arr=$('endrollArranger'); if(arr) arr.addEventListener('input',e=>{card.arranger=e.target.value; renderEndrollCardList(); renderPreview();}); const sing=$('endrollSinger'); if(sing) sing.addEventListener('input',e=>{card.singer=e.target.value; renderEndrollCardList(); renderPreview();}); if(t.kind==='cast') renderCastRows(card);
+}
+function renderCastRows(card){const host=$('endrollCastRows'); if(!host) return; host.replaceChildren(); (card.entries||[]).forEach((entry,idx)=>{const row=el('div','entry-row'); row.innerHTML='<label class="form-field"><span>キャラ名</span><input type="text" placeholder="例：主人公" value="'+escapeHtml(entry.role||'')+'"></label><label class="form-field"><span>声優名</span><input type="text" placeholder="例：声優名" value="'+escapeHtml(entry.actor||'')+'"></label>'; const del=el('button','', '×'); del.type='button'; del.addEventListener('click',()=>{card.entries.splice(idx,1); if(!card.entries.length) card.entries.push({role:'',actor:''}); renderCastRows(card); renderEndrollCardList(); renderPreview();}); row.append(del); const [roleInp,actorInp]=row.querySelectorAll('input'); roleInp.addEventListener('input',e=>{entry.role=e.target.value; renderEndrollCardList(); renderPreview();}); actorInp.addEventListener('input',e=>{entry.actor=e.target.value; renderEndrollCardList(); renderPreview();}); host.append(row);}); const add=$('addCastRowBtn'); if(add) add.onclick=()=>{card.entries.push({role:'',actor:''}); renderCastRows(card); renderEndrollCardList(); renderPreview();}; }
+function renderEndrollStyleUI(){
+  const style=state.endroll.style;
+  $('endrollSameStyle').checked=!!style.sameStyle;
+  for(const part of ['title','body']){
+    const name=part==='title'?'endrollTitle':'endrollBody';const st=style[part];
+    $(name+'Font').value=st.fontFamily;
+    $(name+'Size').value=st.fontSize;$(name+'SizeOutput').textContent=st.fontSize+' px';
+    $(name+'StrokeWidth').value=st.strokeWidth;$(name+'StrokeWidthOutput').textContent=st.strokeWidth+' px';
+  }
+  const controls=$('endrollBodySettings').querySelectorAll('input,select,button');
+  controls.forEach(c=>c.disabled=style.sameStyle);
+  $('endrollBodySettings').classList.toggle('is-disabled',style.sameStyle);
+  $('endrollBgEnabled').checked=style.background.enabled;
+  $('endrollBgOpacity').value=style.background.opacity;
+  $('endrollBgOpacityOutput').textContent=style.background.opacity+' %';
+  $('endrollBgOptions').classList.toggle('is-disabled',!style.background.enabled);
+  $('endrollBgOptions').querySelectorAll('input,button').forEach(c=>c.disabled=!style.background.enabled);
+  syncColorInputs();
+}
+function renderEndrollPositionUI(){
+  const p=Math.round(clamp(num(state.endroll.positionX,50),0,100));
+  const a=['left','center','right'].includes(state.endroll.textAlign)?state.endroll.textAlign:'center';
+  $('endrollPositionX').value=p;
+  $('endrollPositionXOutput').textContent=p+'%'+(p===0?'（左端）':p===50?'（中央）':p===100?'（右端）':'');
+  $('endrollTextAlign').value=a;
+  const bodyOffset=Math.round(clamp(num(state.endroll.bodyOffsetX,0),-40,40));
+  $('endrollBodyOffsetX').value=bodyOffset;
+  $('endrollBodyOffsetXOutput').textContent=bodyOffset===0?'0%（調整なし）':(bodyOffset>0?'+':'')+bodyOffset+'%（'+(bodyOffset<0?'左':'右')+'へ）';
+  $('endrollBodyOffsetReset').disabled=bodyOffset===0;
+  for(const button of document.querySelectorAll('[data-endroll-preset]')){
+    const active=button.dataset.endrollPreset===a && p===({left:0,center:50,right:100}[a]);
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-pressed',String(active));
+  }
+}
+function renderEndrollUI(){if(!$('endrollCardList')) return; renderEndrollCardList(); renderEndrollEditor(); $('endrollStart').value=state.endroll.start.toFixed(2).replace(/\.00$/,''); $('endrollEnd').value=state.endroll.end.toFixed(2).replace(/\.00$/,''); $('endrollDirection').value=state.endroll.direction;renderEndrollPositionUI();renderEndrollStyleUI();}
+function renderEndrollTimeline(){const container=$('timelineEndroll'); if(!container) return; container.textContent=''; if(!state.endroll.cards.length) return; const d=state.duration||1; const b=el('div','cue-bar'+(state.mode==='endroll'?' active':'')); b.style.left=(100*state.endroll.start/d)+'%'; b.style.width=(100*Math.max(.05,state.endroll.end-state.endroll.start)/d)+'%'; b.title='エンドロール\n'+fmt(state.endroll.start)+'～'+fmt(state.endroll.end); b.addEventListener('pointerdown',e=>e.stopPropagation()); b.addEventListener('click',e=>{e.stopPropagation(); setMode('endroll'); state.selectedEndrollCardId=state.endroll.cards[0]?.id||null; setTime(state.endroll.start+0.1); renderUI();}); container.append(b); }
+function drawEndroll(ctx,t){if(window.ChocoEndrollPainter)window.ChocoEndrollPainter(ctx,state.endroll,t,state.width,state.height);}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+function initEndrollFontSelects(){
+  const options=[
+    ['"Yu Mincho", "Hiragino Mincho ProN", serif','明朝体 / 日本語'],
+    ['"Yu Gothic", Meiryo, sans-serif','游ゴシック / 日本語'],
+    ['Meiryo, sans-serif','メイリオ'],['"Noto Sans JP", sans-serif','Noto Sans JP'],
+    ['"Noto Serif JP", serif','Noto Serif JP'],['Arial, sans-serif','Arial'],
+    ['Georgia, serif','Georgia'],['"Times New Roman", serif','Times New Roman']
+  ];
+  for(const id of ['endrollTitleFont','endrollBodyFont']){
+    const select=$(id);select.replaceChildren();
+    options.forEach(([value,label])=>{const opt=document.createElement('option');opt.value=value;opt.textContent=label;select.append(opt);});
+  }
+}
+function bindEndrollStyleEvents(){
+  $('endrollSameStyle').addEventListener('change',e=>{
+    state.endroll.style.sameStyle=e.target.checked;
+    if(e.target.checked)state.endroll.style.body=clone(state.endroll.style.title);
+    renderEndrollStyleUI();renderPreview();
+  });
+  for(const part of ['title','body']){
+    const prefix=part==='title'?'endrollTitle':'endrollBody';
+    for(const [suffix,prop] of [['Font','fontFamily'],['Size','fontSize'],['StrokeWidth','strokeWidth']]){
+      $(prefix+suffix).addEventListener('input',e=>{
+        const v=prop==='fontFamily'?e.target.value:num(e.target.value);
+        state.endroll.style[part][prop]=v;
+        if(part==='title'&&state.endroll.style.sameStyle)state.endroll.style.body[prop]=v;
+        renderEndrollStyleUI();renderPreview();
+      });
+    }
+  }
+  $('endrollBgEnabled').addEventListener('change',e=>{state.endroll.style.background.enabled=e.target.checked;renderEndrollStyleUI();renderPreview();});
+  $('endrollBgOpacity').addEventListener('input',e=>{state.endroll.style.background.opacity=num(e.target.value);renderEndrollStyleUI();renderPreview();});
+}
+function bindEndrollEvents(){
+  $('addEndrollCardBtn').addEventListener('click',()=>addEndrollCard($('endrollTemplate').value));
+  $('clearEndrollCardsBtn').addEventListener('click',()=>{if(state.endroll.cards.length&&confirm('エンドロールカードをすべて削除しますか？')){state.endroll.cards=[];state.selectedEndrollCardId=null;renderUI();}});
+  $('endrollStart').addEventListener('input',e=>{state.endroll.start=Math.max(0,num(e.target.value,state.endroll.start)); state.endroll.end=Math.max(state.endroll.start+.1,state.endroll.end); refreshDuration(); renderTimeline(); renderPreview();});
+  $('endrollEnd').addEventListener('input',e=>{state.endroll.end=Math.max(state.endroll.start+.1,num(e.target.value,state.endroll.end)); refreshDuration(); renderTimeline(); renderPreview();});
+  $('endrollDirection').addEventListener('input',e=>{state.endroll.direction=e.target.value==='topToBottom'?'topToBottom':'bottomToTop'; renderPreview();});
+  $('endrollPositionX').addEventListener('input',e=>{state.endroll.positionX=clamp(num(e.target.value,50),0,100);renderEndrollPositionUI();renderPreview();});
+  $('endrollTextAlign').addEventListener('change',e=>{state.endroll.textAlign=['left','center','right'].includes(e.target.value)?e.target.value:'center';renderEndrollPositionUI();renderPreview();});
+  $('endrollBodyOffsetX').addEventListener('input',e=>{state.endroll.bodyOffsetX=clamp(num(e.target.value,0),-40,40);renderEndrollPositionUI();renderPreview();});
+  $('endrollBodyOffsetReset').addEventListener('click',()=>{state.endroll.bodyOffsetX=0;renderEndrollPositionUI();renderPreview();});
+  document.querySelectorAll('[data-endroll-preset]').forEach(button=>button.addEventListener('click',()=>{
+    const align=button.dataset.endrollPreset;
+    state.endroll.positionX=({left:0,center:50,right:100})[align];
+    state.endroll.textAlign=align;
+    renderEndrollPositionUI();renderPreview();
+  }));
+  $('endrollNowStart').addEventListener('click',()=>{state.endroll.start=Math.max(0,state.time); state.endroll.end=Math.max(state.endroll.start+.1,state.endroll.end); renderEndrollUI(); renderTimeline(); renderPreview();});
+  $('endrollNowEnd').addEventListener('click',()=>{state.endroll.end=Math.max(state.endroll.start+.1,state.time); renderEndrollUI(); renderTimeline(); renderPreview();});
+}
+function endrollRuntimeSource(){const painterSource='('+window.ChocoEndrollPainter.toString()+')'; return `/* ChocoLyric Endroll - same canvas painter as editor preview. */
+(function(root){
+'use strict';
+var session=null,paint=${painterSource},fontCache={};
+function stage(){return document.querySelector('.tyrano_base')||document.querySelector('#tyrano_base')||document.body;}
+function audioRef(){return root.TyranoLyrics&&root.TyranoLyrics.getAudio&&root.TyranoLyrics.getAudio()||root.ChocoCredits&&root.ChocoCredits.getAudio&&root.ChocoCredits.getAudio();}
+function resourceURL(path){return String(path||'').split('/').map(function(x){try{return encodeURIComponent(decodeURIComponent(x));}catch(_){return encodeURIComponent(x);}}).join('/');}
+function loadFonts(fonts){if(!root.FontFace||!document.fonts||!Array.isArray(fonts))return Promise.resolve();return Promise.all(fonts.map(function(font){
+ if(!font||!/^ChocoLyric_[a-z0-9_-]+$/i.test(font.family)||!/^data\\/others\\/font\\/[^/]+\\.(ttf|otf|woff2?)$/i.test(font.path))return Promise.resolve();
+ var key=font.family+'|'+font.path;if(fontCache[key])return fontCache[key];
+ try{var face=new FontFace(font.family,'url('+JSON.stringify(new URL(resourceURL(font.path),document.baseURI).href)+')');
+ fontCache[key]=face.load().then(function(){document.fonts.add(face);}).catch(function(err){console.warn('[ChocoEndroll] カスタムフォントを読み込めません',err);delete fontCache[key];});return fontCache[key];}
+ catch(err){console.warn('[ChocoEndroll] フォントの初期化に失敗しました',err);return Promise.resolve();}
+ }));}
+function stop(){var s=session;session=null;if(!s)return;cancelAnimationFrame(s.raf);if(s.audio&&s.ownsAudio){s.audio.pause();s.audio.removeAttribute('src');s.audio.load();}if(s.host.parentNode)s.host.parentNode.removeChild(s.host);}
+function start(data){
+ stop();data=data||{};
+ var parent=stage(),host=document.createElement('div');host.id='choco-endroll-overlay';
+ Object.assign(host.style,{position:'absolute',left:'0',top:'0',width:'100%',height:'100%',overflow:'hidden',pointerEvents:'none',zIndex:'99995'});
+ if(getComputedStyle(parent).position==='static')parent.style.position='relative';parent.appendChild(host);
+ var canvas=document.createElement('canvas'),width=Math.max(1,Number(data.width)||1920),height=Math.max(1,Number(data.height)||1080);
+ canvas.width=width;canvas.height=height;Object.assign(canvas.style,{display:'block',width:'100%',height:'100%',pointerEvents:'none'});host.appendChild(canvas);
+ var ctx=canvas.getContext('2d'),shared=audioRef(),owns=!shared,audio=shared||new Audio();
+ if(owns){audio.preload='auto';audio.src=data.audio||'';}
+ var s={host:host,audio:audio,ownsAudio:owns,raf:0};session=s;
+ function tick(){if(session!==s)return;ctx.clearRect(0,0,width,height);paint(ctx,data,audio.currentTime||0,width,height);if(audio.ended&&owns){stop();return;}s.raf=requestAnimationFrame(tick);}
+ s.raf=requestAnimationFrame(tick);
+ if(owns){audio.addEventListener('ended',function(){if(session===s)stop();});}
+ loadFonts(data.fonts).then(function(){if(session!==s||!owns)return;audio.play().catch(function(){
+ var btn=document.createElement('button');btn.textContent='▶ エンドロールを再生';
+ Object.assign(btn.style,{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',background:'#563525',color:'#fff8eb',border:'2px solid #f9e4cc',padding:'18px 26px',borderRadius:'12px',pointerEvents:'auto',cursor:'pointer',zIndex:'10000',fontSize:'22px'});
+ host.appendChild(btn);btn.onclick=function(){audio.play().then(function(){btn.remove();});};
+ });});
+ return {stop:stop,audio:audio};
+}
+root.ChocoEndroll={start:start,stop:stop,getAudio:function(){return session&&session.audio;}};
+})(window);`;}
+function showEndrollScript(audioName){const config={audio:resourceURL('data/bgm/'+audioName),width:state.width,height:state.height,start:Number(state.endroll.start.toFixed(3)),end:Number(state.endroll.end.toFixed(3)),direction:state.endroll.direction,positionX:state.endroll.positionX,textAlign:state.endroll.textAlign,bodyOffsetX:state.endroll.bodyOffsetX,style:state.endroll.style,cards:state.endroll.cards,fonts:state.fonts.filter(f=>f.file).map(f=>({family:f.family,path:fontExportPath(f)}))};return '; ChocoLyric Endroll / self-contained\r\n[iscript]\r\nif (!window.ChocoEndroll) {\r\n'+endrollRuntimeSource()+'\r\n}\r\nwindow.ChocoEndroll.start('+JSON.stringify(config,null,2)+');\r\n[endscript]\r\n[return]\r\n';}
+function endrollStopScript(){ return '; ChocoLyric Endroll - stop\r\n[iscript]\r\nif (window.ChocoEndroll) window.ChocoEndroll.stop();\r\n[endscript]\r\n[return]\r\n'; }
+
+// ---- Endroll image/video editor (shared music timeline) ----
+const CreditsCore=window.ChocoCreditsCore;
+function creditsAsset(){return state.mediaAssets.find(a=>a.id===state.selectedAssetId)||null;}
+function creditsClip(){return state.creditClips.find(c=>c.id===state.selectedClipId)||null;}
+function sortedClips(){return CreditsCore.sorted(state.creditClips);}
+function effectiveClipEnd(c){const list=sortedClips(),i=list.findIndex(a=>a.id===c.id),next=list[i+1];if(!next)return c.end;const switchEnd=next.start+(next.crossfade?next.fade:0);return Math.min(c.autoEnd?switchEnd:c.end,switchEnd);}
+function mediaPath(a){
+  const base=a.type==='video'?'data/video/choco_credits/':'data/fgimage/choco_credits/';
+  const name=originalName(a.name);
+  // Separate only colliding media into ID-named folders. The basename never changes.
+  const duplicates=state.mediaAssets.filter(other=>other.type===a.type && other.name.toLowerCase()===a.name.toLowerCase());
+  const subdir=duplicates.length>1 ? String(a.id).replace(/[^a-z0-9_-]/gi,'_')+'/' : '';
+  return base+subdir+name;
+}
+function clearAssetResources(a){if(a.objectUrl)URL.revokeObjectURL(a.objectUrl);if(a.element&&a.type==='video'){a.element.pause();a.element.removeAttribute('src');a.element.load();}a.objectUrl=null;a.element=null;a.file=null;a.playPending=false;}
+function resetAssets(){state.mediaAssets.forEach(clearAssetResources);state.mediaAssets=[];state.creditClips=[];state.selectedAssetId=null;state.selectedClipId=null;}
+function addMediaFiles(files){let added=0;
+  for(const file of files){
+    const type=/\.(mp4|webm|ogv)$/i.test(file.name)||/^video\//.test(file.type)?'video':(/\.(png|jpe?g|webp|gif|bmp|avif)$/i.test(file.name)||/^image\//.test(file.type)?'image':null);
+    if(!type||!file.size){toast('対応していない素材があります：'+file.name);continue;}
+    let a=state.mediaAssets.find(x=>!x.file&&x.name===file.name&&x.type===type&&(!x.size||x.size===file.size));
+    if(!a){a={id:uid().replace('cl_','media_'),name:file.name,type,size:file.size,file:null,objectUrl:null,element:null};state.mediaAssets.push(a);}
+    else clearAssetResources(a);
+    a.file=file;a.size=file.size;a.objectUrl=URL.createObjectURL(file);
+    if(type==='image'){
+      const image=new Image();image.onload=()=>{renderPreview();};image.onerror=()=>toast('画像を表示できません：'+file.name);image.src=a.objectUrl;a.element=image;
+    }else{
+      const video=document.createElement('video');video.muted=true;video.defaultMuted=true;video.playsInline=true;video.preload='auto';video.src=a.objectUrl;a.element=video;
+      video.addEventListener('seeked',renderPreview);video.addEventListener('loadeddata',renderPreview);video.addEventListener('error',()=>toast('動画の形式を再生できない可能性があります：'+file.name));
+    }
+    state.selectedAssetId=a.id;added++;
+  }
+  renderCreditsUI();renderTimeline();renderPreview();if(added)toast(added+'件の画像・動画を読み込みました');
+}
+function addClip(assetId,time=state.time){let a=state.mediaAssets.find(x=>x.id===assetId);if(!a){toast('左の素材一覧から画像・動画を選んでください');return;}
+  const begin=Number(Math.max(0,time).toFixed(2));const c={id:uid().replace('cl_','clip_'),assetId:a.id,start:begin,end:begin+6,autoEnd:true,crossfade:true,fade:1,fit:'cover',loop:false};
+  if(!state.creditClips.length)c.crossfade=false;
+  state.creditClips.push(c);state.selectedClipId=c.id;state.selectedAssetId=a.id;
+  refreshDuration();renderCreditsUI();renderTimeline();renderPreview();toast(fmt(begin)+' に素材を配置しました');
+}
+function selectClip(id,seek=true){let c=state.creditClips.find(v=>v.id===id);if(!c)return;state.selectedClipId=id;state.selectedAssetId=c.assetId;if(seek)setTime(c.start+Math.min(.3,(c.end-c.start)/4));renderCreditsUI();renderTimeline();renderPreview();}
+function removeClip(id){state.creditClips=state.creditClips.filter(c=>c.id!==id);if(state.selectedClipId===id)state.selectedClipId=sortedClips()[0]?.id||null;renderCreditsUI();renderTimeline();renderPreview();}
+function removeMedia(id){let a=state.mediaAssets.find(v=>v.id===id);if(!a)return;
+  if(state.creditClips.some(c=>c.assetId===id)&&!confirm('この素材が使われている表示区間も削除します。よろしいですか？'))return;
+  clearAssetResources(a);state.mediaAssets=state.mediaAssets.filter(v=>v.id!==id);state.creditClips=state.creditClips.filter(v=>v.assetId!==id);
+  if(state.selectedClipId&&!creditsClip())state.selectedClipId=sortedClips()[0]?.id||null;
+  if(state.selectedAssetId===id)state.selectedAssetId=state.mediaAssets[0]?.id||null;
+  renderCreditsUI();renderTimeline();renderPreview();
+}
+function renderMediaLibrary(){const panel=$('mediaLibrary');panel.replaceChildren();
+  $('exportMediaPreview').classList.toggle('hidden',!state.mediaAssets.length);
+  if(!state.mediaAssets.length){panel.append(el('div','empty-list','まだ素材がありません。PNGやMP4を追加してください。'));return;}
+  state.mediaAssets.forEach(a=>{
+    const row=el('div','media-resource'+(a.id===state.selectedAssetId?' active':''));row.title='クリックして選択';
+    let thumb=el('div','media-thumb');if(a.element&&a.type==='image'){let img=el('img');img.src=a.objectUrl;thumb.append(img);}else thumb.textContent=a.type==='video'?'▶':'▧';
+    let info=el('div','media-meta');info.append(el('strong','',a.name),el('small','',(a.type==='video'?'動画':'画像')+' / '+(a.file?(a.size/1048576).toFixed(1)+' MB':'⚠ 再読み込みが必要')));
+    let add=el('button','media-add','＋');add.type='button';add.title='現在時刻へ挿入';add.addEventListener('click',e=>{e.stopPropagation();addClip(a.id);});
+    let del=el('button','media-remove','×');del.type='button';del.title='素材削除';del.addEventListener('click',e=>{e.stopPropagation();removeMedia(a.id);});
+    row.append(thumb,info,add,del);row.addEventListener('click',()=>{state.selectedAssetId=a.id;renderMediaLibrary();});panel.append(row);
+  });
+  const preview=$('exportMediaPreview');preview.classList.toggle('hidden',!state.mediaAssets.length);preview.textContent='data/fgimage・data/video / 素材 '+state.mediaAssets.filter(a=>a.file).length+' ファイル';
+}
+function renderClipList(){let cont=$('clipList'),scroll=cont.scrollTop;cont.replaceChildren();$('clipCount').textContent=state.creditClips.length;
+  if(!state.creditClips.length){cont.append(el('div','empty-list','音声を聴きながら、素材一覧の「＋」で表示時刻に配置します。'));return;}
+  sortedClips().forEach((c,i)=>{let a=state.mediaAssets.find(x=>x.id===c.assetId),r=el('div','cue-item clip-item'+(c.id===state.selectedClipId?' selected':''));
+    r.append(el('div','cue-index',two(i+1)));let info=el('div','cue-line');info.append(el('div','cue-name',a?.name||'素材がありません'));let t=el('div','cue-time',fmt(c.start)+' → '+fmt(effectiveClipEnd(c))+(c.crossfade?'　◌':'　│')+(a?.type==='video'&&c.loop?'　↻ ループ':''));info.append(t);r.append(info);
+    let actions=el('div','cue-actions');let dup=el('button','cue-more','⧉');dup.title='後ろに複製';dup.addEventListener('click',e=>{e.stopPropagation();addClip(c.assetId,effectiveClipEnd(c));});
+    let del=el('button','cue-more','×');del.title='削除';del.addEventListener('click',e=>{e.stopPropagation();removeClip(c.id);});actions.append(dup,del);r.append(actions);
+    r.addEventListener('click',()=>selectClip(c.id));cont.append(r);
+  });cont.scrollTop=scroll;
+}
+function syncClipEditor(){let c=creditsClip();const ids=['clipStart','clipEnd','clipAutoEnd','clipCrossfade','clipFade','clipFit','clipVideoLoop'];ids.forEach(id=>$(id).disabled=!c);
+  $('clipSelectedName').textContent=c?state.mediaAssets.find(a=>a.id===c.assetId)?.name||'素材がありません':'映像を選択してください';
+  $('clipSelectedInfo').textContent=c?'表示区間 '+fmt(c.start)+' ～ '+fmt(effectiveClipEnd(c)):'左側から素材を挿入できます';
+  const selectedAsset=c?state.mediaAssets.find(a=>a.id===c.assetId):null;
+  $('clipVideoLoopGroup').classList.toggle('hidden',!c||selectedAsset?.type!=='video');
+  $('clipVideoLoop').disabled=!c||selectedAsset?.type!=='video';
+  if(!c)return;
+  $('clipVideoLoop').checked=!!c.loop;
+  $('clipStart').value=c.start.toFixed(2);$('clipEnd').value=c.end.toFixed(2);$('clipAutoEnd').checked=!!c.autoEnd;$('clipCrossfade').checked=!!c.crossfade;$('clipFade').value=c.fade;$('clipFadeOutput').textContent=c.fade.toFixed(2)+' 秒';$('clipFit').value=c.fit;
+  $('clipFade').disabled=!c.crossfade;$('clipEnd').disabled=c.autoEnd&&!!sortedClips().find((x,i,all)=>x.id===c.id&&i<all.length-1);
+}
+function renderCreditsUI(){renderMediaLibrary();renderClipList();syncClipEditor();}
+function renderCreditTimeline(){let cont=$('timelineCredits');cont.replaceChildren();let d=Math.max(1,state.duration);
+  sortedClips().forEach(c=>{let a=state.mediaAssets.find(x=>x.id===c.assetId);const end=effectiveClipEnd(c);
+    let bar=el('div','cue-bar'+(c.id===state.selectedClipId?' active':'')+(c.crossfade?' has-fade':''));bar.style.left=(100*c.start/d)+'%';bar.style.width=(100*Math.max(.05,end-c.start)/d)+'%';bar.title=(a?.name||'素材')+' / '+fmt(c.start)+' → '+fmt(end);bar.addEventListener('pointerdown',e=>e.stopPropagation());bar.addEventListener('click',e=>{e.stopPropagation();selectClip(c.id);});cont.append(bar);
+  });
+}
+function drawCreditMedia(ctx,t){let active=CreditsCore.active(state.creditClips,t),showing=new Set(),isPlaying=!!((state.audio&&!state.audio.paused)||state.virtualPlaying);
+  for(const item of active){const a=state.mediaAssets.find(x=>x.id===item.clip.assetId);if(!a?.element)continue;const media=a.element;showing.add(a.id);
+    if(a.type==='video'){
+      media.loop=!!item.clip.loop;
+      const duration=Number(media.duration),hasDuration=Number.isFinite(duration)&&duration>0;
+      const endFrame=hasDuration?Math.max(0,duration-0.04):0;
+      const finished=hasDuration&&!item.clip.loop&&item.localTime>=endFrame;
+      if(hasDuration){
+        const target=item.clip.loop?(item.localTime%duration):Math.min(Math.max(0,item.localTime),endFrame);
+        if(!media.seeking&&Math.abs((media.currentTime||0)-target)>(finished?.035:isPlaying?.32:.08)){try{media.currentTime=target;}catch(_){}}
+      }
+      if(finished){if(!media.paused)media.pause();}
+      else if(isPlaying&&media.paused&&!media.ended&&!a.playPending){a.playPending=true;let p=media.play();if(p&&p.then)p.then(()=>a.playPending=false,()=>a.playPending=false);else a.playPending=false;}
+      if(!isPlaying&&!media.paused)media.pause();
+    }
+    const w=a.type==='video'?media.videoWidth:media.naturalWidth,h=a.type==='video'?media.videoHeight:media.naturalHeight;
+    if(!w||!h)continue;
+    ctx.save();ctx.globalAlpha=item.alpha;const W=state.width,H=state.height;
+    if(item.clip.fit==='contain'){
+      const sc=Math.min(W/w,H/h),ww=w*sc,hh=h*sc;try{ctx.drawImage(media,(W-ww)/2,(H-hh)/2,ww,hh);}catch(_){}}
+    else{const sc=Math.max(W/w,H/h),ww=W/sc,hh=H/sc;try{ctx.drawImage(media,(w-ww)/2,(h-hh)/2,ww,hh,0,0,W,H);}catch(_){}}
+    ctx.restore();
+  }
+  for(const a of state.mediaAssets){if(a.type==='video'&&!showing.has(a.id)&&a.element&&!a.element.paused)a.element.pause();}
+}
+function setMode(mode){state.mode=['lyrics','endroll','credits'].includes(mode)?mode:'lyrics';document.body.dataset.mode=state.mode;
+  document.querySelector('.stage-hint').textContent=state.mode==='credits'?'読み込んだ素材が歌詞とエンドロールの背面に音声同期で表示されます':state.mode==='endroll'?'クレジットカード全体が指定区間の中で流れます':'プレビュー上をクリック・ドラッグして位置を変更できます';
+  document.querySelector('.support-panel p').textContent=state.mode==='credits'?'音声を再生しながら左の素材を現在位置に挿入。前後の画像・動画をクロスフェードで切り替えられます。ゲーム用ZIPには元の素材も同梱します。':state.mode==='endroll'?'原案・CAST・主題歌などのカードを追加して、音声に合わせて流れるエンドロールを作成できます。方向は上向き・下向きから選べます。':'SRTを使えば歌詞の表示タイミングを一括設定。再生を聴きながら細かい秒数を調整して、ティラノビルダーでそのまま使える演出ファイルを出力できます。';$('modeLyrics').classList.toggle('active',state.mode==='lyrics');$('modeEndroll').classList.toggle('active',state.mode==='endroll');$('modeCredits').classList.toggle('active',state.mode==='credits');
+  $('previewCueInfo').textContent=state.mode==='credits'?'映像を選択し、音声に合わせて表示タイミングを調整':state.mode==='endroll'?'エンドロール全体の流れとカード内容を確認':'歌詞を選択して位置・色・演出を調整';renderPreview();}
+function bindCreditsEvents(){
+  $('modeLyrics').addEventListener('click',()=>setMode('lyrics'));$('modeEndroll').addEventListener('click',()=>setMode('endroll'));$('modeCredits').addEventListener('click',()=>setMode('credits'));
+  $('mediaInput').addEventListener('change',e=>{const list=Array.from(e.target.files||[]);e.target.value='';if(list.length)addMediaFiles(list);});
+  const drop=$('mediaDrop');for(const ev of ['dragover','dragenter'])drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('dragover');});for(const ev of ['dragleave','drop'])drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('dragover');});
+  drop.addEventListener('drop',e=>{const list=Array.from(e.dataTransfer?.files||[]);if(list.length)addMediaFiles(list);});
+  $('addClipBtn').addEventListener('click',()=>addClip(state.selectedAssetId));
+  $('clearClipsBtn').addEventListener('click',()=>{if(state.creditClips.length&&confirm('エンドロールの配置をすべて削除しますか？')){state.creditClips=[];state.selectedClipId=null;renderCreditsUI();renderTimeline();renderPreview();}});
+  function changeClip(id){let c=creditsClip();if(!c)return;let val=$(id).value;
+    if(id==='clipStart'){const old=c.start;c.start=Math.max(0,num(val));c.end=Math.max(c.start+.05,c.end+(c.start-old));}
+    if(id==='clipEnd')c.end=Math.max(c.start+.05,num(val));
+    if(id==='clipAutoEnd')c.autoEnd=$('clipAutoEnd').checked;
+    if(id==='clipCrossfade')c.crossfade=$('clipCrossfade').checked;
+    if(id==='clipFade')c.fade=Math.max(.1,num(val,1));
+    if(id==='clipFit')c.fit=val==='contain'?'contain':'cover';
+    if(id==='clipVideoLoop')c.loop=$('clipVideoLoop').checked;
+    renderTimeline();renderClipList();if(id==='clipFade')$('clipFadeOutput').textContent=c.fade.toFixed(2)+' 秒';
+    if(id==='clipStart'||id==='clipEnd'||id==='clipAutoEnd'||id==='clipCrossfade')syncClipEditor();
+    renderPreview();
+  }
+  for(const id of ['clipStart','clipEnd','clipAutoEnd','clipCrossfade','clipFade','clipFit','clipVideoLoop'])$(id).addEventListener('input',()=>changeClip(id));
+  $('clipNowStart').addEventListener('click',()=>{let c=creditsClip();if(!c)return;const old=c.start;c.start=state.time;c.end=Math.max(c.start+.05,c.end+(c.start-old));renderCreditsUI();renderTimeline();renderPreview();});
+  $('clipNowEnd').addEventListener('click',()=>{let c=creditsClip();if(!c)return;c.autoEnd=false;c.end=Math.max(c.start+.05,state.time);renderCreditsUI();renderTimeline();renderPreview();});
+  $('previewLyricsWithCredits').addEventListener('change',renderPreview);
+}
+function missingUsedMedia(){return state.mediaAssets.filter(a=>!a.file&&state.creditClips.some(c=>c.assetId===a.id));}
+function showCreditsScript(audioName){
+  let assets=state.mediaAssets.filter(a=>state.creditClips.some(c=>c.assetId===a.id)).map(a=>({id:a.id,type:a.type,path:mediaPath(a)}));
+  let config={width:state.width,height:state.height,audio:resourceURL('data/bgm/'+audioName),assets:assets,clips:state.creditClips.map(c=>({assetId:c.assetId,start:Number(c.start.toFixed(3)),end:Number(c.end.toFixed(3)),crossfade:!!c.crossfade,fade:Number(c.fade.toFixed(3)),autoEnd:!!c.autoEnd,fit:c.fit,loop:!!c.loop}))};
+  let core=window.TYRANO_CREDITS_CORE_SOURCE,runtime=window.TYRANO_CREDITS_RUNTIME_SOURCE;
+  if(!core||!runtime)throw new Error('エンドロールの描画エンジンが読み込まれていません');
+  return '; ChocoLyric Credits / self-contained / image + video\r\n[iscript]\r\nif (!window.ChocoCreditsCore) {\r\n'+core+'\r\n}\r\nif (!window.ChocoCredits) {\r\n'+runtime+'\r\n}\r\nwindow.ChocoCredits.start('+JSON.stringify(config,null,2)+');\r\n[endscript]\r\n[return]\r\n';
+}
+function setupScript(){let modules=[];if(state.cues.length){modules.push('if (!window.TyranoLyrics || !window.LyricsPainter) {\n'+window.TYRANO_LYRICS_RUNTIME_SOURCE+'\n}');}if(state.creditClips.length){modules.push('if (!window.ChocoCreditsCore) {\n'+window.TYRANO_CREDITS_CORE_SOURCE+'\n}');modules.push('if (!window.ChocoCredits) {\n'+window.TYRANO_CREDITS_RUNTIME_SOURCE+'\n}');}
+  return '; Call once at the beginning of your story (optional)\r\n[iscript]\r\n'+modules.join('\r\n')+'\r\n[endscript]\r\n[return]\r\n';
+}
+function creditsStopScript(){return '; ChocoLyric Credits - stop\r\n[iscript]\r\nif (window.ChocoCredits) window.ChocoCredits.stop();\r\n[endscript]\r\n[return]\r\n';}
+function comboStartScript(){return '; ChocoLyric: start enabled tracks\r\n'+(state.cues.length?'[call storage=\"lyrics_show.ks\"]\r\n':'')+(state.endroll.cards.length?'[call storage=\"endroll_show.ks\"]\r\n':'')+(state.creditClips.length?'[call storage=\"credits_show.ks\"]\r\n':'')+'[return]\r\n';}
+function quickTestScript(){return '; ChocoLyric: simple 15 second playback test\r\n'+
+  '[call storage="choco_setup.ks"]\r\n[call storage="choco_start.ks"]\r\n[wait time=15000]\r\n[call storage="choco_stop.ks"]\r\n[return]\r\n';}
+function comboStopScript(){return '; Stop overlays without page reload\r\n[iscript]\r\nif (window.ChocoCredits) window.ChocoCredits.stop();\r\nif (window.ChocoEndroll) window.ChocoEndroll.stop();\r\nif (window.TyranoLyrics) window.TyranoLyrics.stop();\r\n[endscript]\r\n[return]\r\n';}
+function creditsReadme(audioName){return `\r\n\r\n【エンドロール（画像・動画）】\r\n`+
+  `data/scenario/credits_show.ks / credits_stop.ks / choco_setup.ks / choco_stop.ks\r\n`+
+  `画像: data/fgimage/choco_credits/、動画: data/video/choco_credits/\r\n`+
+  `\r\n・先に[call storage="choco_setup.ks"]を冒頭で実行すると、描画エンジンを初期化できます（任意）。\r\n`+
+  `・歌詞と映像をまとめて再生: [call storage="choco_start.ks"]\r\n`+
+  `・歌詞と映像をまとめて停止: [call storage="choco_stop.ks"]\r\n`+
+  `・映像単体を再生: [call storage="credits_show.ks"]\r\n`+
+  `・映像だけ停止: [call storage="credits_stop.ks"]\r\n`+
+  `・既に[call storage="lyrics_show.ks"]が動いているときは、続けて[call storage="credits_show.ks"]で同時再生できます。\r\n`+
+  `・映像のZ-indexは99995、歌詞は99996。通常の画像より上・歌詞より下に表示されます。\r\n`+
+  `・音声は同じ再生時計を共有します。映像の動画音声は常にミュート。\r\n`+
+  `・動画クリップの「動画をループ再生する」ONなら表示区間内で繰り返し、OFFなら最終フレームを保持します。\r\n`+
+  `・動画の実再生可否はWindows/NW.js/Chromiumのコーデックに依存します。MP4(H.264)とWebMを推奨します。\r\n`+
+  `・GIFはアニメーション画像のままファイルを同梱します。Canvasプレビューは静止画として表示される場合があります。\r\n`+
+  `・画像・動画の形式や最大サイズはティラノビルダー実機で検証してください。\r\n`+
+  `・JSONプロジェクト（v2.4以降）は素材を含むため、再読み込み時に自動復元します。大容量の素材はJSONファイルが大きくなります。\r\n`;
+}
+
+
+function endrollReadme(){return `
+
+【エンドロール（流れるクレジット）】
+`+
+  `data/scenario/endroll_show.ks / endroll_stop.ks / choco_setup.ks / choco_stop.ks
+`+
+  `
+・歌詞とクレジットをまとめて再生: [call storage="choco_start.ks"]
+`+
+  `・クレジット単体を再生: [call storage="endroll_show.ks"]
+`+
+  `・クレジットだけ停止: [call storage="endroll_stop.ks"]
+`+
+  `・描画優先順は 映像(99994) → エンドロール(99995) → 歌詞(99996) です。
+`+
+  `・クレジット全体が start ～ end の間で一定速度で流れます。流れる方向は下→上 / 上→下から選択できます。
+`;}
+
+function initEvents(){
+  $('audioInput').addEventListener('change',e=>{if(e.target.files[0])audioChanged(e.target.files[0]);e.target.value='';});
+  const drop=$('audioDrop');for(const ev of ['dragenter','dragover'])drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('dragover');});for(const ev of ['dragleave','drop'])drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('dragover');});drop.addEventListener('drop',e=>{let file=e.dataTransfer.files[0];if(file)audioChanged(file);});
+  $('srtInput').addEventListener('change',async e=>{let f=e.target.files[0];if(f)importSrtText(await f.text(),f.name);e.target.value='';});
+  $('txtInput').addEventListener('change',async e=>{let f=e.target.files[0];if(f)importTxtText(await f.text(),f.name);e.target.value='';});
+  $('fontInput').addEventListener('change',async e=>{let files=Array.from(e.target.files||[]);e.target.value='';if(files.length)await importFonts(files);});
+  $('endrollFontInput').addEventListener('change',async e=>{const files=Array.from(e.target.files||[]);e.target.value='';if(files.length)await importFonts(files,false);});
+  $('downloadFontsOnlyBtn').addEventListener('click',downloadFontsOnly);
+  $('applyAllStyleBtn').addEventListener('click',()=>{let c=cue();if(!c)return;state.cues.forEach(o=>{if(o.id!==c.id)o.style=clone(c.style);});renderUI();toast(`スタイルを${state.cues.length}フレーズに反映しました`);});
+  $('addCueBtn').addEventListener('click',()=>{let now=state.audio?state.audio.currentTime:state.time;let nc=freshCue('',now,now+3.5,cue()?.style||emptyStyle());state.cues.push(nc);state.selectedId=nc.id;renderUI();$('cueText').focus();$('cueText').select();});
+  $('clearCuesBtn').addEventListener('click',()=>{if(!state.cues.length)return;if(confirm(`${state.cues.length}件の歌詞をすべて消去しますか？`)){state.cues=[];state.tapLines.forEach(x=>x.usedId=null);state.selectedId=null;renderUI();}});
+  document.querySelectorAll('.switch-tab').forEach(b=>b.addEventListener('click',()=>setActiveTab(b.dataset.tab)));
+  $('playBtn').addEventListener('click',playPause);$('back1Btn').addEventListener('click',()=>setTime(state.time-1));$('forward1Btn').addEventListener('click',()=>setTime(state.time+1));$('backFrameBtn').addEventListener('click',()=>setTime(state.time-.1));$('forwardFrameBtn').addEventListener('click',()=>setTime(state.time+.1));
+  $('loopPreview').addEventListener('change',e=>state.loop=e.target.checked);
+  $('setStartBtn').addEventListener('click',()=>{let c=cue();if(!c)return;c.start=Math.max(0,Math.min(state.time,c.end-.06));renderUI();});$('setEndBtn').addEventListener('click',()=>{let c=cue();if(!c)return;c.end=Math.max(c.start+.06,state.time);renderUI();});
+  $('copyStartBtn').addEventListener('click',()=>{let c=cue();if(!c)return;c.start=Math.min(state.time,c.end-.06);c.start=Math.max(0,c.start);renderUI();});$('copyEndBtn').addEventListener('click',()=>{let c=cue();if(!c)return;c.end=Math.max(state.time,c.start+.06);renderUI();});
+  let dragTimeline=false;const seekPointer=e=>{let r=$('timeline').getBoundingClientRect();setTime((e.clientX-r.left)/r.width*state.duration);};
+  $('timeline').addEventListener('pointerdown',e=>{if(e.target.closest('.cue-bar'))return;dragTimeline=true;$('timeline').setPointerCapture(e.pointerId);seekPointer(e);});
+  $('timeline').addEventListener('pointermove',e=>{if(dragTimeline)seekPointer(e);});$('timeline').addEventListener('pointerup',()=>dragTimeline=false);$('timeline').addEventListener('pointercancel',()=>dragTimeline=false);
+  let dragStage=false;const positionPointer=e=>{let c=cue();if(!c)return;let r=canvas.getBoundingClientRect();c.style.x=Math.round(clamp((e.clientX-r.left)/r.width*state.width,0,state.width));c.style.y=Math.round(clamp((e.clientY-r.top)/r.height*state.height,0,state.height));$('posX').value=c.style.x;$('posY').value=c.style.y;$('posXOutput').textContent=c.style.x+' px';$('posYOutput').textContent=c.style.y+' px';renderPreview();};
+  $('canvasWrap').addEventListener('pointerdown',e=>{if(state.mode!=='lyrics'||!cue())return;dragStage=true;$('canvasWrap').setPointerCapture(e.pointerId);positionPointer(e);});$('canvasWrap').addEventListener('pointermove',e=>{if(dragStage)positionPointer(e);});$('canvasWrap').addEventListener('pointerup',()=>dragStage=false);$('canvasWrap').addEventListener('pointercancel',()=>dragStage=false);
+  $('forceSelected').addEventListener('change',e=>{state.force=e.target.checked;renderPreview();});$('fitBtn').addEventListener('click',()=>{$('previewPanel')?.scrollIntoView({block:'nearest'});renderPreview();});
+  $('screenSize').addEventListener('change',e=>{let v=e.target.value;$('customSize').classList.toggle('hidden',v!=='custom');if(v!=='custom'){let [w,h]=v.split('x').map(Number);setSize(w,h);}else{$('customWidth').value=state.width;$('customHeight').value=state.height;}});
+  for(const id of ['customWidth','customHeight'])$(id).addEventListener('change',()=>setSize(num($('customWidth').value,state.width),num($('customHeight').value,state.height)));
+  $('bgImageInput').addEventListener('change',e=>{let file=e.target.files[0];if(file){attachBackground(file);toast('プレビュー背景画像を追加しました');}e.target.value='';});
+  $('removeBgBtn').addEventListener('click',()=>attachBackground(null));
+  bindInputs();
+  for(let b of document.querySelectorAll('[data-color]'))b.addEventListener('click',()=>openColor(b.dataset.color,b));
+  document.querySelectorAll('[data-hex]').forEach(e=>e.addEventListener('change',()=>{let hex=parseHex(e.value);if(hex)applyColor(e.dataset.hex,hex);else syncColorInputs();}));
+  $('closeColor').addEventListener('click',()=>$('colorPopover').classList.add('hidden'));
+  document.addEventListener('pointerdown',e=>{if(!e.target.closest('#colorPopover')&&!e.target.closest('.color-control'))$('colorPopover').classList.add('hidden');});
+  wheel.addEventListener('pointerdown',e=>{let pt=colorPoint(e),rr=Math.hypot(pt.x,pt.y);cp.active=rr>74?'ring':'square';wheel.setPointerCapture(e.pointerId);wheelChange(e);});wheel.addEventListener('pointermove',e=>{if(cp.active)wheelChange(e);});wheel.addEventListener('pointerup',()=>cp.active=null);wheel.addEventListener('pointercancel',()=>cp.active=null);
+  $('nativePicker').addEventListener('input',e=>{Object.assign(cp,hexToHsv(e.target.value));drawColorWheel();applyColor(cp.target,e.target.value);});
+  $('saveProjectBtn').addEventListener('click',saveProject);$('loadProjectBtn').addEventListener('click',()=>$('projectInput').click());$('projectInput').addEventListener('change',async e=>{let f=e.target.files[0];e.target.value='';if(!f)return;const button=$('loadProjectBtn');withProjectButton(button,true,'素材を復元中…');try{await loadProject(JSON.parse(await f.text()));}catch(err){console.error(err);toast('読み込み失敗：'+err.message);}finally{withProjectButton(button,false);}});
+  $('exportSrtBtn').addEventListener('click',exportSRT);
+  $('exportBtn').addEventListener('click',()=>{let n=$('exportAudioName');if(!n.value)n.value=state.audioFile?.name||'your_song.mp3';$('exportAudioPreview').textContent='data/bgm/'+originalName(n.value);$('exportDialog').showModal();});
+  $('exportAudioName').addEventListener('input',e=>$('exportAudioPreview').textContent='data/bgm/'+(e.target.value?originalName(e.target.value):'your_song.mp3'));$('closeExportBtn').addEventListener('click',()=>$('exportDialog').close());$('confirmExportBtn').addEventListener('click',exportZip);
+  $('helpBtn').addEventListener('click',()=>$('helpDialog').showModal());$('closeHelpBtn').addEventListener('click',()=>$('helpDialog').close());
+  document.addEventListener('keydown',e=>{let tag=document.activeElement?.tagName||'';let edit=['INPUT','TEXTAREA','SELECT'].includes(tag)||document.activeElement?.isContentEditable;if(e.ctrlKey&&e.key.toLowerCase()==='s'){e.preventDefault();saveProject();return;}if(edit)return;if(e.code==='Space'){e.preventDefault();playPause();}if(e.key==='ArrowLeft'){e.preventDefault();setTime(state.time-(e.shiftKey?1:.1));}if(e.key==='ArrowRight'){e.preventDefault();setTime(state.time+(e.shiftKey?1:.1));}if(e.key==='Enter'&&!e.repeat){let pending=state.tapLines.findIndex(x=>!x.usedId);if(pending>=0){e.preventDefault();tapLine(pending);}}});
+}
+function init(){initEndrollFontSelects();bindCreditsEvents();bindEndrollEvents();bindEndrollStyleEvents();initEvents();renderFontManager();updateCanvasSize();refreshDuration();renderUI();setActiveTab('cues');requestAnimationFrame(frame);}
+init();
+})();
+
+</script>
+</body></html>
