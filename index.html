@@ -188,40 +188,197 @@
 <dialog id="exportDialog"><form method="dialog" class="modal-inner"><div class="modal-eyebrow">EXPORT / TYRANOBUILDER</div><h2>ゲーム用スクリプトを書き出す</h2><p>プレビューと同じ描画処理をKS内に組み込みます。独立したJSファイルの配置は不要です。</p><label class="form-field">ゲーム内の音声ファイル名（読み込み時の名前を保持）<input id="exportAudioName" type="text" placeholder="morning_song.mp3"></label><label class="check-setting export-check"><input type="checkbox" id="bundleAudio" checked><span class="custom-check"></span><span>読み込んだ音声もZIPに含める</span></label><p class="modal-note"><code>[call storage="choco_start.ks"]</code>で再生できます（歌詞のみ・映像のみでも使用可）。エンドロール・映像は歌詞の音声時計を参照するため二重再生しません。画像・動画素材、音声、追加フォントは読み込み時のファイル名のままZIPに同梱します。</p><div class="export-file-list"><span>data/scenario/choco_start.ks</span><span>data/scenario/choco_quick_test.ks</span><span>data/scenario/lyrics_show.ks</span><span>data/scenario/lyrics_stop.ks</span><span>data/scenario/endroll_show.ks</span><span>data/scenario/endroll_stop.ks</span><span id="exportAudioPreview">data/bgm/your_song.mp3</span><span id="exportMediaPreview" class="hidden"></span><span id="exportFontsPreview" class="hidden"></span><span>README_導入手順.txt</span></div><div class="modal-actions"><button type="button" class="btn ghost" id="closeExportBtn">キャンセル</button><button type="button" class="btn primary" id="confirmExportBtn">ZIPをダウンロード ⇩</button></div></form></dialog>
 <dialog id="helpDialog" aria-labelledby="helpTitle">
   <div class="modal-inner help-inner">
-    <div class="modal-eyebrow">HOW TO USE / TYRANOBUILDER</div>
-    <h2 id="helpTitle">ChocoLyric の使い方</h2>
-    <ol>
-      <li><strong>音声を読み込む：</strong>MP3などを選択します。音声がなくてもSRTの歌詞を編集できます。</li>
-      <li><strong>歌詞のタイミング：</strong>SRTなら開始・終了時刻を自動で設定。TXTなら「タイミング入力」で再生しながら登録します。</li>
-      <li><strong>演出を調整：</strong>歌詞を選び、スライダー・カラーサークル・プレビューから位置や見た目を設定します。</li>
-      <li><strong>フォント：</strong>TTF / OTF / WOFF / WOFF2を読み込めます。ゲーム用ZIPには <code>data/others/font/</code> に同梱します。</li>
-      <li><strong>エンドロール：</strong>カードを追加して、原案・CAST・主題歌などのクレジットを流せます。方向は上向き・下向きから選択できます。</li>
-      <li><strong>エンドロール映像：</strong>画像・動画を追加し、再生時刻に合わせて配置。クロスフェードの有無、動画ごとのループ再生も指定できます。</li>
-      <li><strong>ゲーム用に出力：</strong>「ティラノ用に書き出す」でZIPを保存し、ZIPの <code>data</code> フォルダをゲームプロジェクトへ統合します。</li>
-    </ol>
-    <section class="help-recipe" aria-label="ティラノビルダーへの導入例">
-      <h3>ティラノビルダーでの呼び出し例</h3>
-      <p>ティラノスクリプトコンポーネント（KS）に、必要な場面ごとに以下を記述します。</p>
-      <p><strong>① ゲーム冒頭（任意・1回のみ）</strong></p>
-      <pre><code>[call storage="choco_setup.ks"]</code></pre>
-      <p><strong>② 音楽・歌詞・映像を開始したい場面</strong></p>
-      <pre><code>[call storage="choco_start.ks"]</code></pre>
-      <p><strong>③ 音楽を終了したい別の場面</strong></p>
-      <pre><code>[call storage="choco_stop.ks"]</code></pre>
-      <p><strong>※ ②と③を続けて書くと、即停止します。</strong> <code>[call]</code>は曲の再生終了を待ちません。</p>
-      <p><strong>動作確認には次の1行だけを使用してください。</strong> 初期化・開始・15秒待機・停止まで自動実行します。</p>
-      <pre><code>[call storage="choco_quick_test.ks"]</code></pre>
-      <p>書き出したZIPの <code>data/scenario/</code> に <code>choco_quick_test.ks</code> が入ります。音声は <code>data/bgm/</code> に配置する必要があります。</p>
-      <div class="help-recipe-extra"><strong>個別に再生したい場合</strong>
-        <p>歌詞：<code>[call storage="lyrics_show.ks"]</code> ／ 停止：<code>[call storage="lyrics_stop.ks"]</code></p>
-        <p>エンドロール：<code>[call storage="endroll_show.ks"]</code> ／ 停止：<code>[call storage="endroll_stop.ks"]</code></p>
-        <p>映像：<code>[call storage="credits_show.ks"]</code> ／ 停止：<code>[call storage="credits_stop.ks"]</code></p>
-        <p>歌詞の再生中に <code>credits_show.ks</code> を呼ぶと、同じ音声に同期して映像を重ねられます。</p>
+    <header class="help-head">
+      <div class="help-heading-block">
+        <span class="modal-eyebrow">USER GUIDE / CHOCOLYRIC STUDIO v2.9</span>
+        <h2 id="helpTitle">操作マニュアル <small>はじめての方にもわかる使い方</small></h2>
+        <p>歌詞・エンドロール・映像を、ゲームの音楽に合わせて制作するためのガイドです。</p>
       </div>
-    </section>
-    <p>プロジェクトJSON（v2.4以降）は音声・画像・動画・フォント・プレビュー背景を含めて1ファイルで保存でき、次回も自動復元します。素材が多い場合、Base64化によりファイル容量が約33%増えます。旧バージョンのJSONは素材を含まないため再選択が必要です。フォント・映像素材の再配布条件も確認してください。</p>
-    <p class="help-nonofficial"><strong>非公式ツールについて：</strong>ChocoLyric Studioはティラノビルダー／ティラノスクリプトの公式製品ではない、独立した制作補助アプリです。ティラノ公式開発者のメール・SNSは本アプリの問い合わせ先ではありません。</p>
-    <button class="btn primary" id="closeHelpBtn">閉じる</button>
+      <button type="button" class="help-close" id="closeHelpBtn" aria-label="マニュアルを閉じる" title="閉じる">×</button>
+    </header>
+    <div class="help-searchbar">
+      <label class="help-searchbox" for="helpSearch"><span aria-hidden="true">⌕</span><input id="helpSearch" type="search" placeholder="マニュアル内を検索（例：SRT、クロスフェード、ZIP）" autocomplete="off"><span class="help-search-shortcut">キーワード検索</span></label>
+      <button type="button" id="helpClearSearch" class="help-reset">クリア</button>
+      <span id="helpSearchStatus" class="help-search-status" aria-live="polite"></span>
+    </div>
+    <div class="help-layout">
+      <nav class="help-toc" aria-label="マニュアルの目次">
+        <div class="help-toc-title">目次 <span>CONTENTS</span></div>
+        <button type="button" class="help-toc-link active" data-help-target="help-overview"><span>01</span>まずはここから</button>
+        <button type="button" class="help-toc-link" data-help-target="help-layout"><span>02</span>画面の見方</button>
+        <button type="button" class="help-toc-link" data-help-target="help-import"><span>03</span>音声と歌詞の読み込み</button>
+        <button type="button" class="help-toc-link" data-help-target="help-timing"><span>04</span>歌詞の時間を合わせる</button>
+        <button type="button" class="help-toc-link" data-help-target="help-style"><span>05</span>歌詞の見た目と動き</button>
+        <button type="button" class="help-toc-link" data-help-target="help-endroll"><span>06</span>エンドロールを作る</button>
+        <button type="button" class="help-toc-link" data-help-target="help-video"><span>07</span>画像・動画を配置する</button>
+        <button type="button" class="help-toc-link" data-help-target="help-preview"><span>08</span>プレビューと再生操作</button>
+        <button type="button" class="help-toc-link" data-help-target="help-project"><span>09</span>保存と復元</button>
+        <button type="button" class="help-toc-link" data-help-target="help-export"><span>10</span>ゲーム用ZIPを書き出す</button>
+        <button type="button" class="help-toc-link" data-help-target="help-tyrano"><span>11</span>ティラノビルダーに導入</button>
+        <button type="button" class="help-toc-link" data-help-target="help-trouble"><span>12</span>よくある困りごと</button>
+        <button type="button" class="help-toc-link" data-help-target="help-cautions"><span>13</span>ご利用上の注意</button>
+      </nav>
+      <div class="help-article" id="helpArticle" tabindex="0" aria-label="マニュアル本文">
+        <section id="help-overview" class="help-section">
+          <span class="help-chapter">CHAPTER 01 / START HERE</span>
+          <h3>まずはここから <em>─ 5ステップで完成</em></h3>
+          <p>ChocoLyric Studio は、<strong>歌詞の字幕演出・流れるエンドロール・エンドロール用の画像／動画</strong>を、1曲の再生時刻に合わせて作れるブラウザアプリです。編集したものはティラノビルダー／ティラノスクリプトで使えるファイルとして書き出せます。</p>
+          <div class="help-steps">
+            <div><b>1</b><span><strong>音楽を読み込む</strong><small>左の「音声ファイルを選ぶ」から曲を選択します。</small></span></div>
+            <div><b>2</b><span><strong>演出を追加する</strong><small>SRT／TXTの歌詞、エンドロールカード、画像・動画のいずれかを追加します。</small></span></div>
+            <div><b>3</b><span><strong>タイミングと見た目を編集する</strong><small>中央で再生しながら、右パネルで時間・位置・色などを調整します。</small></span></div>
+            <div><b>4</b><span><strong>素材込みJSONを保存する</strong><small>後から編集できるよう、制作データをバックアップします。</small></span></div>
+            <div><b>5</b><span><strong>ゲーム用ZIPを書き出す</strong><small>ZIPの <code>data</code> フォルダをゲームに統合して KS から呼び出します。</small></span></div>
+          </div>
+          <div class="help-note"><strong>最初に知っておきたいこと</strong><p>3つの制作モードは同じ音声を共有します。すべて使う必要はありません。「歌詞だけ」「エンドロールだけ」「映像だけ」でも制作できます。起動時には見本素材が入っていないため、使用したいファイルを読み込んでください。</p></div>
+        </section>
+        <section id="help-layout" class="help-section">
+          <span class="help-chapter">CHAPTER 02 / WORKSPACE</span>
+          <h3>画面の見方</h3>
+          <div class="help-mini-grid">
+            <div><strong>① 画面上部</strong><p>「使い方」「プロジェクトを開く」「素材込みJSON保存」「ティラノ用に書き出す」があります。</p></div>
+            <div><strong>② 制作モードのタブ</strong><p>「歌詞・SRT演出」「エンドロール」「エンドロール映像」を切り替えます。切り替えても同じプロジェクト内のデータを編集できます。</p></div>
+            <div><strong>③ 左パネル</strong><p>音声・字幕・画像／動画素材を読み込み、歌詞やカード、映像クリップを一覧管理します。</p></div>
+            <div><strong>④ 中央パネル</strong><p>実際の画面サイズで演出を確認し、音楽を再生したりタイムラインで時刻を移動したりします。</p></div>
+            <div><strong>⑤ 右パネル</strong><p>選択中の歌詞・エンドロール・映像の内容、タイミング、色やアニメーションを設定します。</p></div>
+          </div>
+          <p>項目を編集すると中央プレビューに反映されます。まずは左で対象を選択し、右で設定する流れを覚えるとスムーズです。</p>
+        </section>
+        <section id="help-import" class="help-section">
+          <span class="help-chapter">CHAPTER 03 / IMPORT</span>
+          <h3>音声と歌詞を読み込む</h3>
+          <h4>音声ファイルの読み込み</h4>
+          <ol><li>左上の「音声ファイルを選ぶ」を押すか、その枠へ音声ファイルをドラッグします。</li><li>MP3 / OGG / M4A / WAV などの音声ファイルを指定します。</li><li>中央の再生ボタンで曲が流れることを確認します。</li></ol>
+          <p>歌詞の時間を正確に合わせたい場合は、先に音声を読み込むのがおすすめです。音声がなくても、仮のタイムラインで歌詞などの編集はできます。</p>
+          <h4>SRTで歌詞を読み込む（時刻設定済みの場合）</h4>
+          <p>「SRTを読み込む」を押すと、字幕に書かれた<strong>開始・終了時刻と歌詞本文</strong>が自動で取り込まれます。</p>
+          <pre><code>1
+00:00:03,000 --> 00:00:05,500
+一行目の歌詞
+
+2
+00:00:05,500 --> 00:00:08,000
+二行目の歌詞</code></pre>
+          <p>上のように、字幕番号・表示時間・本文をまとめたテキストがSRTです。すでにタイミングを作ってある場合に向いています。</p>
+          <h4>TXTで歌詞を読み込む（これから時刻を付ける場合）</h4>
+          <ol><li>1行ずつ歌詞を書いた <code>.txt</code> ファイルを用意します。</li><li>「歌詞TXTを読み込む」を押します。</li><li>左の「タイミング入力」に、まだ時刻を付けていない歌詞が並びます。</li><li>曲を流しながら、歌が始まる位置で各行をクリックします。</li></ol>
+          <div class="help-tip"><strong>使い分けの目安</strong><p>SRTは「時刻ごと取り込む」、TXTは「歌詞だけ取り込んで、あとからタイミングを付ける」形式です。</p></div>
+        </section>
+        <section id="help-timing" class="help-section">
+          <span class="help-chapter">CHAPTER 04 / LYRIC TIMING</span>
+          <h3>歌詞の表示タイミングを合わせる</h3>
+          <h4>TXTを再生しながら配置する</h4>
+          <ol><li>上部タブで「歌詞・SRT演出」を選びます。</li><li>左の「タイミング入力」を開き、中央で音声を再生します。</li><li>歌が始まる瞬間に歌詞行をクリックすると、その位置に歌詞が配置されます。<strong>Enter</strong> キーで次の未配置行を追加することもできます（文字入力欄にカーソルがないとき）。</li><li>間違えた場合は配置済みの行をもう一度押して解除し、やり直せます。</li></ol>
+          <h4>1フレーズずつ細かく編集する</h4>
+          <ol><li>左の「配置済みの歌詞」から変更したい行を選びます。</li><li>右上で本文を編集し、「開始（秒）」「終了（秒）」を数値で調整します。</li><li>再生位置を合わせて「現在位置 → 開始／終了」または中央の「IN／OUT を現在位置に」を押して、現在時刻を入力することもできます。</li><li>左の <strong>＋</strong> は歌詞追加、<strong>⧉</strong> は複製、<strong>×</strong> は削除です。</li></ol>
+          <p>開始は歌詞が現れる時間、終了は消える時間です。例えば <strong>開始 3.00 秒／終了 5.50 秒</strong> なら、その2.5秒間表示されます。</p>
+          <div class="help-tip"><strong>SRTを書き戻したいとき</strong><p>左下の「SRT保存」で現在の歌詞とタイミングをSRTファイルに出力できます。ゲーム用ZIPとは別の機能です。</p></div>
+        </section>
+        <section id="help-style" class="help-section">
+          <span class="help-chapter">CHAPTER 05 / LYRIC STYLING</span>
+          <h3>歌詞の見た目と動きを設定する</h3>
+          <h4>位置・文字・色</h4>
+          <p>左の歌詞一覧で1行選ぶと、右側の「歌詞の演出を調整」が編集できます。<strong>横位置 X／縦位置 Y</strong> はスライダーのほか、中央のプレビューをクリック・ドラッグして位置を決められます。</p>
+          <p>フォント・太さ・サイズ・左／中央／右揃え・字間・文字色を調整できます。色見本のボタンからカラーサークルを開くか、HEXコードを直接指定してください。</p>
+          <h4>フォントを追加する</h4>
+          <p>「フォントファイルを追加」から <code>TTF</code> / <code>OTF</code> / <code>WOFF</code> / <code>WOFF2</code> を読み込むと、フォント一覧で選べます。ゲーム用ZIPでは <code>data/others/font/</code> へ同梱されます。「フォントのみZIPで保存」は素材の控えとして使えます。</p>
+          <h4>装飾とアニメーション</h4>
+          <ul><li><strong>縁取り・影：</strong>縁取りのON/OFF、縁色と太さ、ドロップシャドウを設定。</li><li><strong>動きの種類：</strong>静止、タイプライター、ジャンプ、ウェーブ、スライド、ズームなどを選択。</li><li><strong>速度・大きさ：</strong>動きの速さと変化量をスライダーで調整。</li><li><strong>フェード：</strong>フェードイン／アウトを個別にONにし、秒数を指定。</li></ul>
+          <p>同じデザインをほかの行にも使う場合は、<strong>「この見た目・位置をすべての歌詞に適用」</strong>を押します。各歌詞の文章と表示時間はそのままで、見た目の設定を統一できます。</p>
+          <div class="help-note"><strong>「プレビュー背景」は編集用です</strong><p>プレビューの背景色や追加した背景画像は位置合わせのためのもので、ゲーム用演出には書き出されません。ゲーム本編の背景はティラノ側で用意してください。</p></div>
+        </section>
+        <section id="help-endroll" class="help-section">
+          <span class="help-chapter">CHAPTER 06 / END CREDITS</span>
+          <h3>流れるエンドロールを作る</h3>
+          <h4>カードを追加・編集する</h4>
+          <ol><li>上部の「エンドロール」タブを選びます。</li><li>左の「追加する項目」で「原案」「シナリオ」「声優」「BGM」「主題歌」「任意」などを選択します。</li><li>右上の <strong>＋</strong> でカードを追加します。</li><li>左のカードを選択し、右の「選択中のカード」で見出しや名前を入力します。</li><li><strong>⧉</strong> で複製、<strong>×</strong> で削除できます。</li></ol>
+          <p>通常の項目は<strong>1行に1名ずつ、改行で複数名</strong>を入力できます。「声優」はキャラ名と声優名を組み合わせる配役欄、「BGM」「主題歌」は作曲・編曲・歌唱などの専用項目を編集できます。入力欄内の薄い文字は記入例で、実際の出力には入りません。</p>
+          <h4>流れる時間と方向を決める</h4>
+          <p>右の「再生区間」で開始・終了秒を設定すると、その区間の中でクレジット全体が一定速度でスクロールします。「流れる方向」は<strong>下から上／上から下</strong>を選択できます。長いエンドロールは再生区間を広げると読みやすくなります。</p>
+          <h4>横位置と文字揃え</h4>
+          <p>「エンドロールの横位置」は画面幅の <strong>0%（左）〜100%（右）</strong>で指定し、「左寄せ／中央／右寄せ」で位置と揃え方をまとめて設定できます。「文字の揃え方」は別々に指定することもできます。</p>
+          <p>「本文だけの横位置」は<strong>見出しを動かさずにクレジット名だけ</strong>を左右へずらす機能です（−40%〜＋40%）。「本文位置をリセット」で0%に戻ります。</p>
+          <h4>文字デザイン・背景パネル</h4>
+          <ul><li>【 】で囲まれる<strong>見出し</strong>と、<strong>本文・クレジット名</strong>のフォント、サイズ、文字色、縁取りをそれぞれ設定できます。</li><li>「見出しと本文の設定を一括調整」をONにすると、見出しの変更を本文にも反映できます。</li><li>「角丸の背景パネルを表示する」をONにすると、パネル色と不透明度を調整できます。</li></ul>
+        </section>
+        <section id="help-video" class="help-section">
+          <span class="help-chapter">CHAPTER 07 / VISUAL TIMELINE</span>
+          <h3>エンドロール用の画像・動画を配置する</h3>
+          <ol><li>上部の「エンドロール映像」タブを開きます。</li><li>左の「画像・動画を読み込む」で <strong>PNG / JPG / WEBP / GIF / MP4 / WEBM</strong> などを複数読み込みます。</li><li>中央のタイムラインをクリックして、画像を表示したい時刻へ移動します。</li><li>左の素材一覧で <strong>＋</strong> を押すと、その時刻に映像クリップが追加されます。</li><li>左の「映像タイムライン」からクリップを選び、右の開始・終了秒を調整します。</li></ol>
+          <h4>切り替えと表示方法</h4>
+          <ul><li><strong>次の素材への切り替えまで表示：</strong>次のクリップが始まるまで現在の素材を保持します。最後の素材は終了時刻も確認してください。</li><li><strong>クロスフェードで切り替える：</strong>ONなら重なりながら切り替え、OFFなら瞬時に切り替えます。「切り替え時間」でフェードの長さを指定できます。</li><li><strong>画面への配置：</strong>「画面を埋める」は中央トリミング、「画像全体を表示」は余白を許して全体を表示します。</li><li><strong>動画をループ再生する：</strong>動画クリップを選んだときだけ表示。ONは表示区間中に反復、OFFは終了後に最後のフレームを保持します。</li></ul>
+          <p>素材一覧の <strong>×</strong> は素材の削除、クリップ一覧の <strong>⧉</strong> はクリップの複製です。動画内の音声はミュートされ、読み込んだ楽曲の再生時刻に同期します。</p>
+          <div class="help-tip"><strong>歌詞を映像に重ねたいとき</strong><p>プレビューの「歌詞も重ねる」をONにしてください。ゲームでの前面表示順は <strong>歌詞 → エンドロール → 映像</strong> です。</p></div>
+        </section>
+        <section id="help-preview" class="help-section">
+          <span class="help-chapter">CHAPTER 08 / PREVIEW &amp; KEYS</span>
+          <h3>プレビューと再生操作</h3>
+          <h4>ゲーム画面のサイズを合わせる</h4>
+          <p>中央上部「ゲーム画面」から、<strong>1920×1080 / 1280×720 / 4:3</strong>などを選択できます。「カスタムサイズ」では横幅と高さを指定できます。ゲーム本体の画面解像度と合わせてください。サイズの切り替えに応じて歌詞の位置やサイズも再計算されます。</p>
+          <h4>再生・停止位置の操作</h4>
+          <p>中央の <strong>▶</strong> は再生／一時停止です。「−1s」「＋1s」は1秒移動、「‹」「›」は0.1秒移動です。タイムラインの空き部分をクリック・ドラッグして目的の時刻へ移動できます。「ループ」はプレビューの繰り返し再生です。</p>
+          <table class="help-key-table"><thead><tr><th>キー</th><th>動作</th></tr></thead><tbody><tr><td><kbd>Space</kbd></td><td>再生／一時停止</td></tr><tr><td><kbd>←</kbd> / <kbd>→</kbd></td><td>0.1秒戻る／進む</td></tr><tr><td><kbd>Shift</kbd>＋<kbd>←</kbd> / <kbd>→</kbd></td><td>1秒戻る／進む</td></tr><tr><td><kbd>Enter</kbd></td><td>TXTから次の未配置歌詞を配置</td></tr><tr><td><kbd>Ctrl</kbd>＋<kbd>S</kbd></td><td>素材込みJSON保存</td></tr></tbody></table>
+          <p class="help-small">※ 文字入力欄やプルダウンで入力している間は、再生などのショートカットは働きません。マニュアル表示中もショートカットは無効です。</p>
+          <p>歌詞モードの「選択中を常時表示」は、指定した表示時間外でも選択中の歌詞を確認するための編集補助です。</p>
+        </section>
+        <section id="help-project" class="help-section">
+          <span class="help-chapter">CHAPTER 09 / SAVE &amp; LOAD</span>
+          <h3>作業データの保存と復元</h3>
+          <h4>編集を続けたい場合はJSONを保存</h4>
+          <ol><li>画面右上の<strong>「素材込みJSON保存」</strong>を押します。</li><li><code>chocolyric_project_full.json</code> がダウンロードされます。</li><li>後日、右上の<strong>「プロジェクトを開く」</strong>から保存したJSONを読み込めば、編集状態を復元できます。</li></ol>
+          <p>現行形式のJSONには歌詞・タイミング・設定だけでなく、読み込んだ<strong>音声、画像、動画、追加フォント、プレビュー背景</strong>のデータも含まれます。通常は同じファイルを読み込み直す必要はありません。</p>
+          <div class="help-note"><strong>JSONとゲーム用ZIPは役割が違います</strong><p><strong>JSON：</strong>編集を再開するための保存データ。<br><strong>ティラノ用ZIP：</strong>ゲームに組み込むためのKSファイルと素材。<br>作業を失わないため、書き出す前にJSONも保存することをおすすめします。</p></div>
+          <p>大きな動画などを含むJSONは、Base64化により素材の合計サイズより約33%大きくなることがあります。容量やブラウザのメモリに注意してください。古い形式のJSONでは素材を再選択する必要がある場合があります。</p>
+        </section>
+        <section id="help-export" class="help-section">
+          <span class="help-chapter">CHAPTER 10 / EXPORT</span>
+          <h3>ゲーム用ZIPを書き出す</h3>
+          <ol><li>歌詞・エンドロール・映像のうち、少なくとも1つを用意します。</li><li>画面右上の<strong>「ティラノ用に書き出す」</strong>を押します。</li><li>使用する<strong>ゲーム内の音声ファイル名</strong>を確認します。読み込んだ音声があれば元のファイル名が使われます。</li><li>音声もZIPへ入れる場合は<strong>「読み込んだ音声もZIPに含める」</strong>をONにします。</li><li><strong>「ZIPをダウンロード」</strong>を押します。</li></ol>
+          <h4>ZIPに入るもの</h4>
+          <div class="help-file-tree"><code>data/<br>├─ scenario/　… 再生・停止のKSファイル<br>├─ bgm/　　　 … 音声（同梱した場合）<br>├─ fgimage/　　… 使用する画像<br>├─ video/　　　… 使用する動画<br>└─ others/font/ … 追加フォント<br><br>README_導入手順.txt　… ゲームへの導入方法</code></div>
+          <p>歌詞SRT・エンドロールや映像のタイムライン情報も、作成した内容に応じて付属します。使っていない制作モードの専用ファイルは生成されない場合があります。KSには必要な描画処理が含まれており、別途JSファイルを作る必要はありません。</p>
+          <div class="help-note"><strong>音声を同梱しない場合</strong><p>同梱チェックをOFFにしたときは、指定した音声ファイルを自分でゲームプロジェクトの <code>data/bgm/</code> に配置してください。読み込んだ音声がないまま同梱ONで書き出すことはできません。</p></div>
+        </section>
+        <section id="help-tyrano" class="help-section">
+          <span class="help-chapter">CHAPTER 11 / TYRANOBUILDER</span>
+          <h3>ティラノビルダーへの導入方法</h3>
+          <ol><li>ゲーム用ZIPを解凍します。</li><li>ZIP内の <code>data</code> フォルダの内容を、制作中ゲームの <code>data</code> フォルダに<strong>統合</strong>します。既存のゲームのフォルダを丸ごと削除・置き換えないでください。</li><li>ティラノビルダーで、演出を開始したい場面に「ティラノスクリプト」コンポーネントを置き、次のKSを書きます。</li></ol>
+          <p><strong>ゲーム開始時の初期化（任意）</strong></p>
+          <pre><code>[call storage="choco_setup.ks"]</code></pre>
+          <p><strong>歌詞・エンドロール・映像をまとめて開始</strong></p>
+          <pre><code>[call storage="choco_start.ks"]</code></pre>
+          <p><strong>別の場面でまとめて終了</strong></p>
+          <pre><code>[call storage="choco_stop.ks"]</code></pre>
+          <div class="help-warning"><strong>重要：開始と停止を続けて書かないでください</strong><p><code>[call]</code> は曲の終了を待ちません。開始の直後に停止を書くと、音が流れる前に演出が止まります。停止は終了させたい別の場面へ記述してください。</p></div>
+          <h4>最初の動作確認はこの1行</h4>
+          <pre><code>[call storage="choco_quick_test.ks"]</code></pre>
+          <p>この1行で、初期化 → 開始 → <strong>15秒待機</strong> → 停止を順に実行できます。まずこちらで組み込みを確認する方法がおすすめです。</p>
+          <h4>一部だけ表示したい場合</h4>
+          <table class="help-key-table"><thead><tr><th>用途</th><th>開始／停止用KS</th></tr></thead><tbody><tr><td>歌詞</td><td><code>lyrics_show.ks</code> ／ <code>lyrics_stop.ks</code></td></tr><tr><td>エンドロール</td><td><code>endroll_show.ks</code> ／ <code>endroll_stop.ks</code></td></tr><tr><td>画像・動画</td><td><code>credits_show.ks</code> ／ <code>credits_stop.ks</code></td></tr></tbody></table>
+          <p>例えば途中から映像だけ加えたいときは、歌詞を <code>[call storage="lyrics_show.ks"]</code> で開始した後、別のタイミングで <code>[call storage="credits_show.ks"]</code> を呼び出せます。各モードは同じ音声時計に同期するため、同じ楽曲を複数再生する必要はありません。</p>
+        </section>
+        <section id="help-trouble" class="help-section">
+          <span class="help-chapter">CHAPTER 12 / TROUBLESHOOTING</span>
+          <h3>よくある困りごと</h3>
+          <div class="help-faq"><h4>Q. 音が出ない／ゲーム上で再生できない</h4><p>音声ファイルが <code>data/bgm/</code> にあり、ZIP書き出し時のファイル名と一致するか確認してください。ブラウザや実行環境によっては、最初のクリック操作があるまで音声が再生できない場合があります。</p></div>
+          <div class="help-faq"><h4>Q. 歌詞が表示されない</h4><p>歌詞が配置されているか、各行の開始・終了秒が合っているかを確認してください。ゲームとプレビューの画面解像度も合わせます。「選択中を常時表示」はプレビュー用の補助設定です。</p></div>
+          <div class="help-faq"><h4>Q. SRT／TXTを読み込んだのに時刻が合わない</h4><p>SRTの時間表記、終了時刻が開始時刻より後かどうかを確認します。TXTは自動で時刻を割り当てないため、「タイミング入力」から配置してください。</p></div>
+          <div class="help-faq"><h4>Q. フォントが変わらない／ZIPを書き出せない</h4><p>右のフォント選択が読み込んだものになっているか確認してください。古いJSONで「再読み込みが必要」と表示された場合は、元のフォントファイルを再登録してください。ゲームへのフォント同梱の許諾も確認してください。</p></div>
+          <div class="help-faq"><h4>Q. 画像・動画が表示されない</h4><p>素材を読み込んだだけでなく、時刻を決めて映像クリップを追加したか確認してください。クリップの表示区間、配置方法、「次の素材への切り替えまで表示」も確認します。動画の対応コーデックはゲーム実行環境に依存します。</p></div>
+          <div class="help-faq"><h4>Q. 音楽が二重に鳴る</h4><p>ChocoLyricのKSとは別に、同じ音楽を <code>[playbgm]</code> などで再生していないか確認してください。ChocoLyric側で再生する場合、同じ曲を別途流す必要はありません。</p></div>
+          <div class="help-faq"><h4>Q. 保存したJSONが大きい／開けない</h4><p>動画などの素材も保存するためサイズが大きくなります。ブラウザの空きメモリを確保してください。旧形式のJSONでは素材の再選択が必要になる場合があります。制作中はJSONを別の場所にも控えておくと安全です。</p></div>
+          <div class="help-faq"><h4>Q. プレビューの背景がゲームで出てこない</h4><p>「プレビュー背景」は編集補助です。ゲーム画面の背景はティラノビルダー側で別に設定してください。</p></div>
+        </section>
+        <section id="help-cautions" class="help-section">
+          <span class="help-chapter">CHAPTER 13 / NOTES</span>
+          <h3>ご利用上の注意</h3>
+          <ul><li>本アプリはブラウザ内で動作します。<strong>Chrome / Edge</strong> などで <code>index.html</code> を開いて利用できます。通常の編集はネット接続なしで行えます。</li><li>画像、動画、音声、フォントをゲームに同梱・配布する場合は、それぞれの素材の利用条件を確認してください。</li><li>動画の対応形式、文字の描画、音声の自動再生制限などは、OS・ブラウザ・ティラノビルダー側の実行環境によって違いがあります。完成したゲーム上で必ず動作確認してください。</li><li>ゲームのセーブ／ロード、シナリオジャンプ、他の画面演出と重ねる場合も、実機で最終確認してください。</li></ul>
+          <p class="help-nonofficial"><strong>非公式ツールについて：</strong>ChocoLyric Studioはティラノビルダー／ティラノスクリプトの公式製品ではない、独立した制作補助アプリです。ティラノ公式開発者のメール・SNSは本アプリの問い合わせ先ではありません。</p>
+        </section>
+        <p class="help-no-results hidden" id="helpNoResults">該当する項目が見つかりませんでした。別のキーワードでお試しください。</p>
+        <footer class="help-bottom"><span>CHOCO LYRIC STUDIO · USER GUIDE v2.9</span><button type="button" id="closeHelpBtnBottom" class="btn primary">マニュアルを閉じる</button></footer>
+      </div>
+    </div>
   </div>
 </dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>

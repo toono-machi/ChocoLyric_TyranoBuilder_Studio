@@ -121,3 +121,78 @@ dialog{border:1px solid #e2d1bb;border-radius:17px;padding:0;max-width:min(500px
 #endrollBodyOffsetX{display:block;width:100%;margin:15px 0 7px;accent-color:#95684a}
 .endroll-offset-reset{display:block;margin:12px 0 0 auto}
 .endroll-body-position .microcopy{margin:10px 0 0}
+
+/* v2.9: full, beginner-friendly in-app user manual */
+#helpDialog{width:min(1130px,96vw);max-width:min(1130px,96vw);height:min(900px,92vh);height:min(900px,92dvh);max-height:92vh;max-height:92dvh;overflow:hidden;border-radius:18px}
+#helpDialog .help-inner{height:100%;padding:0;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+#helpDialog .help-head{background:#fffaf1;padding:22px 27px 19px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;border-bottom:1px solid #ebddcd;flex:none}
+#helpDialog .help-heading-block{min-width:0}
+#helpDialog .help-head h2{margin:8px 0 5px;font-size:25px;color:#56392d;line-height:1.35}
+#helpDialog .help-head h2 small{font-size:12px;font-weight:500;color:#947961;display:inline-block;margin-left:9px}
+#helpDialog .help-head p{font-size:12px;color:#826d5c;margin:5px 0 0}
+#helpDialog .help-close{display:grid;place-items:center;margin:0;border:1px solid #e4d4be;background:#f8efe2;border-radius:10px;width:37px;height:37px;font-size:24px;color:#6d4e3b;flex:none}
+#helpDialog .help-close:hover{background:#f0e1cd}
+#helpDialog .help-searchbar{display:flex;align-items:center;gap:11px;background:#fffdf8;border-bottom:1px solid #eaded0;padding:11px 27px;flex:none}
+#helpDialog .help-searchbox{display:flex;gap:10px;align-items:center;flex:1;min-width:0;border:1px solid #e4d5c1;border-radius:10px;padding:0 13px;background:#fff}
+#helpDialog .help-searchbox>span:first-child{font-size:24px;color:#a88062}
+#helpDialog #helpSearch{width:100%;height:38px;border:0;outline:0;min-width:0;font-size:12px;background:transparent;color:#50382c}
+#helpDialog #helpSearch::placeholder{color:#aa9786}
+#helpDialog .help-search-shortcut{font-size:10px;color:#b09e8c;white-space:nowrap}
+#helpDialog .help-reset{border:1px solid #dfcbb3;background:#f8f0e4;border-radius:8px;padding:10px 13px;font-size:11px;font-weight:750;color:#815e48;margin:0}
+#helpDialog .help-search-status{font-size:11px;color:#927963;min-width:65px;text-align:right}
+#helpDialog .help-layout{display:grid;grid-template-columns:232px minmax(0,1fr);flex:1;min-height:0;overflow:hidden}
+#helpDialog .help-toc{background:#f7efe2;border-right:1px solid #e8d8c3;padding:23px 12px 22px;overflow-y:auto;scrollbar-width:thin}
+#helpDialog .help-toc-title{font-size:13px;font-weight:850;color:#654735;padding:0 13px 15px}
+#helpDialog .help-toc-title span{font:800 9px Arial,sans-serif;letter-spacing:1.4px;color:#b39475;margin-left:7px}
+#helpDialog .help-toc-link{display:flex;align-items:center;width:100%;gap:10px;margin:0 0 4px;padding:11px 10px;text-align:left;border:1px solid transparent;background:transparent;color:#856b57;border-radius:8px;font-size:11px;font-weight:700;line-height:1.5}
+#helpDialog .help-toc-link>span{font:800 10px Georgia,serif;color:#b89b7c;min-width:19px}
+#helpDialog .help-toc-link:hover{background:#f0e4d3}
+#helpDialog .help-toc-link.active{background:#fff9ed;border-color:#e4d1bb;color:#5a382a;box-shadow:inset 3px 0 #976746}
+#helpDialog .help-article{overflow-y:auto;min-height:0;background:#fffdf9;padding:4px 38px 26px;scrollbar-color:#d3bca6 transparent;scrollbar-width:thin;outline-offset:-5px}
+#helpDialog .help-section{padding:30px 0 31px;border-bottom:1px solid #e9dccb;scroll-margin-top:18px}
+#helpDialog .help-chapter{font:850 10px Arial,sans-serif;letter-spacing:2px;color:#a87e5b}
+#helpDialog .help-section h3{font-size:21px;color:#573b2b;line-height:1.45;margin:8px 0 17px;letter-spacing:.02em;border-left:4px solid #b88a60;padding-left:13px}
+#helpDialog .help-section h3 em{font-style:normal;font-size:11px;color:#a08a75;font-weight:600}
+#helpDialog .help-section h4{font-size:14px;line-height:1.5;color:#775039;margin:22px 0 9px;padding:0 0 6px;border-bottom:1px dashed #e8d7c2}
+#helpDialog .help-section p,#helpDialog .help-section li{font-size:12px;color:#6c5747;line-height:1.95}
+#helpDialog .help-section p{margin:9px 0 13px}
+#helpDialog .help-section ol,#helpDialog .help-section ul{margin:9px 0 16px;padding-left:23px}
+#helpDialog .help-section li{margin-bottom:7px;padding-left:3px}
+#helpDialog .help-section strong{color:#563b2d}
+#helpDialog .help-section code{border:0;background:#f3e7d6;border-radius:4px;color:#6d422d;padding:2px 5px;overflow-wrap:anywhere;font-size:11px}
+#helpDialog .help-section pre{background:#39271f;border:1px solid #53372a;color:#ffefd6;padding:16px 18px;border-radius:10px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;overflow-x:auto;font:12px/1.85 ui-monospace,SFMono-Regular,Consolas,monospace;margin:12px 0}
+#helpDialog .help-section pre code{font:inherit;line-height:inherit;color:inherit;background:none;padding:0}
+#helpDialog .help-steps{display:grid;gap:10px;margin:20px 0}
+#helpDialog .help-steps>div{display:flex;gap:14px;padding:14px;background:#fbf4e8;border:1px solid #ebddc8;border-radius:11px;align-items:center}
+#helpDialog .help-steps b{display:grid;place-items:center;min-width:32px;height:32px;background:#6a4434;color:#fff9ed;border-radius:50%;font:800 14px Georgia,serif}
+#helpDialog .help-steps span{display:flex;flex-direction:column;gap:3px}
+#helpDialog .help-steps small{font-size:11px;line-height:1.6;color:#947d68}
+#helpDialog .help-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+#helpDialog .help-mini-grid>div{background:#fcf7ee;border:1px solid #ebe0d0;border-radius:10px;padding:15px 16px}
+#helpDialog .help-mini-grid strong{font-size:12px}
+#helpDialog .help-mini-grid p{margin:6px 0 0;font-size:11px;line-height:1.7}
+#helpDialog .help-note,#helpDialog .help-tip,#helpDialog .help-warning{border-radius:10px;padding:15px 18px;margin:18px 0;background:#f6eee2;border-left:4px solid #9b7454}
+#helpDialog .help-note strong,#helpDialog .help-tip strong,#helpDialog .help-warning strong{font-size:12px}
+#helpDialog .help-note p,#helpDialog .help-tip p,#helpDialog .help-warning p{margin:5px 0 0;font-size:11.5px}
+#helpDialog .help-tip{background:#f8f4eb;border-left-color:#9c9b72}
+#helpDialog .help-warning{background:#fff2e8;border-left-color:#b97859}
+#helpDialog .help-file-tree{background:#faf3e7;border:1px solid #e8d5bc;padding:17px;border-radius:9px;line-height:2;white-space:normal;overflow:auto}
+#helpDialog .help-file-tree code{font:12px/2 ui-monospace,Consolas,monospace;background:transparent;color:#604737;padding:0}
+#helpDialog .help-key-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:11px;table-layout:auto}
+#helpDialog .help-key-table th{background:#eee0ce;text-align:left;color:#553c2c;font-weight:800}
+#helpDialog .help-key-table td,#helpDialog .help-key-table th{border:1px solid #e8d7c0;padding:10px 12px;line-height:1.65;vertical-align:top}
+#helpDialog .help-key-table td{color:#6d5847}
+#helpDialog kbd{font:700 10px ui-monospace,Consolas,monospace;background:#f5eada;border:1px solid #e1cab0;border-bottom-width:2px;padding:2px 5px;border-radius:4px;color:#69492f;white-space:nowrap}
+#helpDialog .help-section .help-small{font-size:10.5px;color:#927d6b}
+#helpDialog .help-faq{padding:12px 0 14px;border-bottom:1px dashed #e6d9c8}
+#helpDialog .help-faq:last-child{border-bottom:0}
+#helpDialog .help-faq h4{margin:3px 0 6px;border:0;color:#77513b;font-size:13px;padding:0}
+#helpDialog .help-faq p{margin:0;font-size:11.5px}
+#helpDialog .help-nonofficial{margin-top:18px;padding:13px 15px;background:#f6ede1;border-left:3px solid #ad805d;color:#785f4c;border-radius:6px}
+#helpDialog .help-no-results{text-align:center;padding:70px 15px;color:#9d866e;font-size:13px}
+#helpDialog .help-bottom{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:28px 0 0}
+#helpDialog .help-bottom span{font:800 9px Arial,sans-serif;letter-spacing:1.4px;color:#a9937d}
+#helpDialog .help-bottom button{margin:0}
+@media(max-width:770px){#helpDialog{width:96vw;max-width:96vw;height:94dvh;max-height:94dvh}#helpDialog .help-head{padding:17px 18px}#helpDialog .help-head h2{font-size:20px}#helpDialog .help-head h2 small{display:block;margin:3px 0 0}#helpDialog .help-searchbar{padding:9px 15px;gap:7px}#helpDialog .help-search-shortcut{display:none}#helpDialog .help-search-status{display:none}#helpDialog .help-layout{display:flex;flex-direction:column}#helpDialog .help-toc{display:flex;align-items:center;gap:6px;padding:10px 12px;border-right:0;border-bottom:1px solid #e8d8c3;overflow-x:auto;overflow-y:hidden;flex:none;scrollbar-width:thin}#helpDialog .help-toc-title{white-space:nowrap;padding:0 8px}#helpDialog .help-toc-title span{display:none}#helpDialog .help-toc-link{white-space:nowrap;flex:none;width:auto;padding:9px 11px;margin:0}#helpDialog .help-article{padding:4px 20px 20px}#helpDialog .help-mini-grid{grid-template-columns:1fr}#helpDialog .help-section{padding:24px 0}#helpDialog .help-section h3{font-size:18px}}
+@media(max-width:390px){#helpDialog .help-head p{display:none}#helpDialog .help-reset{padding:9px 8px}#helpDialog .help-key-table td,#helpDialog .help-key-table th{padding:8px 6px}#helpDialog .help-bottom span{display:none}}
+
